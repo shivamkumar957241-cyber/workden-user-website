@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog – Work From Home Tips | Official WorkDen</title>
+<meta name="description" content="WorkDen Blog – work from home, data entry aur online tasks se related guides aur tips.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --navy:#02083f;
+  --blue:#113f7a;
+  --text:#365a73;
+  --muted:#6b8297;
+  --bg:#f3f5fb;
+  --white:#ffffff;
+  --orange:#ff5733;
+  --orange-dark:#e74725;
+  --green:#1f8d4d;
+  --border:#e8edf5;
+  --shadow:0 14px 36px rgba(13,34,63,.06);
+  --shadow-hover:0 26px 64px rgba(13,34,63,.13);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.72;overflow-x:hidden;opacity:0;transition:opacity .35s ease}
+body.loaded{opacity:1}
+a{text-decoration:none;color:inherit}
+#header-placeholder{min-height:110px;background:#fff}
+#footer-placeholder{min-height:360px;background:#fff}
+.container{max-width:1240px;margin:0 auto;padding:0 22px}
+.btn{min-height:48px;padding:0 22px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:transform .28s ease,box-shadow .28s ease,background .28s ease,color .28s ease}
+.btn-orange{background:var(--orange);color:#fff;box-shadow:0 12px 26px rgba(255,87,51,.20)}
+.btn-orange:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 18px 36px rgba(255,87,51,.26)}
+.btn-outline{background:#fff;color:var(--blue);border-color:#cfdae7}
+.btn-outline:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 12px 28px rgba(13,34,63,.08)}
+.page-hero{position:relative;overflow:hidden;background:#fff;padding:88px 0 70px;border-bottom:1px solid var(--border)}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 8% 18%,rgba(17,63,122,.08),transparent 31%),radial-gradient(circle at 92% 15%,rgba(255,87,51,.10),transparent 28%);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;background:#f1f7ff;border:1px solid #d9e8fb;color:var(--blue);border-radius:50px;padding:9px 18px;font-size:13px;font-weight:700;margin-bottom:18px}
+.page-hero h1{font-size:48px;line-height:1.16;color:var(--navy);font-weight:650;letter-spacing:-.8px;margin-bottom:18px}
+.page-hero p{font-size:17px;color:var(--text);max-width:710px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.hero-visual{position:relative;min-height:350px;border-radius:18px;background:linear-gradient(135deg,#fff,#f7fbff);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:30px}
+.hero-visual::before{content:'';position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,87,51,.10);right:-76px;top:-74px}
+.hero-visual::after{content:'';position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(17,63,122,.08);left:-82px;bottom:-82px}
+.hero-visual img{position:relative;z-index:1;width:min(390px,100%);height:auto;filter:drop-shadow(0 22px 30px rgba(13,34,63,.12));animation:floatY 5s ease-in-out infinite}
+.float-card{position:absolute;z-index:2;background:#fff;border:1px solid var(--border);box-shadow:0 14px 34px rgba(13,34,63,.10);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;color:var(--navy);font-size:13px;font-weight:600}
+.float-card i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#fff2ed;color:var(--orange)}
+.fc-1{left:22px;top:30px}.fc-2{right:24px;bottom:32px}.fc-3{left:38px;bottom:42px}
+.blogs-section{padding:78px 0;background:var(--bg)}
+.section-head{max-width:830px;margin:0 auto 46px;text-align:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-size:13px;text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:10px}
+.title{font-size:36px;line-height:1.22;color:var(--navy);font-weight:600;letter-spacing:-.5px;margin-bottom:12px}
+.sub{font-size:16px;color:var(--text);max-width:780px;margin:0 auto}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.blog-card{position:relative;min-height:410px;background:#fff;border:1px solid rgba(231,237,245,.92);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:none;transition:transform .38s cubic-bezier(.22,.61,.36,1),box-shadow .38s cubic-bezier(.22,.61,.36,1),border-color .38s ease}
+.blog-card::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--orange),#ff9c50);transform:scaleX(0);transform-origin:left;transition:transform .42s cubic-bezier(.22,.61,.36,1);z-index:4}
+.blog-card:hover{transform:translateY(-9px);box-shadow:var(--shadow-hover);border-color:#dde8f3}
+.blog-card:hover::before{transform:scaleX(1)}
+.blog-art{position:relative;height:142px;background:radial-gradient(circle at 20% 18%,rgba(255,87,51,.11),transparent 30%),linear-gradient(135deg,#fbfdff,#f4f8ff);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.blog-art::after{content:'';position:absolute;width:130px;height:130px;border-radius:50%;right:16px;bottom:-48px;background:rgba(17,63,122,.07)}
+.logo-tile{position:relative;z-index:1;width:94px;height:94px;border-radius:22px;background:#fff;display:grid;place-items:center;border:1px solid #edf2f8;box-shadow:0 16px 30px rgba(13,34,63,.09);transition:transform .42s cubic-bezier(.22,.61,.36,1),box-shadow .42s ease}
+.logo-tile img{width:64px;height:64px;object-fit:contain;display:block;filter:drop-shadow(0 8px 12px rgba(13,34,63,.10))}
+.blog-card:hover .logo-tile{transform:translateY(-8px) scale(1.035);box-shadow:0 20px 38px rgba(13,34,63,.13)}
+.blog-content{padding:22px 24px 0;flex:1;display:flex;flex-direction:column}
+.blog-tag{display:inline-flex;align-items:center;gap:7px;width:max-content;max-width:100%;font-size:12px;font-weight:700;color:var(--orange);background:#fff5f0;border:1px solid #ffe1d7;border-radius:50px;padding:6px 11px;margin-bottom:14px;line-height:1.25}
+.blog-title{font-size:20px;font-weight:600;color:var(--navy);line-height:1.42;margin-bottom:12px;transition:color .25s ease}
+.blog-card:hover .blog-title{color:var(--blue)}
+.blog-excerpt{font-size:14.5px;color:var(--text);line-height:1.78;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.blog-footer{padding:16px 24px;background:#fbfdff;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:22px}
+.blog-read{font-size:14px;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:7px;transition:color .25s ease,transform .25s ease}
+.blog-card:hover .blog-read{color:var(--orange);transform:translateX(3px)}
+.blog-date{font-size:13px;color:var(--muted);font-weight:600}
+.info-strip{margin-top:54px;background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:16px;box-shadow:0 18px 44px rgba(2,8,63,.16);overflow:hidden;position:relative;color:#fff;padding:44px 34px;text-align:center}
+.info-strip::before{content:'';position:absolute;right:-76px;top:-96px;width:240px;height:240px;border-radius:50%;background:rgba(255,87,51,.18)}
+.info-strip h3{position:relative;font-size:28px;line-height:1.35;margin-bottom:12px;font-weight:600}
+.info-strip p{position:relative;font-size:16px;color:#dce8ff;max-width:820px;margin:0 auto 24px}
+.reveal,.reveal-card{opacity:0;transform:translate3d(0,28px,0);transition:opacity .78s cubic-bezier(.22,.61,.36,1),transform .78s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.reveal.left{transform:translate3d(-42px,0,0)}.reveal.right{transform:translate3d(42px,0,0)}.show{opacity:1!important;transform:translate3d(0,0,0)!important}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(max-width:1050px){.hero-grid{grid-template-columns:1fr}.blog-grid{grid-template-columns:repeat(2,1fr)}.page-hero h1{font-size:40px}}
+@media(max-width:720px){#header-placeholder{min-height:76px}#footer-placeholder{min-height:520px}.page-hero{padding:58px 0}.page-hero h1{font-size:34px}.title{font-size:28px}.hero-visual{min-height:300px}.float-card{display:none}.blogs-section{padding:58px 0}.blog-grid{grid-template-columns:1fr;gap:22px}.blog-card{min-height:auto}.blog-title{font-size:18px}.blog-footer{align-items:flex-start;flex-direction:column}.blog-read{width:100%;justify-content:flex-end}.info-strip{padding:38px 20px}.info-strip h3{font-size:24px}.btn{width:100%;max-width:340px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.reveal,.reveal-card{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div class="reveal left">
+      <span class="hero-badge"><i class="fas fa-pen-nib"></i> Information Center</span>
+      <h1 data-content-id="pageHeroTitle">WorkDen Blog & Guides</h1>
+      <p data-content-id="pageHeroDesc">Work from home, data entry aur online tasks se related genuine guides, safety tips aur real experiences.</p>
+      <div class="hero-actions">
+        <a href="demo-task.html" class="btn btn-orange"><i class="fas fa-play"></i> Start Demo Module</a>
+        <a href="projects.html" class="btn btn-outline"><i class="fas fa-layer-group"></i> View Work Projects</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal right">
+      <img src="https://img.icons8.com/clouds/500/news.png" alt="WorkDen blog guides PNG" onerror="this.src='https://img.icons8.com/clouds/500/document.png'">
+      <div class="float-card fc-1"><i class="fas fa-shield-halved"></i> Safety guides</div>
+      <div class="float-card fc-2"><i class="fas fa-keyboard"></i> Task tips</div>
+      <div class="float-card fc-3"><i class="fas fa-circle-check"></i> Verified info</div>
+    </div>
+  </div>
+</section>
+
+<section class="blogs-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker"><i class="fas fa-newspaper"></i> WorkDen Knowledge Hub</span>
+      <h2 class="title">Latest Guides & Awareness Articles</h2>
+      <p class="sub">Clean logo-style PNG cards, smooth hover animation and simple official layout for a trustworthy blog experience.</p>
+    </div>
+
+    <div class="blog-grid">
+      <a href="blogs/work-from-home.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/cyber-security.png" alt="Job scams alert logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/security-checked.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-exclamation-circle"></i> <span data-content-id="blog1Tag">Job Scams Alert</span></div><div class="blog-title" data-content-id="blog1Title">WhatsApp aur Telegram par Data Entry Jobs ke Naam Par ₹3,000 Security Deposit Maang Rahe Hain? Bilkul Mat Dena!</div><div class="blog-excerpt" data-content-id="blog1Desc">Telegram groups par daily ₹1,500-₹2,000 kamane ke jhaanse mein aane se pehle ye post padhein. Jaaniye fake registration fee scams kaise kaam karte hain aur khud ko kaise safe rakhein.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/online-typing-job-real-or-fake.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/verified-account.png" alt="Verification logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/approval.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-check-circle"></i> <span data-content-id="blog2Tag">WorkDen Verification</span></div><div class="blog-title" data-content-id="blog2Title">WorkDen Real or Fake? An Honest Inside Look at Our Registration & Task Verification System</div><div class="blog-excerpt" data-content-id="blog2Desc">Bahut se users puchte hain ki kya WorkDen par sach mein kaam milta hai? Humne is post mein hamara operational model, GST registration aur task approvals ki puri process share ki hai.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/captcha-work-safe-or-not.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/student-male.png" alt="User story logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/user-male-circle.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-user-circle"></i> <span data-content-id="blog3Tag">User Story</span></div><div class="blog-title" data-content-id="blog3Title">Mera Personal Experience: Kaise Maine Mobile Phone se Form Filling Karke Monthly Pocket Money Earn Kiya</div><div class="blog-excerpt" data-content-id="blog3Desc">Jaipur ke college student Aarav ki kahani, jinhone laptop na hone par bhi mobile app se daily 2 ghante form filling tasks kiye aur ₹4,200/month tak pocket money banayi.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/form-filling-job-real-or-fake.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/keyboard.png" alt="Typing tutorial logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/keyboard.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-book"></i> <span data-content-id="blog4Tag">Task Tutorials</span></div><div class="blog-title" data-content-id="blog4Title">Online Typing Work Guide: Kaise Type Karein ki Aapki Accuracy 95% Se Jyada Rahe Aur Tasks Reject Na Ho</div><div class="blog-excerpt" data-content-id="blog4Desc">Demo tasks mein baar-baar low accuracy aa rahi hai? Humne practical tips share kiye hain jisse aap typing speed aur text alignment thik karke task approval rate badha sakte hain.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/work-from-home-opportunity-workden.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/home-office.png" alt="Housewife guide logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/home-office.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-home"></i> <span data-content-id="blog5Tag">Housewife Guide</span></div><div class="blog-title" data-content-id="blog5Title">Housewives Ke Liye Work From Home: Ghar Ke Kaam Ke Sath Daily 2-3 Ghante Kaise Manage Karein?</div><div class="blog-excerpt" data-content-id="blog5Desc">Mumbai ki Anjali Verma se seekhein time management. Unhone kitchen ke kaamo aur bachon ki classes ke beech micro-tasks ke liye target schedule banakar consistent earning ki.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/work-from-home-jobs-for-beginners.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/money-bag.png" alt="Earning truth logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/money-bag.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-chart-bar"></i> <span data-content-id="blog6Tag">Earning Truths</span></div><div class="blog-title" data-content-id="blog6Title">The Reality of Captcha Entry: 5 Hours of Work for Just ₹30? Why You Should Stop Doing It Immediately</div><div class="blog-excerpt" data-content-id="blog6Desc">Agar aap abhi bhi captcha filling websites par apna time waste kar rahe hain, toh ye statistics dekh lijiye. Kyun micro-tasks aur typing projects isse 10x behtar option hain.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/ghar-baithe-online-paise-kaise-kamaye.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/law.png" alt="Legal help logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/law.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-balance-scale"></i> <span data-content-id="blog7Tag">Legal Help</span></div><div class="blog-title" data-content-id="blog7Title">Online Fraud Kaise Report Karein? Cyber Crime Portal (cybercrime.gov.in) par Complaint Darj Karne ka Step-by-Step Tarika</div><div class="blog-excerpt" data-content-id="blog7Desc">Agar kisi fake company ne security deposit lekar aapko block kar diya hai, toh dariye mat. Hamari detailed guide se seekhein cyber cell mein refund aur complaint kaise file karein.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/online-earning-platforms-in-india.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/wallet-app.png" alt="Payout help logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/wallet.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-wallet"></i> <span data-content-id="blog8Tag">Payout Help</span></div><div class="blog-title" data-content-id="blog8Title">How to Withdraw Your Earnings on WorkDen: Step-by-Step UPI and Direct Bank Transfer Process</div><div class="blog-excerpt" data-content-id="blog8Desc">Hamara payout system kaise kaam karta hai? Minimum withdrawal limits, auto-payment schedules aur bank transfer details ke saare doubts clear karein is simple post se.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/how-workden-helps-beginners-online-work.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/task-completed.png" alt="Quality tips logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/task-completed.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-clipboard-check"></i> <span data-content-id="blog9Tag">Quality Tips</span></div><div class="blog-title" data-content-id="blog9Title">Data Entry Tasks Me Sabse Jyada Hone Wali 5 Choti Galtiyan Jo Aapka Payout Rok Sabti Hain</div><div class="blog-excerpt" data-content-id="blog9Desc">Aadhar number copy karte waqt space chhorna, ya spelling mistakes karna — ye aisi galtiyan hain jo manual review mein cards reject karwa deyte hain. Inhe kaise avoid karein?</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/part-time-job-work-from-home.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/overtime.png" alt="Career advice logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/clock.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-briefcase"></i> <span data-content-id="blog10Tag">Career Advice</span></div><div class="blog-title" data-content-id="blog10Title">Part-Time WFH Jobs vs Full-Time Permanent Jobs: Kaun Sa Option Aapke Liye Behtar Hai?</div><div class="blog-excerpt" data-content-id="blog10Desc">Freelance micro-tasking aur structured permanent jobs ke beech ke flexibility, rules, aur payout difference ko samajhein aur apne convenience ke hisab se decision lein.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/work-from-home-for-students.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/graduation-cap.png" alt="Student corner logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/graduation-cap.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-book-open"></i> <span data-content-id="blog11Tag">Student Corner</span></div><div class="blog-title" data-content-id="blog11Title">Student Budget Hack: College Fees Aur Books Ke Liye Self-Dependent Kaise Banein</div><div class="blog-excerpt" data-content-id="blog11Desc">Bina parents par dependent hue, college hours ke baad 1.5 ghante genuine typing projects karke monthly small bills aur online courses ki fees khud pay karne ki practical steps.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+
+      <a href="blogs/work-from-home-for-housewives.html" class="blog-card reveal-card">
+        <div class="blog-art"><div class="logo-tile"><img src="https://img.icons8.com/fluency/96/mother.png" alt="Housewives logo PNG" loading="lazy" onerror="this.src='https://img.icons8.com/color/96/home.png'"></div></div>
+        <div class="blog-content"><div class="blog-tag"><i class="fas fa-female"></i> <span data-content-id="blog12Tag">Housewives</span></div><div class="blog-title" data-content-id="blog12Title">Flexible Remote Tasks Perfect for Housewives & Homemakers</div><div class="blog-excerpt" data-content-id="blog12Desc">Ghar ke kaamo ke beech me 2-3 ghante nikal kar safe workflow ke saath remote tasks manage karne ki genuine possibilities.</div></div>
+        <div class="blog-footer"><span class="blog-read">Read Guide <i class="fas fa-arrow-right"></i></span><span class="blog-date">2026</span></div>
+      </a>
+    </div>
+
+    <div class="info-strip reveal">
+      <h3>Need to understand WorkDen before registration?</h3>
+      <p>Start with the demo module and read the official guides to understand workflow, task rules and safety practices.</p>
+      <a href="demo-task.html" class="btn btn-orange"><i class="fas fa-play"></i> Initiate Free Demo Task</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="content-sync.js?v=3.5"></script>
+<script>
+  function runFragmentScripts(container){
+    const scripts = container.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      const s = document.createElement('script');
+      if(oldScript.src) s.src = oldScript.src;
+      s.textContent = oldScript.textContent;
+      document.body.appendChild(s);
+      oldScript.remove();
+    });
+  }
+  function loadFragment(id, file){
+    const el = document.getElementById(id);
+    if(!el) return Promise.resolve();
+    return fetch(file).then(r => {
+      if(!r.ok) throw new Error(file + ' not found');
+      return r.text();
+    }).then(html => {
+      el.innerHTML = html;
+      runFragmentScripts(el);
+    }).catch(err => console.error('Error loading ' + file + ':', err));
+  }
+  function startReveal(){
+    const items = document.querySelectorAll('.reveal, .reveal-card');
+    items.forEach((el, i) => {
+      const isCard = el.classList.contains('reveal-card');
+      el.style.transitionDelay = isCard ? Math.min(i * 75, 520) + 'ms' : Math.min(i * 70, 260) + 'ms';
+    });
+    if(!('IntersectionObserver' in window)){
+      items.forEach(el => el.classList.add('show'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.13, rootMargin:'0px 0px -60px 0px'});
+    items.forEach(el => obs.observe(el));
+  }
+  Promise.all([
+    loadFragment('header-placeholder','header.html'),
+    loadFragment('footer-placeholder','footer.html')
+  ]).finally(() => {
+    document.body.classList.add('loaded');
+    startReveal();
+  });
+</script>
+</body>
+</html>

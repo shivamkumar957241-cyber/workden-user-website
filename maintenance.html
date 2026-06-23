@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Under Maintenance</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --bg-light: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .maintenance-card {
+      background-color: var(--card-bg);
+      max-width: 550px;
+      width: 100%;
+      padding: 48px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .icon-wrapper {
+      background: #eff6ff;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 24px;
+    }
+
+    .icon-wrapper svg {
+      width: 40px;
+      height: 40px;
+      color: var(--primary-color);
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-dark);
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* Highlight style for the estimated time */
+    .time-highlight {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .support-box {
+      background-color: var(--bg-light);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+    }
+
+    .support-box p {
+      margin-bottom: 16px;
+      font-size: 15px;
+      color: #334155;
+      font-weight: 500;
+    }
+
+    .chat-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary-color);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    }
+
+    .chat-button:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.3);
+    }
+
+    .chat-button svg {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="maintenance-card">
+    
+    <div class="icon-wrapper">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+      </svg>
+    </div>
+
+    <h1>Under Maintenance</h1>
+    <p>
+      Our system is currently undergoing routine maintenance. We were facing some issues with task saving and submission. Our team is actively working to fix the problem, and we expect everything to be fully ready today by <span class="time-highlight">7:00 PM</span>. We apologize for the inconvenience and appreciate your patience.
+    </p>
+
+    <div class="support-box">
+      <p>Need immediate assistance?</p>
+      <button class="chat-button" onclick="openChat()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+        Connect with Live Support
+      </button>
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/6958f37bd51646197ecbb739/1je1ne73s';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+
+    // Function to open the chat window when the button is clicked
+    function openChat() {
+      if (typeof Tawk_API !== 'undefined') {
+        Tawk_API.maximize(); // Chat pop-up ko expand kar dega
+      }
+    }
+  </script>
+
+</body>
+</html>

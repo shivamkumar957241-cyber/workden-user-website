@@ -1,0 +1,3077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkDen – Official Demo Task Portal | Final Firebase + Full Content</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+/* ============================================================
+   GOVERNMENT OFFICIAL THEME VARIABLES & ANTI-FLICKER
+   ============================================================ */
+:root {
+  --gov-blue: #003875;
+  --gov-blue-light: #0050a0;
+  --gov-saffron: #FF9933;
+  --gov-green: #138808;
+  --gov-red: #D32F2F;
+  --gov-bg: #F4F6F9;
+  --gov-text: #222222;
+  --gov-text-muted: #555555;
+  --gov-border: #D1D5DB;
+  --white: #FFFFFF;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--gov-bg);
+  color: var(--gov-text);
+  min-height: 100vh;
+  opacity: 0; 
+  transition: opacity 0.4s ease-in-out;
+}
+body.loaded { opacity: 1; }
+#header-placeholder { min-height: 110px; }
+@media(max-width:768px){ #header-placeholder { min-height: 80px; } }
+input, textarea { -webkit-user-select: text; -moz-user-select: text; user-select: text; }
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: var(--gov-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gov-text-muted); }
+
+/* ============================================================
+   AUTHENTICATION PORTAL (GOVERNMENT STYLE)
+   ============================================================ */
+.auth-wrapper { display: flex; min-height: calc(100vh - 110px); align-items: center; justify-content: center; padding: 20px; }
+.auth-card { background: #fff; width: 100%; max-width: 450px; border: 1px solid var(--gov-border); border-top: 5px solid var(--gov-blue); box-shadow: var(--shadow); border-radius: 2px; }
+.auth-header { background: var(--gov-blue); color: #fff; padding: 20px; text-align: center; border-bottom: 3px solid var(--gov-saffron); }
+.auth-header h2 { font-size: 1.3rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin: 0; }
+.auth-header p { font-size: 0.8rem; opacity: 0.9; margin-top: 5px; }
+.auth-body { padding: 30px; }
+.auth-tabs { display: flex; margin-bottom: 25px; border-bottom: 2px solid var(--gov-border); }
+.auth-tab { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; font-weight: 700; color: var(--gov-text-muted); text-transform: uppercase; font-size: 0.9rem; transition: 0.2s; }
+.auth-tab.active { border-bottom: 3px solid var(--gov-blue); color: var(--gov-blue); background: #f4f6f9; }
+.auth-label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--gov-text); margin-bottom: 5px; text-transform: uppercase; }
+.auth-input { width: 100%; padding: 12px; border: 1px solid var(--gov-border); border-radius: 2px; margin-bottom: 15px; font-size: 0.95rem; }
+.auth-input:focus { border-color: var(--gov-blue); outline: none; box-shadow: 0 0 0 3px rgba(0,56,117,0.1); }
+.auth-btn { width: 100%; padding: 14px; background: var(--gov-blue); color: #fff; border: none; font-weight: 700; font-size: 1rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; border-radius: 2px; transition: 0.2s; }
+.auth-btn:hover { background: var(--gov-blue-light); }
+.auth-btn-green { background: var(--gov-green); }
+.auth-btn-green:hover { background: #0f6e06; }
+.auth-alert { background: #fee2e2; color: #b91c1c; padding: 12px; border-left: 4px solid #ef4444; font-size: 0.85rem; margin-bottom: 15px; font-weight: 700; display: none; }
+
+/* ============================================================
+   MAIN MENU (DASHBOARD)
+   ============================================================ */
+#mainMenu { min-height: calc(100vh - 110px); padding: 40px 20px; }
+.menu-header-box { max-width: 1000px; margin: 0 auto 30px; border-bottom: 2px solid var(--gov-border); padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 15px; }
+.menu-header-box h1 { color: var(--gov-blue); font-size: 2rem; font-weight: 900; text-transform: uppercase; border-left: 5px solid var(--gov-saffron); padding-left: 15px; line-height: 1; margin-bottom: 5px; }
+.menu-header-box p { color: var(--gov-text-muted); font-size: 0.9rem; padding-left: 20px; }
+.profile-btn { background: var(--white); border: 1px solid var(--gov-border); color: var(--gov-blue); padding: 10px 20px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 3px; transition: 0.2s; text-transform: uppercase; font-size:0.85rem; }
+.profile-btn:hover { border-color: var(--gov-blue); background: #f0f7ff; }
+.task-cards { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.task-card { background: var(--white); border: 1px solid var(--gov-border); border-top: 4px solid var(--gov-blue); padding: 25px; border-radius: 3px; box-shadow: var(--shadow); transition: transform 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+.task-card:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); border-top-color: var(--gov-saffron); }
+.task-card-icon-wrap { font-size: 2.5rem; color: var(--gov-blue); margin-bottom: 15px; }
+.task-card-title { font-size: 1.2rem; font-weight: 800; color: var(--gov-text); margin-bottom: 8px; text-transform: uppercase; }
+.task-card-desc { font-size: 0.9rem; color: var(--gov-text-muted); margin-bottom: 20px; line-height: 1.5; }
+.task-card-btn { background: var(--gov-blue); color: var(--white); border: none; padding: 10px; width: 100%; font-weight: 700; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: 0.2s; }
+.task-card-btn:hover { background: var(--gov-blue-light); }
+
+/* ============================================================
+   TASK WORKSPACE
+   ============================================================ */
+#taskArea { display: none; max-width: 1100px; margin: 30px auto; background: var(--white); border: 1px solid var(--gov-border); border-radius: 3px; box-shadow: var(--shadow); min-height: 70vh; }
+.task-topbar { padding: 15px 25px; background: #f8fafc; border-bottom: 1px solid var(--gov-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; position: sticky; top: 110px; z-index: 50; }
+.back-btn { background: var(--white); border: 1px solid var(--gov-border); padding: 8px 15px; font-weight: bold; cursor: pointer; border-radius: 2px; color: var(--gov-text); transition: 0.2s; }
+.back-btn:hover { background: var(--gov-blue); color: white; border-color: var(--gov-blue); }
+.timer-bar { background: var(--gov-blue); color: white; padding: 15px 25px; margin: 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 3px; border-bottom: 3px solid var(--gov-saffron); }
+.timer-val { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; }
+.progress-chip { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+.items-container { padding: 0 20px 20px; }
+.item-wrapper { border: 1px solid var(--gov-border); margin-bottom: 25px; border-radius: 3px; overflow: hidden; }
+.item-header { background: var(--gov-blue); color: white; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+.item-header h4 { margin: 0; font-size: 1.1rem; text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+.item-num { background: var(--gov-saffron); color: white; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.9rem; font-weight: 900; }
+.save-btn { background: var(--gov-green); color: white; border: none; padding: 6px 16px; font-weight: bold; cursor: pointer; border-radius: 2px; text-transform: uppercase; font-size: 0.8rem; }
+.save-btn.saved { background: white; color: var(--gov-green); }
+.item-body { padding: 25px; background: #fff; }
+.ref-box { background: #fdfae6; border: 1px solid #fde68a; padding: 15px; border-radius: 4px; margin-bottom: 20px; border-left: 4px solid var(--gov-saffron); }
+.ref-box h5 { color: var(--gov-blue); margin: 0 0 10px 0; font-size: 0.9rem; text-transform: uppercase; font-weight: 800; }
+.ref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.ref-item { border: 1px solid #e0e7ff; padding: 8px 10px; border-radius: 2px; background: #fff; }
+.ref-item strong { display: block; font-size: 0.7rem; color: var(--gov-text-muted); text-transform: uppercase; margin-bottom: 2px; }
+.ref-item span { font-weight: 700; font-size: 0.85rem; color: var(--gov-text); word-break: break-word; }
+.fields-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+.field-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--gov-blue); margin-bottom: 5px; text-transform: uppercase; }
+.field-group input, .field-group textarea { width: 100%; padding: 10px; border: 1px solid var(--gov-border); border-radius: 2px; font-size: 0.95rem; background: #fafafa; font-family: inherit; }
+.field-group input:focus, .field-group textarea:focus { border-color: var(--gov-blue); background: #fff; outline: none; }
+.field-group input.correct { border-color: var(--gov-green); background: #f0fdf4; }
+.field-group input.wrong { border-color: var(--gov-red); background: #fef2f2; }
+.submit-area { padding: 20px; }
+.submit-all-btn { width: 100%; background: var(--gov-green); color: white; padding: 15px; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border: none; cursor: pointer; border-radius: 3px; box-shadow: var(--shadow); }
+.submit-all-btn:hover { background: #0f6e06; }
+
+/* Overrides for Grammar & Typing */
+.grammar-wrong { background: #fef2f2; border: 1px solid #fecaca; padding: 15px; border-left: 4px solid var(--gov-red); margin-bottom: 15px; }
+.grammar-wrong-title { color: var(--gov-red); font-weight: 800; margin-bottom: 5px; font-size: 0.9rem; text-transform: uppercase; }
+.grammar-textarea { width: 100%; min-height: 100px; padding: 12px; border: 1px solid var(--gov-border); border-radius: 2px; font-size: 0.95rem; resize: vertical; }
+.typing-split-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+@media(max-width: 800px) { .typing-split-container { grid-template-columns: 1fr; } }
+.typing-source { background: #fdfae6; border: 1px solid #fcd34d; padding: 15px; border-radius: 2px; font-family: 'Space Mono', monospace; font-size: 0.85rem; line-height: 1.6; }
+.typing-textarea { width: 100%; min-height: 300px; padding: 15px; border: 1px solid var(--gov-border); border-radius: 2px; font-family: 'Space Mono', monospace; font-size: 0.85rem; resize: vertical; }
+.word-counter { font-size: 0.8rem; font-weight: bold; color: var(--gov-text-muted); text-align: right; margin-top: 5px; }
+
+/* ============================================================
+   MODALS & DRAWERS
+   ============================================================ */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
+.modal-overlay.show { display: flex; }
+.modal { background: #fff; width: 100%; max-width: 650px; border-top: 5px solid var(--gov-blue); border-radius: 2px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; margin: auto; }
+.modal-hero { background: var(--gov-blue); color: white; padding: 30px 20px; text-align: center; border-bottom: 3px solid var(--gov-saffron); }
+.modal-hero h2 { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin: 10px 0 5px; }
+.grade-circle { width: 80px; height: 80px; border: 3px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; margin: 15px auto 0; }
+.modal-body { padding: 30px; }
+.overall-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+@media(max-width: 500px) { .overall-stats { grid-template-columns: 1fr; } }
+.os-card { background: #f8fafc; border: 1px solid var(--gov-border); padding: 15px; text-align: center; border-radius: 2px; }
+.os-card .ov { font-size: 1.5rem; font-weight: 900; color: var(--gov-blue); }
+.os-card .ol { font-size: 0.75rem; font-weight: 700; color: var(--gov-text-muted); text-transform: uppercase; margin-top: 5px; }
+.summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9rem; }
+.summary-table th { background: var(--gov-blue); color: white; padding: 10px; text-align: left; text-transform: uppercase; font-size: 0.8rem; }
+.summary-table td { padding: 10px; border-bottom: 1px solid var(--gov-border); }
+.modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+.btn-primary, .btn-secondary { flex: 1; padding: 12px; font-weight: 700; text-transform: uppercase; cursor: pointer; border-radius: 2px; text-align: center; border: none; }
+.btn-primary { background: var(--gov-blue); color: white; }
+.btn-primary:hover { background: var(--gov-blue-light); }
+.btn-secondary { background: #f1f5f9; color: var(--gov-blue); border: 1px solid var(--gov-blue); }
+.btn-secondary:hover { background: #e2e8f0; }
+
+/* Profile Drawer */
+#profileDrawerOverlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 99990; }
+#profileDrawer { position: fixed; top: 0; right: -400px; bottom: 0; width: 100%; max-width: 400px; background: #fff; z-index: 99995; transition: right 0.3s ease; display: flex; flex-direction: column; box-shadow: -5px 0 20px rgba(0,0,0,0.2); }
+.drawer-header { background: var(--gov-blue); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--gov-saffron); }
+.drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
+.drawer-section-title { font-size: 0.85rem; font-weight: 800; color: var(--gov-blue); text-transform: uppercase; border-bottom: 1px solid var(--gov-border); padding-bottom: 5px; margin-bottom: 15px; margin-top: 20px; }
+.drawer-kv { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #eee; font-size: 0.9rem; }
+.drawer-kv span:first-child { color: var(--gov-text-muted); font-weight: 600; }
+.drawer-kv span:last-child { font-weight: 700; color: var(--gov-text); }
+.drawer-footer { padding: 20px; border-top: 1px solid var(--gov-border); background: #f8fafc; }
+
+/* Toasts */
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #222; color: #fff; padding: 12px 24px; border-radius: 2px; font-weight: bold; z-index: 999999; opacity: 0; transition: opacity 0.2s; pointer-events: none; border-bottom: 3px solid var(--gov-saffron); font-size: 0.9rem; }
+.toast.show { opacity: 1; }
+
+
+/* Full performance report + saved history UI */
+.acc-pill{display:inline-block;padding:4px 10px;border-radius:999px;font-weight:900;font-size:.75rem;}
+.acc-high{background:#dcfce7;color:#166534;}
+.acc-mid{background:#fef3c7;color:#92400e;}
+.acc-low{background:#fee2e2;color:#991b1b;}
+.ac{border-radius:4px;padding:14px 16px;border:1px solid var(--gov-border);}
+.ac h5{font-size:.78rem;font-weight:900;text-transform:uppercase;margin-bottom:6px;}
+.ac p{font-size:.84rem;line-height:1.55;}
+.ac.strength{background:#f0fdf4;border-left:4px solid var(--gov-green);}
+.ac.improve{background:#fffbeb;border-left:4px solid var(--gov-saffron);}
+.ac.suggest{background:#eff6ff;border-left:4px solid var(--gov-blue);}
+.rpt-quality-box{border:2px solid;border-radius:4px;padding:16px;text-align:center;}
+.rpt-pbar-wrap{margin-top:12px;}
+.report-history-btn{margin-top:10px;width:100%;background:#f8fafc;border:1px solid var(--gov-border);color:var(--gov-blue);font-weight:900;font-size:.72rem;text-transform:uppercase;padding:9px;border-radius:3px;cursor:pointer;}
+.report-history-btn:hover{background:#eff6ff;border-color:var(--gov-blue);}
+
+/* RPT Section (Report elements) */
+.rpt-section { border: 1px solid var(--gov-border); padding: 15px; margin-bottom: 15px; background: #fff; border-radius: 2px; }
+.rpt-sec-title { font-size: 0.9rem; font-weight: 800; color: var(--gov-blue); text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+.rpt-grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.rpt-kv { background: #f8fafc; border: 1px solid #eee; padding: 10px; text-align: center; }
+.rpt-k { display: block; font-size: 0.7rem; color: var(--gov-text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+.rpt-v { font-size: 1.1rem; font-weight: 900; color: var(--gov-text); }
+.report-err-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
+.report-err-table th { background: #fee2e2; color: #b91c1c; padding: 8px; text-align: left; }
+.report-err-table td { padding: 8px; border-bottom: 1px solid #eee; }
+
+/* ── FOOTER ── */
+.gov-footer { background: #1A1A2E; color: #94A3B8; position: relative; border-top: 4px solid var(--gov-saffron); margin-top: auto; }
+.gov-footer-inner { max-width: 1200px; margin: 0 auto; padding: 40px 20px 20px; }
+.gov-footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+.gov-footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+.gov-footer-logo img  { width: 40px; background: white; padding: 2px; border-radius: 2px; }
+.gov-footer-logo span { color: #fff; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; }
+.gov-footer-col h4 { color: #fff; font-size: 1.1rem; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; text-transform: uppercase; }
+.gov-footer-col a, .gov-footer-contact p { color: #aaa; text-decoration: none; font-size: 0.9rem; margin-bottom: 10px; display: block; transition: 0.2s; }
+.gov-footer-col a:hover { color: var(--gov-saffron); }
+.verify-box { background: #111; padding: 10px; border: 1px solid #333; font-size: 0.8rem; color: #aaa; margin-top: 15px; }
+.verify-box strong { color: white; display: block; margin-bottom: 5px; }
+.gov-footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 0.85rem; }
+@media (max-width: 992px) { .gov-footer-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { .gov-footer-top { grid-template-columns: 1fr; } }
+</style>
+
+<style id="wd-final-responsive-task-fix">
+/* ================= FINAL TASK LAYOUT RESPONSIVE FIX ================= */
+html, body { max-width: 100%; overflow-x: hidden; }
+#taskArea{
+  width:min(1160px, calc(100% - 28px)) !important;
+  margin:24px auto !important;
+  border-radius:12px !important;
+  overflow:visible !important;
+}
+.task-topbar{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  flex-wrap:wrap !important;
+  width:100% !important;
+}
+.task-topbar > div{ min-width:0 !important; }
+#taskTitle{
+  max-width:100% !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+.timer-bar{
+  display:grid !important;
+  grid-template-columns:1fr auto !important;
+  align-items:center !important;
+  gap:14px !important;
+  margin:16px 20px !important;
+}
+.timer-val{ white-space:nowrap !important; }
+.items-container{
+  width:100% !important;
+  padding:0 20px 24px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:18px !important;
+}
+.item-wrapper{
+  width:100% !important;
+  overflow:hidden !important;
+  border-radius:10px !important;
+}
+.item-header{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  flex-wrap:wrap !important;
+}
+.item-header h4{
+  flex:1 1 220px !important;
+  min-width:0 !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+.save-btn{
+  flex:0 0 auto !important;
+  min-height:38px !important;
+  white-space:nowrap !important;
+}
+.item-body{
+  padding:22px !important;
+  overflow-x:hidden !important;
+}
+.ref-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap:10px !important;
+}
+.ref-item, .ref-item.wide, .ref-item.address-item{
+  min-width:0 !important;
+  grid-column:auto !important;
+}
+.ref-item span{
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:unset !important;
+  word-break:break-word !important;
+}
+.fields-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)) !important;
+  gap:14px !important;
+}
+.field-group{ min-width:0 !important; }
+.field-group.full{ grid-column:1/-1 !important; }
+.field-group input, .field-group textarea, .grammar-textarea, .typing-textarea{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  overflow-wrap:anywhere !important;
+  resize:vertical !important;
+}
+.typing-split-container{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  gap:18px !important;
+}
+.typing-source, .typing-split-container > div{ min-width:0 !important; }
+.typing-textarea{ min-height:260px !important; }
+.grammar-textarea{ min-height:140px !important; }
+.submit-area{ padding:4px 20px 26px !important; }
+.submit-all-btn{ min-height:50px !important; }
+
+@media (max-width: 900px){
+  #taskArea{ width:calc(100% - 20px) !important; margin:16px auto !important; }
+  .timer-bar{ grid-template-columns:1fr !important; text-align:left !important; }
+  .typing-split-container{ grid-template-columns:1fr !important; }
+  .task-topbar{ position:sticky !important; top:0 !important; }
+}
+@media (max-width: 640px){
+  #taskArea{ width:100% !important; margin:0 !important; border-radius:0 !important; border-left:none !important; border-right:none !important; }
+  .task-topbar{ padding:12px !important; gap:10px !important; }
+  .back-btn{ width:40px !important; height:40px !important; flex:0 0 auto !important; }
+  #taskTitle{ font-size:1rem !important; white-space:normal !important; line-height:1.25 !important; }
+  #taskSubtitle{ font-size:.76rem !important; }
+  .timer-bar{ margin:10px 12px !important; padding:13px !important; border-radius:10px !important; }
+  .timer-val{ font-size:1.45rem !important; letter-spacing:1px !important; }
+  .items-container{ padding:0 12px 18px !important; gap:14px !important; }
+  .item-header{ padding:12px !important; }
+  .item-num{ width:30px !important; height:30px !important; }
+  .item-header h4{ flex:1 1 calc(100% - 52px) !important; font-size:.95rem !important; white-space:normal !important; }
+  .save-btn{ width:100% !important; justify-content:center !important; margin-top:2px !important; }
+  .item-body{ padding:14px !important; }
+  .ref-box{ padding:12px !important; margin-bottom:14px !important; }
+  .ref-grid{ grid-template-columns:1fr !important; }
+  .fields-grid{ grid-template-columns:1fr !important; gap:12px !important; }
+  .field-group input, .field-group textarea{ font-size:16px !important; padding:11px !important; }
+  .typing-textarea{ min-height:220px !important; font-size:15px !important; }
+  .grammar-textarea{ min-height:180px !important; font-size:15px !important; }
+  .modal{ width:calc(100vw - 20px) !important; max-width:calc(100vw - 20px) !important; }
+  .summary-table, .report-err-table{ font-size:.78rem !important; display:block !important; overflow-x:auto !important; white-space:nowrap !important; }
+}
+</style>
+
+
+<style id="wd-hard-task-column-fix">
+/* ================= HARD FIX: TASK PAGE MUST ALWAYS STACK VERTICALLY ================= */
+#taskArea{
+  flex-direction:column !important;
+  align-items:stretch !important;
+  justify-content:flex-start !important;
+}
+#taskArea > .task-topbar,
+#taskArea > .timer-bar,
+#taskArea > #taskHowTo,
+#taskArea > .items-container,
+#taskArea > .submit-area{
+  width:100% !important;
+  max-width:100% !important;
+  flex:0 0 auto !important;
+}
+#taskHowTo{
+  display:block !important;
+  padding:0 20px !important;
+  box-sizing:border-box !important;
+}
+#taskHowTo .ref-box{
+  margin:0 0 18px 0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+#taskHowTo ol{
+  margin-left:18px !important;
+  padding-left:10px !important;
+  line-height:1.65 !important;
+}
+#taskHowTo li{
+  word-break:normal !important;
+  overflow-wrap:anywhere !important;
+  margin-bottom:4px !important;
+}
+.timer-left{
+  min-width:0 !important;
+  display:flex !important;
+  align-items:center !important;
+}
+.item-wrapper{
+  flex:none !important;
+}
+.ref-box, .grammar-wrong, .typing-source{
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+.submit-area{
+  position:static !important;
+}
+.submit-all-btn{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+}
+@media (min-width: 901px){
+  #taskArea{
+    width:min(1120px, calc(100% - 48px)) !important;
+  }
+}
+@media (max-width: 900px){
+  #taskHowTo{ padding:0 14px !important; }
+  .timer-bar{ width:calc(100% - 28px) !important; }
+}
+@media (max-width: 640px){
+  #taskHowTo{ padding:0 12px !important; }
+  #taskHowTo .ref-box{ padding:12px !important; }
+  .timer-bar{ width:calc(100% - 24px) !important; }
+  .submit-area{ padding:4px 12px 20px !important; }
+  .submit-all-btn{ width:100% !important; padding:14px 12px !important; font-size:.95rem !important; }
+}
+</style>
+
+
+
+<style id="workden-aadhar-infonet-theme-final">
+/* ============================================================
+   WORKDEN CLEAN IT-SOLUTIONS THEME
+   Data, Firebase, APIs and task logic are untouched.
+   Only visual theme + footer loader layer added.
+   ============================================================ */
+:root{
+  --gov-blue:#0b5cab !important;
+  --gov-blue-light:#0f7bdc !important;
+  --gov-saffron:#ff8a00 !important;
+  --gov-green:#1e9f55 !important;
+  --gov-red:#dc2626 !important;
+  --gov-bg:#f7fbff !important;
+  --gov-text:#172033 !important;
+  --gov-text-muted:#607089 !important;
+  --gov-border:#dbe7f3 !important;
+  --white:#ffffff !important;
+  --shadow:0 14px 40px rgba(15, 91, 171, .10) !important;
+  --wd-soft-blue:#eaf5ff;
+  --wd-card-shadow:0 16px 38px rgba(17, 35, 65, .09);
+  --wd-card-shadow-hover:0 24px 55px rgba(15, 92, 171, .16);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(circle at top left, rgba(15,123,220,.13), transparent 35%),
+    radial-gradient(circle at 92% 8%, rgba(255,138,0,.12), transparent 28%),
+    linear-gradient(180deg,#ffffff 0%,#f6fbff 45%,#eef7ff 100%) !important;
+  color:var(--gov-text) !important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.42;
+  background-image:
+    linear-gradient(90deg, rgba(11,92,171,.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(11,92,171,.04) 1px, transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom, black, transparent 72%);
+  z-index:-1;
+}
+#header-placeholder{min-height:88px !important;}
+.auth-wrapper,#mainMenu{position:relative;}
+.auth-wrapper::before,#mainMenu::before{
+  content:"";
+  position:absolute;
+  width:330px;
+  height:330px;
+  right:4%;
+  top:7%;
+  border-radius:50%;
+  background:linear-gradient(135deg, rgba(15,123,220,.12), rgba(255,138,0,.08));
+  filter:blur(1px);
+  z-index:-1;
+  animation:wdFloat 9s ease-in-out infinite;
+}
+@keyframes wdFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(18px)}}
+.auth-card,.task-card,#taskArea,.modal,#profileDrawer{
+  border-radius:22px !important;
+  border:1px solid rgba(219,231,243,.95) !important;
+  box-shadow:var(--wd-card-shadow) !important;
+  overflow:hidden;
+}
+.auth-card{max-width:480px !important;border-top:0 !important;background:rgba(255,255,255,.96) !important;backdrop-filter:blur(12px);}
+.auth-header,.modal-hero,.drawer-header,.item-header,.timer-bar{
+  background:linear-gradient(135deg,#07559f 0%,#0f7bdc 72%,#35a7ff 100%) !important;
+  border-bottom:0 !important;
+  position:relative;
+  overflow:hidden;
+}
+.auth-header::after,.modal-hero::after,.drawer-header::after,.timer-bar::after{
+  content:"";
+  position:absolute;
+  inset:auto -40px -70px auto;
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  background:rgba(255,255,255,.14);
+}
+.auth-header h2,.modal-hero h2{letter-spacing:.5px !important;text-transform:none !important;}
+.auth-body{padding:32px !important;}
+.auth-tabs{border:0 !important;background:#edf6ff !important;border-radius:14px !important;padding:5px !important;gap:4px;}
+.auth-tab{border-radius:11px !important;text-transform:none !important;}
+.auth-tab.active{background:#fff !important;color:var(--gov-blue) !important;border-bottom:0 !important;box-shadow:0 8px 20px rgba(11,92,171,.12);}
+.auth-label{letter-spacing:.2px !important;text-transform:none !important;color:#25344d !important;}
+.auth-input,.field-group input,.field-group textarea,.grammar-textarea,.typing-textarea{
+  border-radius:12px !important;
+  border:1px solid #d8e6f5 !important;
+  background:#fbfdff !important;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease, transform .2s ease !important;
+}
+.auth-input:focus,.field-group input:focus,.field-group textarea:focus,.grammar-textarea:focus,.typing-textarea:focus{
+  border-color:#0f7bdc !important;
+  background:#fff !important;
+  box-shadow:0 0 0 4px rgba(15,123,220,.12) !important;
+}
+.auth-btn,.task-card-btn,.submit-all-btn,.btn-primary,.btn-secondary,.profile-btn,.back-btn,.save-btn,.report-history-btn{
+  border-radius:12px !important;
+  transition:transform .22s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease, color .22s ease !important;
+}
+.auth-btn,.task-card-btn,.btn-primary{
+  background:linear-gradient(135deg,#07559f,#0f7bdc) !important;
+  box-shadow:0 12px 24px rgba(15,123,220,.22) !important;
+  text-transform:none !important;
+}
+.submit-all-btn,.auth-btn-green,.save-btn{
+  background:linear-gradient(135deg,#15803d,#22a75a) !important;
+  box-shadow:0 12px 24px rgba(30,159,85,.20) !important;
+  text-transform:none !important;
+}
+.auth-btn:hover,.task-card-btn:hover,.submit-all-btn:hover,.btn-primary:hover,.profile-btn:hover,.back-btn:hover,.save-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--wd-card-shadow-hover) !important;
+}
+.menu-header-box{
+  max-width:1120px !important;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(219,231,243,.9) !important;
+  box-shadow:0 16px 42px rgba(15,91,171,.08);
+  border-radius:24px;
+  padding:24px !important;
+  align-items:center !important;
+  backdrop-filter:blur(12px);
+}
+.menu-header-box h1{
+  color:#0a4f96 !important;
+  border-left:0 !important;
+  padding-left:0 !important;
+  text-transform:none !important;
+  letter-spacing:-.7px;
+  font-size:clamp(1.6rem,3vw,2.45rem) !important;
+  line-height:1.08 !important;
+}
+.menu-header-box h1::after{
+  content:"";
+  display:block;
+  width:76px;
+  height:4px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ff8a00,#0f7bdc);
+  margin-top:12px;
+}
+.menu-header-box p{padding-left:0 !important;color:#64748b !important;}
+.task-cards{max-width:1120px !important;gap:24px !important;grid-template-columns:repeat(auto-fit,minmax(280px,1fr)) !important;}
+.task-card{
+  position:relative;
+  min-height:240px;
+  padding:28px !important;
+  border-top:0 !important;
+  background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%) !important;
+  transform:translateY(0);
+}
+.task-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:5px;
+  background:linear-gradient(90deg,#0f7bdc,#ff8a00);
+}
+.task-card::after{
+  content:"";
+  position:absolute;
+  right:-35px;
+  top:-35px;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:rgba(15,123,220,.08);
+  transition:transform .35s ease;
+}
+.task-card:hover{transform:translateY(-7px) !important;box-shadow:var(--wd-card-shadow-hover) !important;border-color:#c7e2ff !important;}
+.task-card:hover::after{transform:scale(1.18)}
+.task-card-icon-wrap{
+  width:64px;
+  height:64px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#eaf5ff,#ffffff);
+  color:#0f7bdc !important;
+  box-shadow:inset 0 0 0 1px #dbeafe;
+}
+.task-card-title{text-transform:none !important;color:#15223a !important;letter-spacing:-.2px;}
+.task-card-desc{color:#67748a !important;}
+#taskArea{background:rgba(255,255,255,.96) !important;width:min(1160px,calc(100% - 40px)) !important;}
+.task-topbar{background:rgba(255,255,255,.94) !important;border-bottom:1px solid #e3eef9 !important;backdrop-filter:blur(10px);}
+.back-btn,.profile-btn,.btn-secondary,.report-history-btn{background:#fff !important;border:1px solid #cfe1f2 !important;color:#0b5cab !important;}
+#taskTitle{text-transform:none !important;color:#0a4f96 !important;}
+.timer-bar{border-bottom:0 !important;border-radius:18px !important;}
+.progress-chip{background:rgba(255,255,255,.18) !important;border-color:rgba(255,255,255,.38) !important;}
+.item-wrapper{border-radius:18px !important;border-color:#dbe7f3 !important;box-shadow:0 12px 30px rgba(15,91,171,.07);}
+.item-header{border-bottom:0 !important;}
+.item-num{background:#ff8a00 !important;box-shadow:0 8px 18px rgba(255,138,0,.25);}
+.item-body{background:#ffffff !important;}
+.ref-box,.typing-source{
+  background:linear-gradient(180deg,#fffaf0,#ffffff) !important;
+  border-color:#ffe1ae !important;
+  border-left-color:#ff8a00 !important;
+  border-radius:16px !important;
+}
+.ref-item,.rpt-kv,.os-card{
+  border-radius:14px !important;
+  border-color:#dbe7f3 !important;
+  background:#fbfdff !important;
+}
+.grammar-wrong{border-radius:16px !important;background:#fff5f5 !important;}
+.modal-overlay{backdrop-filter:blur(6px);background:rgba(13,27,45,.58) !important;}
+.grade-circle{background:rgba(255,255,255,.15);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);}
+.drawer-section-title{text-transform:none !important;color:#0a4f96 !important;}
+.drawer-kv{border-bottom:1px dashed #d9e6f4 !important;}
+.toast{border-radius:12px !important;border-bottom:0 !important;background:#0f172a !important;box-shadow:0 14px 36px rgba(15,23,42,.24);}
+#footer-placeholder{margin-top:auto;}
+.gov-footer,.footer{
+  background:#07172b !important;
+  color:#b8c8dc !important;
+  border-top:0 !important;
+  position:relative;
+  overflow:hidden;
+}
+.gov-footer::before,.footer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 20% 0%,rgba(15,123,220,.22),transparent 32%),radial-gradient(circle at 80% 10%,rgba(255,138,0,.18),transparent 30%);
+  pointer-events:none;
+}
+.gov-footer-inner,.footer-inner{position:relative;z-index:1;}
+.gov-footer-col h4{border-bottom-color:rgba(255,255,255,.12) !important;text-transform:none !important;}
+.gov-footer-col a:hover{color:#ffb35a !important;transform:translateX(3px);}
+.verify-box{border-color:rgba(255,255,255,.12) !important;background:rgba(255,255,255,.05) !important;border-radius:14px;}
+.wd-reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+.wd-reveal.wd-show{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}.wd-reveal{opacity:1 !important;transform:none !important}}
+@media (max-width:768px){
+  .auth-body{padding:22px !important;}
+  .menu-header-box{border-radius:18px;padding:18px !important;}
+  .task-card{border-radius:18px !important;padding:22px !important;}
+  #taskArea{width:100% !important;border-radius:0 !important;}
+}
+
+
+/* ============================================================
+   TASK HISTORY SUMMARY CARDS (ONLY INSIDE HISTORY DRAWER)
+   ============================================================ */
+.dashboard-history-panel{
+  width:100%;
+  margin:0 0 22px;
+}
+.dashboard-history-title{
+  font-size:1.45rem;
+  line-height:1.08;
+  font-weight:900;
+  color:#0a4f96;
+  letter-spacing:-.3px;
+  margin:0 0 6px;
+}
+.dashboard-history-title::after{
+  content:"";
+  display:block;
+  width:58px;
+  height:3px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ff8a00,#0f7bdc);
+  margin-top:9px;
+}
+.dashboard-history-subtitle{
+  font-size:.82rem;
+  color:var(--gov-text-muted);
+  letter-spacing:.1px;
+  margin:0 0 14px;
+  line-height:1.45;
+}
+.dashboard-history-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+.dash-history-card{
+  min-height:105px;
+  border-radius:18px;
+  padding:15px 12px;
+  color:#0f172a;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  box-shadow:0 12px 26px rgba(15, 92, 171, .10);
+  text-align:center;
+  border:1px solid #dbe7f3;
+  background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);
+  position:relative;
+  overflow:hidden;
+}
+.dash-history-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:linear-gradient(90deg,#0f7bdc,#ff8a00);
+}
+.dash-history-card .dash-history-icon{
+  width:38px;
+  height:38px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.25rem;
+  line-height:1;
+  background:#eaf5ff;
+  color:#0b5cab;
+  margin-bottom:2px;
+}
+.dash-history-card .dash-history-label{
+  font-size:.78rem;
+  font-weight:800;
+  color:#607089;
+  letter-spacing:.1px;
+}
+.dash-history-card .dash-history-value{
+  font-size:1.45rem;
+  line-height:1;
+  font-weight:900;
+  color:#172033;
+}
+.dash-history-card.total .dash-history-icon{background:#eaf5ff;color:#0b5cab;}
+.dash-history-card.approved .dash-history-icon{background:#ecfdf5;color:#15803d;}
+.dash-history-card.pending .dash-history-icon{background:#fff7ed;color:#c2410c;}
+.dash-history-card.rejected .dash-history-icon{background:#fff1f2;color:#dc2626;}
+@media(max-width:420px){
+  .dashboard-history-grid{grid-template-columns:1fr;gap:10px;}
+  .dash-history-card{min-height:95px;}
+}
+
+</style>
+
+
+
+<style id="wd-history-fullscreen-final-fix">
+/* ================= FINAL FIX: HISTORY FULL SCREEN + ONLY MANUAL SUBMISSIONS ================= */
+#profileDrawerOverlay{
+  background:rgba(7,23,43,.58) !important;
+  backdrop-filter:blur(6px) !important;
+}
+
+#profileDrawer.history-open{
+  right:0 !important;
+  display:flex !important;
+}
+body.history-open-lock{
+  overflow:hidden !important;
+}
+#profileDrawer{
+  top:0 !important;
+  right:-100vw !important;
+  left:auto !important;
+  width:100vw !important;
+  max-width:100vw !important;
+  height:100vh !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+#profileDrawer .drawer-header,
+#profileDrawer .drawer-body,
+#profileDrawer .drawer-footer{
+  width:min(1180px, calc(100% - 28px)) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+#profileDrawer .drawer-header{
+  margin-top:16px !important;
+  border-radius:22px !important;
+}
+#profileDrawer .drawer-body{
+  padding:22px 0 30px !important;
+}
+#profileDrawer .drawer-footer{
+  border-radius:18px 18px 0 0 !important;
+}
+#legacyEvaluationStats,
+#legacyEvaluationStatsTitle{
+  display:none !important;
+}
+.dashboard-history-panel{
+  background:rgba(255,255,255,.82) !important;
+  border:1px solid #dbe7f3 !important;
+  box-shadow:0 16px 42px rgba(15,91,171,.08) !important;
+  border-radius:24px !important;
+  padding:22px !important;
+}
+.dashboard-history-grid{
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+}
+#drawerAttemptsList{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap:14px !important;
+}
+@media(max-width:900px){
+  .dashboard-history-grid{grid-template-columns:repeat(2, minmax(0,1fr)) !important;}
+}
+@media(max-width:560px){
+  #profileDrawer .drawer-header{width:calc(100% - 20px) !important;margin-top:10px !important;border-radius:18px !important;}
+  #profileDrawer .drawer-body{width:calc(100% - 20px) !important;}
+  .dashboard-history-grid{grid-template-columns:1fr !important;}
+  #drawerAttemptsList{grid-template-columns:1fr !important;}
+}
+</style>
+
+
+<style id="wd-history-user-details-close-final-patch">
+/* History final patch: user details visible, full-screen stable drawer, close button clickable */
+#profileDrawerOverlay{background:rgba(7,23,43,.58) !important;backdrop-filter:blur(6px) !important;z-index:99990 !important;}
+#profileDrawer{z-index:99995 !important;overflow:hidden !important;}
+#profileDrawer.history-open{right:0 !important;display:flex !important;}
+.drawer-header{position:sticky !important;top:0 !important;z-index:3 !important;}
+.drawer-header button{width:44px !important;height:44px !important;display:flex !important;align-items:center !important;justify-content:center !important;border-radius:12px !important;pointer-events:auto !important;z-index:5 !important;}
+.drawer-body{display:grid !important;grid-template-columns:minmax(280px,340px) 1fr !important;gap:18px !important;align-items:start !important;}
+.drawer-body > .drawer-section-title:nth-of-type(1),
+.drawer-body > .drawer-kv:nth-of-type(-n+6),
+.drawer-body > .drawer-section-title:nth-of-type(2),
+.drawer-body > .drawer-kv:nth-of-type(n+7):nth-of-type(-n+8){grid-column:1 !important;}
+.dashboard-history-panel,#drawerAttemptsList{grid-column:2 !important;}
+.drawer-kv{display:grid !important;grid-template-columns:118px minmax(0,1fr) !important;gap:10px !important;align-items:start !important;background:#fff !important;border:1px solid #e4eef8 !important;border-radius:12px !important;padding:10px 12px !important;margin-bottom:8px !important;}
+.drawer-kv span:last-child{min-width:0 !important;overflow-wrap:anywhere !important;text-align:right !important;}
+#drawerAttemptsList .report-history-btn{min-height:44px !important;}
+@media(max-width:900px){.drawer-body{display:block !important}.dashboard-history-panel,#drawerAttemptsList{grid-column:auto !important}.drawer-kv span:last-child{text-align:left !important}}
+</style>
+
+
+<style id="wd-history-structure-responsive-final-v2">
+/* ================= HISTORY SECTION STRUCTURE + MOBILE RESPONSIVE FIX ================= */
+#profileDrawer .drawer-body{
+  display:block !important;
+  overflow-y:auto !important;
+  padding:22px 0 30px !important;
+}
+.history-layout{
+  width:100% !important;
+  display:grid !important;
+  grid-template-columns:minmax(280px, 350px) minmax(0, 1fr) !important;
+  gap:20px !important;
+  align-items:start !important;
+}
+.history-profile-panel,
+.history-main-panel{
+  min-width:0 !important;
+}
+.history-section-card,
+.dashboard-history-panel,
+.attempts-log-toolbar,
+#drawerAttemptsList{
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+.history-section-card{
+  background:rgba(255,255,255,.9) !important;
+  border:1px solid #dbe7f3 !important;
+  border-radius:22px !important;
+  box-shadow:0 14px 34px rgba(15, 91, 171, .08) !important;
+  padding:18px !important;
+  margin-bottom:16px !important;
+}
+.history-section-card .drawer-section-title{
+  margin:0 0 14px !important;
+  padding-bottom:9px !important;
+  border-bottom:1px solid #e4eef8 !important;
+  font-size:.9rem !important;
+  letter-spacing:.2px !important;
+}
+.history-section-card .drawer-kv{
+  display:grid !important;
+  grid-template-columns:120px minmax(0,1fr) !important;
+  gap:10px !important;
+  align-items:start !important;
+  background:#fff !important;
+  border:1px solid #e4eef8 !important;
+  border-radius:14px !important;
+  padding:11px 12px !important;
+  margin:0 0 9px !important;
+}
+.history-section-card .drawer-kv span:first-child{
+  color:#607089 !important;
+  font-weight:800 !important;
+}
+.history-section-card .drawer-kv span:last-child{
+  color:#172033 !important;
+  font-weight:800 !important;
+  text-align:right !important;
+  min-width:0 !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+}
+.dashboard-history-panel{
+  margin:0 0 18px !important;
+}
+.attempts-log-toolbar{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  margin:0 0 14px !important;
+  padding:14px 16px !important;
+  background:#fff !important;
+  border:1px solid #dbe7f3 !important;
+  border-radius:18px !important;
+  box-shadow:0 10px 28px rgba(15,91,171,.06) !important;
+}
+.attempts-log-toolbar h3{
+  margin:0 !important;
+  color:#0a4f96 !important;
+  font-size:.95rem !important;
+  font-weight:900 !important;
+  text-transform:uppercase !important;
+}
+.attempts-log-toolbar button{
+  border:none !important;
+  background:#eff6ff !important;
+  color:#0b5cab !important;
+  border-radius:12px !important;
+  padding:9px 12px !important;
+  font-weight:900 !important;
+  cursor:pointer !important;
+}
+#drawerAttemptsList{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap:14px !important;
+  grid-column:auto !important;
+}
+.empty-attempts{
+  grid-column:1/-1 !important;
+  text-align:center !important;
+  padding:42px 20px !important;
+  color:#94a3b8 !important;
+  background:#fff !important;
+  border:1px dashed #cfe1f2 !important;
+  border-radius:18px !important;
+}
+.empty-attempts i{font-size:2rem !important;margin-bottom:10px !important;display:block !important;}
+.empty-attempts p{font-size:.9rem !important;font-weight:800 !important;color:#607089 !important;margin:0 !important;}
+.mistake-group-list{display:grid;gap:14px;margin-top:12px;}
+.mistake-entry-card{background:#fff;border:1px solid #f3c4c4;border-left:5px solid var(--gov-red);border-radius:16px;overflow:hidden;box-shadow:0 10px 26px rgba(220,38,38,.07);}
+.mistake-entry-title{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff5f5;color:#991b1b;font-weight:900;padding:12px 14px;}
+.mistake-entry-title span{background:#fee2e2;color:#991b1b;border-radius:999px;padding:4px 10px;font-size:.72rem;white-space:nowrap;}
+.mistake-entry-table-wrap{overflow-x:auto;padding:0 0 4px;}
+.grouped-mistake-table{margin:0 !important;border-collapse:collapse !important;min-width:560px !important;}
+.grouped-mistake-table th{background:#fee2e2 !important;color:#991b1b !important;}
+.grouped-mistake-table td,.grouped-mistake-table th{padding:10px 12px !important;vertical-align:top !important;}
+@media(max-width:980px){
+  .history-layout{grid-template-columns:1fr !important;gap:16px !important;}
+  .history-profile-panel{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:14px !important;}
+  .history-section-card{margin-bottom:0 !important;}
+}
+@media(max-width:640px){
+  #profileDrawer .drawer-body{width:calc(100% - 20px) !important;padding:14px 0 22px !important;}
+  .history-profile-panel{grid-template-columns:1fr !important;}
+  .history-section-card,.dashboard-history-panel{border-radius:18px !important;padding:15px !important;}
+  .history-section-card .drawer-kv{grid-template-columns:1fr !important;gap:4px !important;}
+  .history-section-card .drawer-kv span:last-child{text-align:left !important;}
+  .dashboard-history-grid{grid-template-columns:1fr !important;}
+  #drawerAttemptsList{grid-template-columns:1fr !important;}
+  .attempts-log-toolbar{align-items:stretch !important;flex-direction:column !important;}
+  .attempts-log-toolbar button{width:100% !important;}
+  .mistake-entry-title{align-items:flex-start;flex-direction:column;}
+}
+</style>
+
+</head>
+<body>
+
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
+
+<!-- ==========================================
+     DEMO AUTHENTICATION PORTAL 
+     ========================================== -->
+<div id="demoAuthArea" class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>User Authentication</h2>
+            <p>WorkDen Official Practice Portal</p>
+        </div>
+        <div class="auth-body">
+            <div class="auth-tabs">
+                <button type="button" id="tabBtnLogin" onclick="setAuthTab('login')" class="auth-tab active">Login</button>
+                <button type="button" id="tabBtnRegister" onclick="setAuthTab('register')" class="auth-tab">Register</button>
+            </div>
+
+            <div id="authAlert" class="auth-alert"><span id="authAlertMsg"></span></div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleDemoLogin(event)">
+                <label class="auth-label">User ID (Mobile / Email / User ID)</label>
+                <input type="email" id="loginEmail" class="auth-input" required placeholder="Enter your User ID">
+                
+                <label class="auth-label">Password</label>
+                <div style="position:relative;">
+                    <input type="password" id="loginMobile" class="auth-input" required placeholder="Enter your password" style="padding-right:42px;">
+                    <button type="button" onclick="togglePasswordVisibility('loginMobile', this)" style="position:absolute; right:10px; top:10px; border:none; background:transparent; color:var(--gov-blue); cursor:pointer;"><i class="fa-regular fa-eye"></i></button>
+                </div>
+                
+                <div style="font-size:0.8rem; text-align:right; margin-bottom:15px;">
+                    <a href="#" onclick="showToast('Contact support@workden.online for assistance.')" style="color:var(--gov-blue); text-decoration:none; font-weight:bold;">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" id="btnLoginSubmit" class="auth-btn"><i class="fas fa-lock mr-2"></i> Secure Login</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" onsubmit="handleDemoRegister(event)" style="display:none;">
+                <label class="auth-label">Full Name</label>
+                <input type="text" id="regName" class="auth-input" required placeholder="As per documents">
+                
+                <label class="auth-label">Mobile Number (Password)</label>
+                <input type="tel" pattern="[0-9]{10}" id="regMobile" class="auth-input" required placeholder="Enter 10-digit mobile number">
+
+                <label class="auth-label">Gmail Address (User ID)</label>
+                <input type="email" id="regEmail" class="auth-input" required placeholder="Enter Gmail address">
+                
+                <label class="auth-label">City</label>
+                <input type="text" id="regCity" class="auth-input" required placeholder="Enter city">
+
+                <label class="auth-label">Qualification</label>
+                <input type="text" id="regQual" class="auth-input" required placeholder="Enter qualification">
+
+                <button type="submit" id="btnRegisterSubmit" class="auth-btn auth-btn-green"><i class="fas fa-user-plus mr-2"></i> Create Profile</button>
+            </form>
+
+            <!-- Success View -->
+            <div id="successView" style="display:none; text-align:center;">
+                <div style="background:#e8f5e9; border:1px solid #bbf7d0; padding:20px; margin-bottom:20px; border-radius:2px;">
+                    <i class="fas fa-check-circle" style="font-size:2.5rem; color:var(--gov-green); margin-bottom:10px;"></i>
+                    <h3 style="color:var(--gov-green); font-size:1.1rem; font-weight:bold; margin-bottom:5px;">Profile Generated</h3>
+                    <p style="font-size:0.85rem; color:#166534;">Your practice credentials are ready.</p>
+                </div>
+                <div style="text-align:left; background:#f8fafc; padding:15px; border:1px solid var(--gov-border); margin-bottom:20px;">
+                    <div style="font-size:0.85rem; margin-bottom:8px; border-bottom:1px solid #eee; padding-bottom:8px;"><strong>User ID:</strong> <span id="successUserId"></span></div>
+                    <div style="font-size:0.85rem;"><strong>Password:</strong> <span id="successPassword"></span></div>
+                </div>
+                <button onclick="autoLoginAfterRegister()" class="auth-btn"><i class="fas fa-arrow-right mr-2"></i> Proceed to Dashboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================
+     MAIN MENU DASHBOARD 
+     ========================================== -->
+<div id="mainMenu">
+    <div class="menu-header-box">
+        <div>
+            <h1>Practice Modules</h1>
+            <p>Select a category below to begin your skill evaluation.</p>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <div style="font-size:0.9rem; font-weight:bold; color:var(--gov-text-muted);">
+                <i class="fas fa-user-circle mr-1"></i> ID: <span id="dashUserName" style="color:var(--gov-blue);">User</span>
+            </div>
+            <button onclick="toggleProfileDrawer()" class="profile-btn"><i class="fas fa-chart-line"></i> History</button>
+            <button onclick="logoutDemoAccount()" class="profile-btn" style="color:var(--gov-red); border-color:var(--gov-red);"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </div>
+    <div class="task-cards" id="taskCards">
+        <!-- Injected by renderMenu() -->
+    </div>
+</div>
+
+<!-- ==========================================
+     TASK WORKSPACE 
+     ========================================== -->
+<div id="taskArea">
+  <div class="task-topbar">
+    <div style="display:flex; align-items:center; gap:15px;">
+      <button class="back-btn" onclick="goBack()" title="Go Back"><i class="fas fa-arrow-left"></i></button>
+      <div>
+        <div id="taskTitle" style="font-size:1.2rem; font-weight:900; color:var(--gov-blue); text-transform:uppercase;"></div>
+        <div id="taskSubtitle" style="font-size:0.8rem; color:var(--gov-text-muted); font-weight:bold;"></div>
+      </div>
+    </div>
+    <div style="background:#fff3cd; border:1px solid #ffeeba; padding:6px 12px; font-size:0.8rem; font-weight:bold; color:#856404; border-radius:2px;">
+      <i class="fas fa-info-circle mr-1"></i> DEMO MODE - Demo tasks are only for practice. No payment will be provided for demo tasks. Payment is applicable only for live tasks.
+    </div>
+  </div>
+  
+  <div class="timer-bar">
+    <div class="timer-left">
+      <i class="fas fa-stopwatch" style="font-size:1.8rem; margin-right:10px;"></i>
+      <div>
+        <div class="timer-label">Time Remaining</div>
+        <div class="timer-val" id="timerDisplay">01:00:00</div>
+      </div>
+    </div>
+    <div class="progress-chip" id="progressChip">✅ 0/0</div>
+  </div>
+  
+  <div id="taskHowTo" style="padding: 0 20px;"></div>
+  
+  <div class="items-container" id="itemsContainer">
+      <!-- Injected by renderItems() -->
+  </div>
+  
+  <div class="submit-area">
+    <button class="submit-all-btn" onclick="submitAll(true)"><i class="fas fa-paper-plane mr-2"></i> Final Submit & Generate Report</button>
+  </div>
+</div>
+
+<!-- ==========================================
+     MINI MODAL (Single Item Save)
+     ========================================== -->
+<div class="modal-overlay" id="miniModal">
+  <div class="modal mini-modal">
+    <div class="modal-body" style="padding: 20px;">
+        <div style="display:flex; align-items:center; gap:15px; border-bottom:2px solid var(--gov-border); padding-bottom:15px; margin-bottom:20px;">
+          <div id="mmIcon" style="font-size:2rem; width:50px; height:50px; background:#f4f6f9; display:flex; align-items:center; justify-content:center; border-radius:4px; border:1px solid var(--gov-border);">📋</div>
+          <div>
+            <h3 id="mmTitle" style="font-size:1.2rem; font-weight:bold; color:var(--gov-blue); margin:0; text-transform:uppercase;">Item Saved</h3>
+            <p id="mmSub" style="font-size:0.85rem; color:var(--gov-green); font-weight:bold; margin:0;">Success</p>
+          </div>
+        </div>
+        <div id="mmStats" style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:bold; font-size:0.9rem;"></div>
+        <div style="background:#e2e8f0; height:8px; border-radius:4px; margin-bottom:20px; overflow:hidden;">
+            <div id="mmBar" style="height:100%; background:var(--gov-green); width:0%; transition:width 0.5s;"></div>
+        </div>
+        <div id="mmFb" style="font-size:0.9rem; padding:12px; background:#f8fafc; border:1px solid var(--gov-border); border-radius:2px; margin-bottom:20px; line-height:1.5;"></div>
+        <div id="mmErrDetail" style="font-size:0.85rem; max-height:150px; overflow-y:auto; margin-bottom:20px;"></div>
+        <button onclick="closeMM()" class="auth-btn"><i class="fas fa-check mr-2"></i> Continue Next</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================
+     RESULT MODAL (Final Report)
+     ========================================== -->
+<div class="modal-overlay" id="resultModal">
+  <div class="modal">
+    <div class="modal-hero">
+      <i class="fas fa-file-signature" style="font-size:2.5rem; margin-bottom:10px;"></i>
+      <h2>Performance Evaluation Report</h2>
+      <p style="font-size:0.9rem; opacity:0.9; margin-top:5px;">System-Generated Official Review</p>
+      <div class="grade-circle" id="gradeCircle">A</div>
+    </div>
+    <div class="modal-body">
+      <div id="overallStats"></div>
+      <div id="breakdownList"></div>
+      <div id="analysisGrid" style="display:grid; grid-template-columns:1fr; gap:10px; margin:20px 0;"></div>
+      <div id="fullErrSection"></div>
+      
+      <h3 style="font-size:1rem; font-weight:bold; color:var(--gov-blue); margin-top:30px; border-bottom:2px solid var(--gov-saffron); display:inline-block; padding-bottom:5px;">Summary Log</h3>
+      <table class="summary-table">
+        <thead><tr><th>Module</th><th>Completed</th><th>Accuracy</th><th>Status</th></tr></thead>
+        <tbody id="summaryBody"></tbody>
+      </table>
+      
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="restartTask()"><i class="fas fa-redo mr-2"></i> Retry Module</button>
+        <button class="btn-primary" onclick="closeReport()"><i class="fas fa-times mr-2"></i> Close Report</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================
+     PROFILE DRAWER (History)
+     ========================================== -->
+<div id="profileDrawerOverlay" onclick="toggleProfileDrawer(true)"></div>
+<div id="profileDrawer">
+    <div class="drawer-header">
+        <div style="display:flex; align-items:center; gap:15px;">
+            <div style="width:45px; height:45px; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.2rem;"><i class="fas fa-user"></i></div>
+            <div>
+                <div id="drawerUserName" style="font-size:1.1rem; font-weight:800; text-transform:uppercase;">Guest</div>
+                <div id="drawerUserEmail" style="font-size:0.8rem; opacity:0.8;">user@workden</div>
+            </div>
+        </div>
+        <button onclick="toggleProfileDrawer(true)" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="drawer-body">
+        <div class="history-layout">
+            <aside class="history-profile-panel" aria-label="User profile and credentials">
+                <div class="history-section-card">
+                    <h3 class="drawer-section-title">Registration Details</h3>
+                    <div class="drawer-kv"><span>Name:</span><span id="profileName">-</span></div>
+                    <div class="drawer-kv"><span>Mobile:</span><span id="profileMobile">-</span></div>
+                    <div class="drawer-kv"><span>Email:</span><span id="profileEmail">-</span></div>
+                    <div class="drawer-kv"><span>City:</span><span id="profileCity">-</span></div>
+                    <div class="drawer-kv"><span>Qualification:</span><span id="profileQual">-</span></div>
+                    <div class="drawer-kv"><span>Account Status:</span><span id="profileStatus">Active Demo User</span></div>
+                </div>
+
+                <div class="history-section-card">
+                    <h3 class="drawer-section-title">Login Credentials</h3>
+                    <div class="drawer-kv"><span>User ID:</span><span id="credEmail">-</span></div>
+                    <div class="drawer-kv"><span>Password:</span><span id="credPassword">-</span></div>
+                </div>
+
+                <h3 id="legacyEvaluationStatsTitle" class="drawer-section-title">Evaluation Stats</h3>
+                <div id="legacyEvaluationStats" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="background:#f4f6f9; border:1px solid var(--gov-border); padding:15px; text-align:center;">
+                        <div style="font-size:0.7rem; color:var(--gov-text-muted); font-weight:700; text-transform:uppercase;">Total Runs</div>
+                        <div id="drawerStatsTotal" style="font-size:1.5rem; font-weight:900; color:var(--gov-blue);">0</div>
+                    </div>
+                    <div style="background:#f4f6f9; border:1px solid var(--gov-border); padding:15px; text-align:center;">
+                        <div style="font-size:0.7rem; color:var(--gov-text-muted); font-weight:700; text-transform:uppercase;">Avg Accuracy</div>
+                        <div id="drawerStatsAccuracy" style="font-size:1.5rem; font-weight:900; color:var(--gov-green);">0%</div>
+                    </div>
+                    <div style="background:#f4f6f9; border:1px solid var(--gov-border); padding:15px; text-align:center;">
+                        <div style="font-size:0.7rem; color:var(--gov-text-muted); font-weight:700; text-transform:uppercase;">Approved</div>
+                        <div id="drawerStatsApproved" style="font-size:1.5rem; font-weight:900; color:var(--gov-green);">0</div>
+                    </div>
+                    <div style="background:#f4f6f9; border:1px solid var(--gov-border); padding:15px; text-align:center;">
+                        <div style="font-size:0.7rem; color:var(--gov-text-muted); font-weight:700; text-transform:uppercase;">Rejected</div>
+                        <div id="drawerStatsRejected" style="font-size:1.5rem; font-weight:900; color:var(--gov-red);">0</div>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="history-main-panel" aria-label="Task history and attempts">
+                <section class="dashboard-history-panel" aria-label="Task History Summary">
+                    <h2 class="dashboard-history-title">Task History</h2>
+                    <p class="dashboard-history-subtitle">Track all your work submissions and their status</p>
+                    <div class="dashboard-history-grid">
+                        <div class="dash-history-card total">
+                            <div class="dash-history-icon"><i class="fa-regular fa-file-lines"></i></div>
+                            <div class="dash-history-label">Total</div>
+                            <div class="dash-history-value" id="dashStatsTotal">0</div>
+                        </div>
+                        <div class="dash-history-card approved">
+                            <div class="dash-history-icon"><i class="fa-regular fa-circle-check"></i></div>
+                            <div class="dash-history-label">Approved</div>
+                            <div class="dash-history-value" id="dashStatsApproved">0</div>
+                        </div>
+                        <div class="dash-history-card pending">
+                            <div class="dash-history-icon"><i class="fa-regular fa-clock"></i></div>
+                            <div class="dash-history-label">Pending</div>
+                            <div class="dash-history-value" id="dashStatsPending">0</div>
+                        </div>
+                        <div class="dash-history-card rejected">
+                            <div class="dash-history-icon"><i class="fa-regular fa-circle-xmark"></i></div>
+                            <div class="dash-history-label">Rejected</div>
+                            <div class="dash-history-value" id="dashStatsRejected">0</div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="attempts-log-toolbar">
+                    <h3>Attempts Log</h3>
+                    <button type="button" onclick="refreshHistoryFromServer()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                </div>
+                <div id="drawerAttemptsList">
+                    <div class="empty-attempts">
+                        <i class="fas fa-folder-open"></i>
+                        <p>No attempts recorded.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <div class="drawer-footer">
+        <button onclick="logoutDemoAccount()" class="auth-btn" style="background:var(--gov-red);"><i class="fas fa-sign-out-alt mr-2"></i> End Session</button>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ==========================================
+     FOOTER (Loaded from footer.html)
+     ========================================== -->
+<div id="footer-placeholder"></div>
+
+<!-- =====================================================
+     JAVASCRIPT LOGIC (100% ORIGINAL PRESERVED + LOCAL DB MOCK)
+     ===================================================== -->
+<script>
+// --- Header Fetching ---
+fetch('header.html')
+  .then(r => r.text())
+  .then(d => {
+    document.getElementById('header-placeholder').innerHTML = d;
+    const scripts = document.getElementById('header-placeholder').getElementsByTagName('script');
+    for (let i = 0; i < scripts.length; i++) eval(scripts[i].innerText);
+    document.body.classList.add('loaded');
+  })
+  .catch(err => { document.body.classList.add('loaded'); });
+
+// --- Original Validation Logic ---
+document.body.addEventListener('input', function(e){
+  if(e.target.tagName === 'TEXTAREA' && !e.target.readOnly){
+    e.target.style.height = 'auto';
+    e.target.style.height = e.target.scrollHeight + 'px';
+  }
+});
+
+function normalizeVal(s){
+  if(s===null||s===undefined) return '';
+  return String(s)
+    .trim()
+    .replace(/\s+/g,' ')           // multiple spaces → single space
+    .replace(/\s*,\s*/g,', ')      // normalize comma spacing: "a,b" / "a ,b" → "a, b"
+    .replace(/\s*\.\s*/g,'.')      // normalize dot: "No. 5" → "No.5" ... keep as-is actually
+    .replace(/[-–—]/g,'-')        // normalize dashes
+    .toLowerCase();
+}
+
+// =====================================================
+// ===== EXPANDED DATA POOLS (300-400 unique combos) ==
+// =====================================================
+const NAMES=[
+  "Rahul Sharma","Priya Verma","Amit Kumar","Sunita Singh","Rajesh Gupta",
+  "Kavita Patel","Vikram Yadav","Pooja Mishra","Sandeep Joshi","Neha Agarwal",
+  "Rohit Tiwari","Anjali Dubey","Manoj Pandey","Deepika Chauhan","Sanjay Maheshwari",
+  "Ravi Shankar","Meena Kumari","Suresh Reddy","Anita Bose","Prakash Nair",
+  "Geeta Pillai","Dinesh Chaube","Rekha Srivastava","Ashok Misra","Vandana Singh",
+  "Rajiv Mehta","Usha Rani","Harish Chandra","Sushma Gupta","Narendra Patil",
+  "Lalita Devi","Bharat Kumar","Savita Sharma","Vinod Khanna","Sudha Murthy",
+  "Alok Nath","Reena Kapoor","Mohan Lal","Shobha Rani","Girish Tiwari",
+  "Poonam Bajaj","Anil Goswami","Sarita Pandey","Naresh Yadav","Mamta Varma",
+  "Devendra Singh","Kamla Devi","Surendra Kumar","Pramila Joshi","Hemant Shah",
+  "Anju Soni","Rakesh Verma","Nirmala Devi","Santosh Kumar","Pushpa Agarwal",
+  "Virender Pratap","Pallavi Shukla","Ajay Dubey","Sunanda Mishra","Rajendra Prasad",
+  "Laxmi Bai","Shyam Sunder","Indu Gupta","Ramesh Chandra","Anupama Rao",
+  "Mahesh Babu","Seema Kapoor","Yogesh Tiwari","Radha Krishnan","Preeti Singh",
+  "Umesh Agnihotri","Bharati Devi","Kamal Kishore","Sarla Jain","Tribhuvan Nath",
+  "Kiran Malhotra","Mukesh Sinha","Renu Tiwari","Sunil Srivastava","Nandita Das",
+  "Ganesh Prasad","Urmila Devi","Tejpal Singh","Veena Malhotra","Chandra Shekhar",
+  "Arvind Trivedi","Manjula Dixit","Deepak Awasthi","Sunita Maurya","Vivek Ranjan",
+  "Madhuri Lata","Pradeep Kushwaha","Ananya Sinha","Brijesh Tiwari","Sheela Devi",
+  "Navin Chandra","Puja Rawat","Yogendra Singh","Savitri Pandey","Raksha Kumar"
+];
+
+const CITIES=[
+  "Mumbai","Delhi","Bengaluru","Hyderabad","Chennai","Kolkata","Pune","Jaipur",
+  "Lucknow","Patna","Surat","Ahmedabad","Nagpur","Indore","Bhopal","Chandigarh",
+  "Coimbatore","Kochi","Vadodara","Agra","Varanasi","Meerut","Rajkot","Nashik",
+  "Amritsar","Ludhiana","Madurai","Jodhpur","Raipur","Dehradun","Guwahati","Mysuru",
+  "Tiruchirappalli","Noida","Gurgaon","Faridabad","Ghaziabad","Aurangabad","Ranchi",
+  "Jabalpur","Allahabad","Howrah","Dhanbad","Bareilly","Aligarh","Moradabad",
+  "Visakhapatnam","Vijayawada","Guntur","Nellore","Kurnool","Rajahmundry",
+  "Tirupati","Warangal","Kakinada","Khammam","Anantapur","Kadapa"
+];
+
+const STATES=[
+  "Maharashtra","Delhi","Karnataka","Telangana","Tamil Nadu","West Bengal","Rajasthan",
+  "Uttar Pradesh","Bihar","Gujarat","Madhya Pradesh","Punjab","Kerala","Haryana",
+  "Odisha","Jharkhand","Assam","Chhattisgarh","Uttarakhand","Himachal Pradesh",
+  "Goa","Tripura","Manipur","Meghalaya","Jammu & Kashmir","Andhra Pradesh"
+];
+
+const QUALS=[
+  "10th Pass, 12th Pass, B.A.", "10th, 12th, B.Sc. (Physics), M.Sc.",
+  "10th Pass, 12th (Commerce), B.Com., MBA", "10th, Diploma in IT, B.Tech (CSE)",
+  "10th Pass, ITI, Diploma (Mechanical)", "10th, 12th Pass, BCA, MCA",
+  "10th, 12th (Science), MBBS", "10th Pass, 12th, B.Pharm, D.Pharm",
+  "10th, 12th (Arts), B.A., B.Ed.", "10th, 12th, LLB, LLM",
+  "10th Pass, 12th Pass, B.Arch, M.Arch", "10th, Polytechnic Diploma, B.E.",
+  "10th, 12th, PGDCA, M.Tech", "10th, 12th Pass, B.Voc, B.Des"
+];
+
+const GENDERS=["Male","Female","Other"];
+const MARITAL=["Single","Married","Divorced","Widowed"];
+const NATIONALS=["Indian","NRI"];
+
+const COMPANIES=[
+  "TCS","Infosys","Wipro","HCL","Reliance","HDFC Bank","SBI","Airtel",
+  "Bajaj Finance","L&T","Mahindra","Zomato","Flipkart","Amazon India","Ola",
+  "Paytm","ICICI Bank","Axis Bank","BHEL","NTPC","ONGC","Coal India","ITC",
+  "Maruti Suzuki","Hero MotoCorp","Bajaj Auto","Tech Mahindra","Mphasis",
+  "Mindtree","Hexaware","Cognizant","Accenture India","IBM India","Capgemini",
+  "Oracle India","SAP India","Dell India","HP India","Lenovo India","Samsung India",
+  "LG India","Bosch India","Siemens India","ABB India","Havells India","Crompton",
+  "Voltas","Blue Star","Daikin India","Carrier Midea"
+];
+
+// Large address component pools for maximum variety
+const HOUSE_TYPES=["H.No.","House No.","Flat No.","Bungalow No.","Plot No.","Residence","Unit No.","Room No.","Villa No.","Ghar No."];
+const WINGS=["Block A","Block B","Block C","Block D","Block E","Block F","Wing 1","Wing 2","Wing 3","Wing 4","Tower A","Tower B","Tower C","Phase 1","Phase 2","Sector 1","Sector 2","Sector 3"];
+const SOCIETIES_DE=[
+  "Hanuman Residency","Shanti Nagar Society","Ram Vihar Apartments","Ganesh Enclave","Laxmi Niwas Colony",
+  "Sai Kripa Apartments","Krishna Vihar Society","Shivam Residency","Tulsi Park Enclave","Balaji Heights",
+  "Durga Prasad Colony","Vinayak Nagar CHS","Jai Mata Di Apartments","Om Shanti Residency","Radha Krishna Colony",
+  "Brindavan Heights","Govind Nagar Society","Mahavir Enclave","Tirupati Apartments","Vaishnavi Residency",
+  "Surya Vihar Colony","Chandra Park CHS","Shree Sai Heights","Ambe Mata Apartments","Jagdamba Niwas",
+  "Panchvati Colony","Narmada Residency","Ganga Vihar Society","Yamuna Apartments","Saraswati Enclave",
+  "Kaveri Heights","Godavari Colony","Krishna Kunj Apartments","Radha Vihar CHS","Hari Om Residency",
+  "Shantiniketan Apartments","Dwarkadhish Heights","Govardhan Society","Vrindavan Colony","Mathura Enclave",
+  "Ayodhya Nagar CHS","Kashi Vihar Residency","Kedarnath Heights","Badrinath Enclave","Amarnath Colony"
+];
+const SOCIETIES_FF=[
+  "Sunrise Apartments","Green Valley Colony","Anand Nagar Society","Shiv Shakti Enclave","Ram Krishna Residency",
+  "Durga Vihar","Saraswati Niwas","Laxmi Apartments","Indira Nagar Colony","Vijay Park Society",
+  "Diamond Park Apartments","Golden Heights CHS","Silver Oak Colony","Emerald Society","Pearl Residency",
+  "Blue Bell Apartments","Rose Garden Colony","Jasmine Heights","Lotus Enclave","Orchid Society",
+  "Royal Park Apartments","Imperial Colony","Elite Residency","Pride Heights","Prestige Enclave",
+  "Marvel Residency","Landmark Colony","Signature Apartments","Pinnacle Heights","Vertex Society",
+  "Fortune Colony","Heritage Apartments","Classic Residency","Regal Heights","Noble Park Colony",
+  "Harmony Heights","Serene Enclave","Tranquil Colony","Peaceful Society","Bliss Apartments",
+  "Urban Heights","Metro Colony","City View Apartments","Sky Line Residency","Star Park CHS"
+];
+const GALIS_DE=[
+  "Patel Gali","Main Road","Sharma Mohalla","Gandhi Path","Station Road",
+  "Nehru Marg","Ram Gali","Shyam Marg","Krishna Path","Radha Gali",
+  "Temple Road","Market Road","School Lane","Hospital Road","Park Street",
+  "Bazaar Gali","Chowk Road","Old Market Lane","New Colony Road","Ring Road",
+  "Bus Stand Road","Railway Gali","Post Office Lane","Police Chowki Marg","Water Tank Road"
+];
+const AREAS_DE=[
+  "Civil Lines","Rajiv Nagar","Indira Colony","Shastri Nagar","Azad Nagar",
+  "Gandhi Nagar","MG Road Area","Sector 12","Defence Colony","Model Town",
+  "Nehru Nagar","Netaji Nagar","Subhash Nagar","Tilak Nagar","Tagore Nagar",
+  "Ambedkar Nagar","Patel Nagar","Green Park","Anand Vihar","Vikaspuri",
+  "Janakpuri","Rohini","Pitampura","Laxmi Nagar","Preet Vihar",
+  "Mayur Vihar","Dwarka","Uttam Nagar","Vasant Kunj","Badarpur"
+];
+const NEAR_DE=[
+  "Near Defence Park","Near Railway Station","Opp. Bus Stand","Near Post Office",
+  "Near City Hospital","Behind Police Chowki","Near Water Tank","Opp. Main Market",
+  "Near Govt. School","Near Municipal Office","Opp. Petrol Pump","Near Park Gate",
+  "Behind Temple","Near Fire Station","Opp. Collector Office","Near Taluka Office",
+  "Behind Bus Depot","Near SDM Office","Opp. Community Centre","Near ITI College",
+  "Behind Gurudwara","Near Church Road","Opp. Masjid","Near Old Fort","Behind Stadium"
+];
+const AREAS_FF=[
+  "Civil Lines","Rajiv Colony","Shastri Nagar","Gandhi Enclave","MG Road Area",
+  "New Colony","Model Town","Defence Enclave","Nehru Nagar","Station Road Area",
+  "Airport Road Area","Ring Road Zone","IT Park Zone","Industrial Area","Cantonment Area",
+  "University Road","College Road","Hospital Road Zone","Market Area","Old City Area",
+  "Sector 15","Sector 22","Sector 5","Phase 3 Area","Extension Area"
+];
+const NEAR_FF=[
+  "Near City Mall","Near Railway Station","Opp. Block Office","Near Police Station",
+  "Near Govt. Hospital","Behind Bus Stand","Near Water Tower","Opp. Petrol Pump",
+  "Near Park Gate","Near Old Market","Opp. Municipal Office","Near IT Park",
+  "Behind Sports Complex","Near Airport Road","Opp. District Court","Near Medical College",
+  "Behind Metro Station","Near SEZ Gate","Opp. Revenue Office","Near Employment Exchange",
+  "Near Shopping Complex","Behind Golf Course","Opp. Civil Court","Near Tech Park","Behind Flyover"
+];
+
+// =====================================================
+// ===== TYPING TASK POOL =====
+// =====================================================
+const TYPING_POOL=[
+`AFFIDAVIT
+
+I, Sunita Sharma, wife of Mr. Ramesh Sharma, aged 38 years, residing at House No. 47, Laxmi Nagar, Delhi - 110092, do hereby solemnly affirm and declare as follows:
+
+1. That I am the deponent and have full knowledge of the facts stated herein.
+2. That I am a permanent resident of Delhi and have been residing at the above address for the past 12 years.
+3. That I have not applied for or obtained any government employment benefits under any other name or identity.
+4. That my Aadhaar Card Number is XXXX-XXXX-1234 and PAN is ABCDE1234F.
+5. That all documents submitted by me in this matter are genuine and have not been tampered with.
+6. That the statements made in this affidavit are true and correct to the best of my knowledge and belief.
+
+No part of this affidavit is false, and nothing material has been concealed.
+
+Deponent: Sunita Sharma
+Date: 05 April 2025
+Place: New Delhi
+
+Verified and sworn before me:
+Notary Public / Oath Commissioner
+Delhi`,
+`FUNDRAISING APPEAL LETTER
+
+Date: 05 April 2025
+
+To All Well-Wishers and Donors,
+
+Namaste!
+
+We are reaching out to you on behalf of the Asha Kiran Charitable Trust, a registered non-profit organization working for the education and rehabilitation of underprivileged children in the tribal belts of Odisha since 2012.
+
+Our Impact So Far:
+- 1,240 children provided free schooling to date
+- 4 residential schools operated in remote tribal areas
+- 380 girls provided vocational training and employment
+- 6,200 families reached through health awareness drives
+
+Current Need:
+We are launching our monsoon school kit drive for 2025. We aim to distribute school bags containing notebooks, pens, pencils, a geometry box, and a raincoat to 2,000 children from Class 1 to Class 8. The cost per kit is Rs. 850/-.
+
+Total Amount Required: Rs. 17,00,000/-
+Amount Raised So Far: Rs. 6,40,000/-
+Amount Still Required: Rs. 10,60,000/-
+
+Your contribution of any amount will directly go to these children. All donations are exempt under Section 80G of the Income Tax Act.
+
+Bank Account: Asha Kiran Charitable Trust | ICICI Bank | A/c: ICICI XXXX 4892
+UPI ID: ashakiran@icici
+
+With gratitude,
+Director,
+Asha Kiran Charitable Trust`,
+`SELF DECLARATION FORM
+
+I, Amit Kumar, son of Mr. Rajendra Kumar, aged 29 years, residing at Ward No. 12, Gandhi Nagar, Patna - 800020, hereby declare that all information submitted by me for the digital work verification process is true, complete, and correct.
+
+I confirm that my mobile number, email address, bank details, and identity information belong to me and are not being used on behalf of any other person.
+
+I understand that incorrect information, duplicate identity usage, or misleading documents may result in rejection of my application.
+
+I further declare that I will follow the portal guidelines, complete tasks manually, maintain accuracy, and avoid copy-paste or automated tools during the evaluation process.
+
+Date: 05 April 2025
+Place: Patna
+Signature: Amit Kumar`,
+`SERVICE REQUEST APPLICATION
+
+Date: 05 April 2025
+
+To,
+The Branch Manager,
+State Bank of India,
+Civil Lines Branch,
+Lucknow.
+
+Subject: Request for correction of mobile number linked with savings account.
+
+Respected Sir/Madam,
+
+I, Meena Kumari, holder of Savings Account Number XXXX XXXX 4512, request you to update my registered mobile number in your bank records.
+
+My old mobile number is no longer active, and I am unable to receive OTP messages, transaction alerts, and online banking verification codes.
+
+Kindly replace the existing number with my new mobile number 98XXXXXX45 after verifying my identity documents.
+
+I have attached a self-attested copy of my Aadhaar Card, PAN Card, and passbook front page for your reference.
+
+I request you to process this application at the earliest.
+
+Thank you.
+
+Yours faithfully,
+Meena Kumari`,
+"HOTEL BOOKING CONFIRMATION\nBooking Reference: TRIBO/2025/MUM/009821\nBooking Date: 15 March 2025\n\nGuest Details:\nGuest Name: Mr. & Mrs. Ashish Mehrotra\nContact: 9820-XXXXXX | ashish.mehrotra@gmail.com\n\nHotel Details:\nHotel Name: The Trident, Nariman Point, Mumbai\nStar Category: 5-Star Luxury Hotel\nAddress: Nariman Point, Mumbai - 400021\nCheck-In: 25 March 2025 (from 3:00 PM)\nCheck-Out: 28 March 2025 (by 12:00 PM)\nTotal Stay Duration: 3 Nights\n\nRoom Details:\nRoom Type: Deluxe Sea View Room (King Bed)\nRooms: 1 | Adults: 2 | Children: 0\nBreakfast: Included for 2 Adults Daily\n\nRate Details:\nRoom Rate per Night: Rs. 14,500/-\nRoom Charges (3 Nights): Rs. 43,500/-\nApplicable Taxes & Levies: Rs. 8,265/-\nTotal Booking Amount: Rs. 51,765/-\nPayment: Rs. 25,882.50 (50% advance paid online)\nBalance Payable at Check-In: Rs. 25,882.50",
+
+"SALES INVOICE\nInvoice Number: INV/2025/DL/004512\nInvoice Date: 20 March 2025\nDue Date: 04 April 2025\n\nSeller Details:\nCompany Name: Sunrise Tech Solutions Pvt. Ltd.\nGST Number: 07AABCS1234K1Z5\nAddress: B-42, Connaught Place, New Delhi - 110001\nContact: 011-45678900 | billing@sunrisetech.in\n\nBuyer Details:\nClient Name: Rajesh Imports & Exports\nGST Number: 27AADCR5678M2Z1\nAddress: Shop 14, Trade Centre, Pune - 411001\n\nItem 1: Laptop HP ProBook 450 x 2 units @ Rs. 48,000\nItem 2: Wireless Mouse Logitech x 5 units @ Rs. 1,200\nItem 3: USB Hub 4-Port x 3 units @ Rs. 850\n\nSubtotal: Rs. 1,05,550/-\nCGST @ 9%: Rs. 9,499.50\nSGST @ 9%: Rs. 9,499.50\nTotal Invoice Amount: Rs. 1,24,549/-\nAmount in Words: One Lakh Twenty Four Thousand Five Hundred Forty Nine Only\nPayment Mode: NEFT / Bank Transfer\nBank Account: HDFC Bank — A/C: 50100123456789 | IFSC: HDFC0001234",
+
+"EMPLOYMENT OFFER LETTER\nLetter Reference: HR/OL/2025/BLR/00189\nIssue Date: 01 April 2025\n\nCandidate Details:\nCandidate Name: Ms. Priya Nair\nApplied Position: Senior Data Analyst\nDepartment: Business Intelligence & Analytics\nReporting To: Mr. Suresh Krishnamurthy, VP Operations\n\nEmployment Terms:\nDate of Joining: 21 April 2025\nProbation Period: 6 Months from Date of Joining\nWork Location: Bengaluru Office — Whitefield Campus\nWork Hours: 9:30 AM to 6:30 PM (Mon – Fri)\n\nCompensation Details:\nAnnual CTC: Rs. 9,60,000 per annum\nBasic Salary: Rs. 40,000 per month\nHRA: Rs. 20,000 per month\nSpecial Allowance: Rs. 14,000 per month\nPF Contribution: Rs. 4,800 per month (Employer)\nAnnual Bonus: Up to 10% of CTC based on performance\n\nAcceptance Deadline: 10 April 2025\nDocuments Required: Aadhar, PAN, Last 3 Salary Slips, Degree Certificate",
+
+"MEDICAL BILL RECEIPT\nReceipt Number: MBR/2025/HYD/007823\nReceipt Date: 22 March 2025\n\nHospital Details:\nHospital Name: Apollo Hospitals, Jubilee Hills\nAddress: Jubilee Hills Rd No. 72, Hyderabad - 500033\nContact: 040-23607777 | billing@apollohyderabad.com\nGSTIN: 36AABCA0408Q1ZK\n\nPatient Details:\nPatient Name: Mr. Venkat Rao Krishnan\nAge / Gender: 52 Years / Male\nPatient ID: APL-HYD-00098234\nWard / Room: Private Room — 304B\nAdmission Date: 18 March 2025\nDischarge Date: 22 March 2025\nAttending Doctor: Dr. Radha Menon (MD, Cardiology)\n\nBill Breakdown:\nRoom Charges (4 nights): Rs. 28,000/-\nDoctor Consultation Fee: Rs. 6,500/-\nDiagnostics & Lab Tests: Rs. 12,340/-\nMedicines & Consumables: Rs. 9,870/-\nICU Charges: Rs. 15,000/-\nGST @ 5%: Rs. 3,585.50\nTotal Bill Amount: Rs. 75,295.50\nInsurance Claim (Star Health): Rs. 50,000/-\nAmount Payable by Patient: Rs. 25,295.50",
+
+"BANK ACCOUNT STATEMENT\nStatement Period: 01 March 2025 to 31 March 2025\nGenerated On: 01 April 2025\n\nAccount Holder Name: Mrs. Sunita Agarwal\nAccount Number: XXXX XXXX 7823\nAccount Type: Savings Account\nBranch: SBI Main Branch, Lucknow\nIFSC Code: SBIN0001234\n\nOpening Balance (01 Mar): Rs. 18,540.00\nTotal Credits: Rs. 42,000.00\nTotal Debits: Rs. 29,315.00\nClosing Balance (31 Mar): Rs. 31,225.00\n\nKey Transactions:\n05 Mar — Credit: Salary Rs. 32,000.00 (NEFT from Wipro)\n08 Mar — Debit: Rent Transfer Rs. 12,000.00\n12 Mar — Debit: LIC Premium Auto-Debit Rs. 4,500.00\n18 Mar — Credit: Freelance Payment Rs. 10,000.00\n22 Mar — Debit: Electricity Bill Rs. 1,815.00\n28 Mar — Debit: SIP Mutual Fund Rs. 5,000.00\n30 Mar — Debit: Grocery / UPI Rs. 3,200.00\n31 Mar — Credit: Interest Credited Rs. 540.25",
+
+"RESIDENTIAL RENT AGREEMENT\nAgreement Number: RA/2025/MH/003671\nAgreement Date: 01 April 2025\n\nLandlord Name: Mr. Dinesh Kulkarni\nPAN Number: AABPK3421R\nContact: 9823001122 | dineshk@gmail.com\n\nTenant Name: Mr. Arjun Mehta & Family\nAadhar Number: 7845 1234 9900\nPermanent Address: B-12 Rajiv Nagar, Nagpur - 440015\n\nProperty Address: Flat 403, Shivaji Heights, Baner, Pune - 411045\nArea: 1100 sq.ft. — 2BHK Apartment\nFurnishing: Semi-Furnished\n\nLease Start Date: 01 April 2025\nLease Duration: 11 Months\nLease End Date: 28 February 2026\nMonthly Rent: Rs. 18,000/-\nSecurity Deposit: Rs. 54,000/- (3 Months Advance)\nMaintenance Charges: Rs. 1,500/- per month (separate)\nRent Payment Due: On or before 5th of each month\nLock-in Period: 6 Months from Start Date",
+
+"E-TICKET — FLIGHT BOOKING CONFIRMATION\nPNR Number: BM7K9Q\nBooking Reference: INDIG/2025/DEL/0048821\nBooking Date: 28 March 2025\n\nPassenger 1: Mr. Sanjay Khanna (Adult)\nPassenger 2: Mrs. Ritu Khanna (Adult)\nPassenger 3: Master Aryan Khanna (Child, Age 7)\n\nFlight Number: 6E-2047\nRoute: Delhi (DEL) to Mumbai (BOM)\nDate of Travel: 05 April 2025\nDeparture: 06:15 AM (IGI Airport — Terminal 1)\nArrival: 08:30 AM (CSIA Mumbai — Terminal 2)\nCabin Class: Economy | 3 Seats — 14A, 14B, 14C\nBaggage Allowance: 15 kg Check-in + 7 kg Cabin per person\n\nBase Fare (3 Passengers): Rs. 9,840/-\nTaxes & Surcharges: Rs. 2,615/-\nSeat Selection Fee: Rs. 900/-\nTotal Amount Paid: Rs. 13,355/-\nPayment Method: Credit Card — HDFC Regalia (Last 4: 7821)",
+
+"STUDENT ADMISSION RECEIPT\nReceipt Number: ADM/2025/JNV/001134\nAcademic Year: 2025 – 2026\nReceipt Date: 15 March 2025\n\nInstitution Name: Jawahar Navodaya Vidyalaya, Patna\nAffiliation: CBSE — Affiliation No. 330067\nAddress: Boring Road, Patna, Bihar - 800001\nContact: 0612-2345678 | principal@jnvpatna.edu.in\n\nStudent Name: Kumari Anjali Singh\nDate of Birth: 14 September 2012\nFather's Name: Mr. Ramesh Kumar Singh\nMother's Name: Mrs. Savita Singh\nAadhar Number: 3345 7812 9900\nClass Admitted: Class VII — Section B\nRoll Number: JNV-2025-VII-B-024\n\nAdmission Fee: Rs. 500/-\nTuition Fee (Annual): Rs. 600/-\nLibrary Fee: Rs. 200/-\nSports & Activity Fee: Rs. 300/-\nTotal Fee Paid: Rs. 1,600/-\nMode of Payment: Online — UPI (Ref: UPI2025031512345)",
+
+"MOTOR VEHICLE INSURANCE CERTIFICATE\nPolicy Number: NI/MV/2025/MH/00091827\nIssue Date: 01 April 2025\nValid From: 01 April 2025\nValid Till: 31 March 2026\n\nInsurance Company: National Insurance Co. Ltd.\nOffice: Divisional Office, Pune — Branch Code: 230011\n\nInsured Name: Mr. Gopal Ramesh Shetty\nAddress: Survey No. 45, Kothrud, Pune - 411038\nContact: 9823445678\n\nRegistration Number: MH-12-AB-4523\nVehicle Make & Model: Maruti Suzuki Swift Dzire VXI\nYear of Manufacture: 2022\nEngine Number: K12N4523189\nChassis Number: MA3FJEB1S00234519\nFuel Type: CNG + Petrol (Bi-Fuel)\n\nPolicy Type: Comprehensive Motor Insurance\nIDV (Insured Declared Value): Rs. 6,20,000/-\nOwn Damage Premium: Rs. 8,450/-\nThird Party Premium: Rs. 2,094/-\nTotal Premium Paid: Rs. 11,210/- (incl. GST)",
+
+"TRAIN TICKET BOOKING CONFIRMATION\nPNR Number: 4512309876\nBooking Date: 12 March 2025\nTransaction ID: TXN100234512876\n\nTrain Details:\nTrain Number & Name: 12951 — Mumbai Rajdhani Express\nFrom: Mumbai Central (BCT)\nTo: New Delhi (NDLS)\nDate of Journey: 20 March 2025\nDeparture: 17:00 hrs\nArrival: 08:35 hrs (Next Day)\nTravel Class: 2A — 2-Tier AC Sleeper\nCoach & Seat: B3 — 24 (Side Lower), 25 (Side Upper)\n\nPassenger Details:\nPassenger 1: Mr. Rohit Sharma — Age 34 — Male — Berth: 24 SL\nPassenger 2: Mrs. Neha Sharma — Age 31 — Female — Berth: 25 SU\n\nFare Details:\nBase Fare: Rs. 2,750/-\nReservation Charges: Rs. 60/-\nSuperfast Charges: Rs. 75/-\nGST @ 5%: Rs. 144.25\nCatering (IRCTC): Rs. 120/-\nTotal Amount Paid: Rs. 3,149.25\nPayment Mode: UPI — Google Pay\nBooking Status: CONFIRMED",
+
+"SALARY SLIP\nMonth: March 2025\nPay Period: 01 March 2025 to 31 March 2025\n\nEmployee Details:\nEmployee Name: Mr. Deepak Sunil Sharma\nEmployee ID: EMP/TCS/BLR/23456\nDesignation: Systems Engineer\nDepartment: Application Development\nPAN Number: AQDPS3412R\nBank Account: ICICI Bank — A/C: 123456789012\nPF Number: KN/BAN/23456/789\n\nEarnings:\nBasic Salary: Rs. 28,000/-\nHouse Rent Allowance: Rs. 14,000/-\nConveyance Allowance: Rs. 1,600/-\nMedical Allowance: Rs. 1,250/-\nSpecial Allowance: Rs. 8,500/-\nPerformance Bonus: Rs. 3,000/-\nGross Earnings: Rs. 56,350/-\n\nDeductions:\nProvident Fund (12%): Rs. 3,360/-\nProfessional Tax: Rs. 200/-\nIncome Tax (TDS): Rs. 4,200/-\nTotal Deductions: Rs. 7,760/-\n\nNet Salary Payable: Rs. 48,590/-\nPayment Date: 31 March 2025\nPayment Mode: NEFT to Bank Account",
+
+"ELECTRICITY BILL RECEIPT\nBill Number: MSEB/2025/MUM/W/0034521\nBill Date: 10 March 2025\nDue Date: 25 March 2025\n\nConsumer Details:\nConsumer Name: Mr. Prakash Ramesh Naik\nConsumer Number: 340-092-00123\nMeter Number: MH340092123\nAddress: D-14, Worli Colony, Mumbai - 400018\nTariff Category: LT-1 Residential\n\nBill Details:\nBilling Period: 01 Feb 2025 to 28 Feb 2025\nPrevious Reading: 14,820 Units\nCurrent Reading: 15,056 Units\nUnits Consumed: 236 Units\n\nCharges:\nEnergy Charges: Rs. 1,652/-\nFixed Charges: Rs. 120/-\nWheeling Charges: Rs. 212/-\nTax & Duty: Rs. 196/-\nTotal Bill Amount: Rs. 2,180/-\nPayment Mode: Online / UPI / Bank Counter\nHelp Line: 1912 (Toll Free)",
+
+"COURIER DELIVERY RECEIPT\nTracking Number: DTDC/MUM/2025/BLR/039182\nBooking Date: 18 March 2025\nExpected Delivery: 21 March 2025\n\nSender Details:\nSender Name: Ms. Kavita Sharma\nAddress: C-204, Andheri East, Mumbai - 400069\nContact: 9821004455\n\nReceiver Details:\nReceiver Name: Mr. Ajay Reddy\nAddress: 45, Koramangala 4th Block, Bengaluru - 560034\nContact: 9844112233\n\nShipment Details:\nPackage Type: Document + Parcel\nWeight: 2.5 kg\nDimensions: 35 x 25 x 10 cm\nContents Declared: Legal Documents + Books\n\nCharges:\nDelivery Charges: Rs. 185/-\nFuel Surcharge: Rs. 25/-\nGST @ 18%: Rs. 37.80\nTotal Amount: Rs. 247.80\nPayment Mode: Prepaid (Online)\nDelivery Status: In Transit — Reached Bengaluru Hub",
+
+"PROPERTY TAX RECEIPT\nReceipt Number: PCMC/TAX/2025/PUN/0078234\nAssessment Year: 2025 – 2026\nReceipt Date: 05 March 2025\n\nMunicipal Corporation: Pimpri-Chinchwad Municipal Corporation\nOffice: Ward Office No. 12, Chinchwad\nContact: 020-27652100 | propertytax@pcmcindia.gov.in\n\nProperty Owner Details:\nOwner Name: Mrs. Lata Vinayak Deshpande\nProperty Account No.: PCMC/12/2025/04532\nAadhar Number: 5678 9012 3456\nContact: 9823447788\n\nProperty Details:\nProperty Address: Plot No. 88, Sector 27, Pradhikaran, Pune - 411044\nProperty Type: Residential — Independent House\nBuilt-up Area: 1,450 sq.ft.\nZone: Zone D — Residential\n\nTax Details:\nGeneral Tax: Rs. 4,200/-\nWater Charges: Rs. 1,800/-\nSewerage Charges: Rs. 900/-\nLighting Charges: Rs. 600/-\nTotal Tax Payable: Rs. 7,500/-\nEarly Payment Discount (5%): Rs. 375/-\nNet Amount Paid: Rs. 7,125/-\nPayment Mode: Online — NEFT",
+
+"INCOME TAX RETURN ACKNOWLEDGEMENT\nAcknowledgement Number: ITR/2025/PUN/AY2024-25/0087234\nFiling Date: 28 July 2024\n\nTaxpayer Details:\nTaxpayer Name: Mrs. Meena Rajesh Kulkarni\nPAN Number: BKSPK7890L\nAssessment Year: 2024 – 2025\nDate of Birth: 03 September 1978\nEmail: meena.kulkarni78@gmail.com\nContact: 9823115566\n\nReturn Details:\nReturn Type: ITR-1 (Sahaj)\nFiling Mode: Online — e-Filing Portal\nTotal Gross Income: Rs. 7,45,000/-\nDeductions under 80C: Rs. 1,50,000/-\nNet Taxable Income: Rs. 5,95,000/-\nTax Payable: Rs. 25,500/-\nTDS Already Deducted: Rs. 22,000/-\nSelf Assessment Tax Paid: Rs. 3,500/-\nRefund/Tax Payable: Nil\nReturn Status: Successfully Filed — Under Processing\ne-Verification: Done via Aadhaar OTP",
+
+"PASSPORT APPLICATION RECEIPT\nApplication Number: PA/2025/MUM/ECR/0034512\nApplication Date: 10 March 2025\n\nApplicant Details:\nApplicant Name: Miss Shreya Anil Deshmukh\nDate of Birth: 22 August 1999\nGender: Female\nPlace of Birth: Aurangabad, Maharashtra\nNationality: Indian\nContact: 9823990011\nEmail: shreya.deshmukh99@gmail.com\nAddress: 14, Shivaji Nagar, Aurangabad - 431001\n\nApplication Details:\nPassport Type: Fresh Application\nBooklet Type: 36 Pages — Normal (Non-ECR)\nVisa Category: Tourist\nFee Paid: Rs. 1,500/-\nPayment Mode: Online — Debit Card\nPayment Reference: PASSPORTINDIA20250310987\n\nAppointment Details:\nAppointment Date: 22 March 2025\nAppointment Time: 10:30 AM — 11:00 AM\nAppointment Centre: PSK Mumbai — Bandra Kurla Complex\nDocuments to Carry: Aadhar, Birth Certificate, Address Proof, 2 Photos",
+
+"MUTUAL FUND ACCOUNT STATEMENT\nStatement Date: 31 March 2025\nFolio Number: MF/HDFC/2025/PUN/001234\n\nInvestor Details:\nInvestor Name: Mr. Rahul Suresh Joshi\nPAN Number: ABCPJ1234K\nEmail: rahul.joshi@gmail.com\nKYC Status: KYC Compliant\n\nHDFC Mid-Cap Opportunities Fund — Regular Growth:\nSIP Amount: Rs. 3,000/- per month\nSIP Start Date: 01 April 2022\nUnits Held: 245.678\nNAV (31 Mar 2025): Rs. 98.24\nCurrent Value: Rs. 24,140.10\nTotal Invested: Rs. 18,000/-\nAbsolute Returns: Rs. 6,140.10 (34.11%)\n\nAxis Bluechip Fund — Direct Growth:\nSIP Amount: Rs. 2,000/- per month\nUnits Held: 187.345\nNAV (31 Mar 2025): Rs. 72.15\nCurrent Value: Rs. 13,516.03\nTotal Invested: Rs. 12,000/-\nAbsolute Returns: Rs. 1,516.03 (12.63%)\n\nCombined Portfolio Value: Rs. 37,656.13\nOverall Returns: Rs. 7,656.13 (25.52%)",
+
+"VEHICLE RC (REGISTRATION CERTIFICATE)\nRC Number: MH-14-2025-0009823\nDate of Issue: 15 March 2025\n\nOwner Details:\nOwner Name: Mr. Mahesh Vitthal Gaikwad\nSon of: Mr. Vitthal Sitaram Gaikwad\nAddress: 7, Parvati Hill, Pune - 411009\nAadhar Number: 6789 0123 4567\n\nVehicle Details:\nRegistration Number: MH-14-EV-9823\nVehicle Type: Private Car\nMake: Tata Motors\nModel: Nexon EV Prime XZ+\nColour: Intensi-Teal\nFuel Type: Electric\nYear of Manufacture: 2025\nEngine Number: NIL (Electric)\nChassis Number: MAT607956PKA12345\nSeating Capacity: 5 (Including Driver)\nUnladen Weight: 1,472 kg\n\nValidity Details:\nRC Valid Till: 14 March 2040 (15 Years)\nFitness Valid Till: 14 March 2040\nInsurance Valid Till: 14 March 2026\nPUC Valid Till: 14 September 2025",
+
+"DRIVING LICENCE RENEWAL RECEIPT\nApplication Number: DL/2025/MH01/RN/009823\nApplication Date: 20 March 2025\n\nApplicant Details:\nApplicant Name: Mr. Sudhir Balkrishna Patil\nDate of Birth: 14 June 1982\nBlood Group: B+\nContact: 9822334455\nEmail: sudhirpatil82@yahoo.com\nAddress: Row House 7, Sahakar Nagar, Pune - 411009\n\nLicence Details:\nExisting DL Number: MH01-20020094321\nDL Issue Date: 22 March 2010\nDL Expiry Date: 21 June 2025\nVehicle Class: LMV (Light Motor Vehicle) + MCWG\n\nRenewal Details:\nRenewal Period: 5 Years\nNew Expiry Date: 13 June 2030\nFee Paid: Rs. 800/-\nPayment Reference: PARIVAHAN/2025/032012345\nProcessing RTO: RTO Pune — MH-12\nStatus: Application Submitted — Smart Card DL dispatched within 7 working days",
+
+"GAS CYLINDER BOOKING RECEIPT\nBooking Reference: HPCL/2025/MUM/CYL/0234512\nBooking Date: 18 March 2025\nDelivery Date: 20 March 2025\n\nDistributor Details:\nDistributor Name: Sai Enterprises LPG Agency\nDistributor Code: HPCL-MUM-D-04532\nAddress: Shop 3, Sion Circle, Mumbai - 400022\nContact: 022-24012345\n\nConsumer Details:\nConsumer Name: Mrs. Rekha Vijay Nair\nConsumer Number: HPCL-MUM-0098234\nRegistered Mobile: 9821334455\nDelivery Address: B-302, Everest Society, Sion East, Mumbai - 400022\nAadhar Number (Last 4): XXXX XXXX 7823\n\nBooking Details:\nCylinder Type: 14.2 kg Domestic LPG\nNumber of Cylinders: 1\nMRP (with subsidy): Rs. 803.50\nHome Delivery Charges: Nil\nTotal Amount Collected: Rs. 803.50\nPayment Mode: Cash\nDelivery Person: Mr. Ganesh Kamble (ID: HPCL-DLV-04532)\nSubsidy Credit: Rs. 0/- (Non-Subsidised Category)"
+,
+"DISTRICT COLLECTORATE, NAGPUR\nPUBLIC NOTICE\n\nNotice is hereby given to all residents of Nagpur District that a public hearing will be held regarding the proposed development of the Nagpur Eastern Ring Road Project under the Maharashtra Highway Development Authority (MHDA).\n\nDate: Saturday, 12 April 2025\nTime: 11:00 AM to 3:00 PM\nVenue: District Collectorate Conference Hall, Civil Lines, Nagpur\n\nThe proposed project involves acquisition of approximately 380 hectares of land across 14 villages. Affected landowners and residents are requested to attend and present their objections or suggestions.\n\nDocuments to be carried:\n- Original land documents / property papers\n- Aadhaar Card / Voter ID for identity verification\n- Written objections (if any) to be submitted in duplicate\n\nFor more information, contact the Land Acquisition Officer, Room No. 21, District Collectorate, Nagpur or call 0712-XXXXXXX.\n\nBy Order,\nDistrict Collector, Nagpur",
+"PRODUCT USER MANUAL\nProduct: Havells Lloyd 1.5 Ton 5-Star Inverter Split AC\nModel: LS 1915XACD\nManufacturer: Lloyd Electric and Engineering Ltd.\n\nSECTION 4: OPERATING INSTRUCTIONS\n\n4.1 Starting the Air Conditioner:\n1. Insert the batteries (2 x AAA) into the remote control with correct polarity.\n2. Press the POWER button on the remote to turn ON the unit.\n3. Set the desired temperature using the TEMP UP (+) or TEMP DOWN (-) buttons.\n4. Select the desired MODE (Cool / Fan / Dry / Auto / Heat) using the MODE button.\n5. Adjust the fan speed using the FAN SPEED button (Auto / Low / Medium / High).\n\n4.2 Recommended Temperature Settings:\n- For maximum energy efficiency and comfort, set temperature between 24°C and 26°C.\n- Using the AUTO mode allows the unit to select the optimal setting automatically.\n\n4.3 Swing and Louver Adjustment:\n- Press the SWING button to activate automatic vertical air swing.\n- For horizontal air direction, manually adjust the horizontal louvers.\n\n4.4 Sleep Mode:\n- Press the SLEEP button to activate Sleep Mode.\n- In sleep mode, temperature rises by 1°C every 30 minutes (up to 2 degrees) to save energy overnight.",
+"RESOLUTION OF THE BOARD OF DIRECTORS\nSunrise Co-operative Housing Society Ltd.\nRegistration No.: MH/MUM/HSG/TC-II/2014/0892\n\nA Special General Meeting of the Board of Directors of Sunrise Co-operative Housing Society Ltd was held on 28 March 2025 at 7:00 PM at the Society's Meeting Hall, Ground Floor, Building A, Andheri West, Mumbai - 400058.\n\nPresent:\n1. Mr. Vivek Pandey (Chairman)\n2. Mr. Ajay Nair (Secretary)\n3. Mrs. Sneha Kulkarni (Treasurer)\n4. Mr. Ramesh Shetty (Committee Member)\n5. Mr. Dinesh Bhatt (Committee Member)\n\nResolutions Passed:\n\n1. Society Maintenance Enhancement:\nResolved to increase monthly maintenance charges from Rs. 2,800/- to Rs. 3,400/- per flat effective 01 April 2025 to meet rising operational expenses and undertake external waterproofing work.\nVoting: Unanimously approved by 5 out of 5 members.\n\n2. Waterproofing Contract Approval:\nResolved to award the building waterproofing contract to M/s. DryShield Solutions for Rs. 8,42,000/- as per their lowest acceptable quote. Work to be completed within 45 days.\nVoting: Approved 4-1.\n\nMeeting adjourned at 9:15 PM.\nSecretary: Mr. Ajay Nair | Date: 28 March 2025",
+"NOTICE INVITING TENDER (NIT)\n\nOffice of the Executive Engineer,\nPublic Works Department, Rajasthan\nTender Notice No.: PWD/RAJ/2025/089\n\nSealed tenders are invited from experienced and registered contractors for the following work:\n\nWork Description: Construction of Community Hall including internal electrification, plumbing, and finishing work at Village Ramgarh, District Alwar, Rajasthan.\n\nEstimated Cost: Rs. 85,00,000/- (Rupees Eighty-Five Lakhs Only)\nEarnest Money Deposit: Rs. 1,70,000/- (Two Percent of Estimated Cost)\nCompletion Period: 9 Months from date of work order\n\nImportant Dates:\n- Tender Document Available From: 15 April 2025\n- Last Date of Submission: 30 April 2025 (3:00 PM)\n- Opening of Tenders: 30 April 2025 (4:00 PM)\n\nTender documents can be downloaded from: www.sppp.rajasthan.gov.in\n\nFor further information contact: Executive Engineer, PWD Division, Alwar - 301001\nPhone: 0144-XXXXXX",
+"To,\nThe Awards Committee\nCII (Confederation of Indian Industry)\nNew Delhi Chapter\n\nSub: Nomination of Mr. Ashok Banerjee for the Young Entrepreneur Award 2025\n\nDear Committee Members,\n\nI am honoured to nominate Mr. Ashok Banerjee, Founder and CEO of GreenPath Technologies Pvt. Ltd., Kolkata, for the prestigious CII Young Entrepreneur Award 2025.\n\nAbout the Nominee:\nMr. Banerjee (aged 31) founded GreenPath Technologies in 2019 with a vision to provide affordable clean energy solutions to rural and semi-urban India. Under his leadership, the company has:\n\n1. Installed solar micro-grids in 127 villages across West Bengal and Bihar, providing electricity to over 85,000 households.\n2. Created direct employment for 1,200 people, with 70% women employees.\n3. Achieved revenue of Rs. 42 Crores in FY2024-25 with 65% year-on-year growth.\n4. Won the National Renewable Energy Award 2024 from the Ministry of New and Renewable Energy.\n5. Featured in Forbes India's 30 Under 30 List for 2024.\n\nMr. Banerjee exemplifies entrepreneurial vision, social impact, and sustainable business leadership. He is deeply committed to climate action and inclusive development."
+];
+
+// =====================================================
+// ===== CAPTCHA GENERATORS (unchanged from original) =
+// =====================================================
+function shuffle(arr){let a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rand(a){return a[Math.floor(Math.random()*a.length)];}
+function rn(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function rPhone(){return "9"+rn(100000000,999999999);}
+function rAadhar(){return rn(2000,9999)+" "+rn(1000,9999)+" "+rn(1000,9999);}
+function rPAN(){const l="ABCDEFGHIJKLMNOPQRSTUVWXYZ";let p="";for(let i=0;i<5;i++)p+=l[rn(0,25)];return p+rn(1000,9999)+l[rn(0,25)];}
+function rDOB(){return `${String(rn(1,28)).padStart(2,'0')}/${String(rn(1,12)).padStart(2,'0')}/${rn(1970,2003)}`;}
+function rEmail(n){const d=["gmail.com","yahoo.com","outlook.com","rediffmail.com"];return n.toLowerCase().replace(/\s+/,'').replace(/[^a-z]/g,'')+rn(10,99)+"@"+rand(d);}
+
+// Build address for Data Entry task
+function gDE(){
+  const nm=rand(NAMES);
+  const num=rn(1,250);
+  const addr=rand(HOUSE_TYPES)+" "+num+", "+rand(WINGS)+", "+rand(SOCIETIES_DE)+", "+rand(GALIS_DE)+", "+rand(AREAS_DE)+", "+rand(NEAR_DE);
+  return{name:nm,phone:rPhone(),email:rEmail(nm),aadhar:rAadhar(),pan:rPAN(),qual:rand(QUALS),
+    address:addr,city:rand(CITIES),state:rand(STATES),pin:rn(100000,999999),dob:rDOB(),
+    gender:rand(GENDERS),salary:"Rs "+rn(15,150)*1000+"/month"};
+}
+
+// Build address for Form Filling task
+function gFF(){
+  const nm=rand(NAMES);
+  const num=rn(1,250);
+  const addr=rand(HOUSE_TYPES)+" "+num+", "+rand(WINGS)+", "+rand(SOCIETIES_FF)+", "+rand(AREAS_FF)+", "+rand(NEAR_FF);
+  return{name:nm,email:rEmail(nm),phone:rPhone(),altPhone:rPhone(),aadhar:rAadhar(),pan:rPAN(),
+    city:rand(CITIES),state:rand(STATES),pin:rn(100000,999999),dob:rDOB(),
+    gender:rand(GENDERS),nationality:rand(NATIONALS),company:rand(COMPANIES),
+    exp:rn(0,20)+" Years",qual:rand(QUALS),marital:rand(MARITAL),address:addr};
+}
+
+let TTEXTS=[];
+function buildTypingTexts(){
+  const shuffled=[...TYPING_POOL].sort(()=>Math.random()-0.5);
+  TTEXTS=[];
+  for(let i=0;i<10;i++) TTEXTS.push({text:shuffled[i%shuffled.length]});
+}
+
+const GRAMMAR=[
+  {wrong:"The team of engineers were working on multiple project simultaneously since last year and have achieved many success. They was assigned to develop a new software module for the clients. The manager have told everyone that the deadline are next Friday. Each member of the team need to complete their individual task before the final review meeting. The project, which were initially delayed, are now progressing well and everyone are hopeful about its completion. The senior developer have submitted his part of the code but there are still some bugs that needs to be fix. The testing department have already begin their work on the earlier modules. Neither the project lead nor the team members was informed about the change in requirements. The client have requested several modification to the original design and the team are now working on implementing it. The management have decided to extend the deadline by one week so that all the issue can be properly address and the final product meets the expected quality standards.",errors:["Subject-verb agreement","plural noun","verb tense","passive voice"],correct:"The team of engineers was working on multiple projects simultaneously since last year and has achieved many successes. They were assigned to develop a new software module for the clients. The manager has told everyone that the deadline is next Friday. Each member of the team needs to complete their individual task before the final review meeting. The project, which was initially delayed, is now progressing well and everyone is hopeful about its completion. The senior developer has submitted his part of the code but there are still some bugs that need to be fixed. The testing department has already begun their work on the earlier modules. Neither the project lead nor the team members were informed about the change in requirements. The client has requested several modifications to the original design and the team is now working on implementing it. The management has decided to extend the deadline by one week so that all the issues can be properly addressed and the final product meets the expected quality standards.",errorPositions:["'were working' → 'was working'","'project' → 'projects'","'have achieved' → 'has achieved'","'They was' → 'They were'","'manager have' → 'manager has'","'deadline are' → 'deadline is'","'need to complete' → 'needs to complete'","'were initially delayed' → 'was initially delayed'","'needs to be fix' → 'need to be fixed'","'have already begin' → 'has already begun'"]},
+  {wrong:"Each of the student have submitted their assignment on time and the teacher are very happy with the result. The principal have also praised the class for their effort and dedication. Neither the students nor the teacher were absent on the day of the submission. Everyone in the school know about the excellent performance of this particular class. The assignment, which was suppose to be difficult, were completed by all the students without any assistance. The headmaster have personally visited the classroom to congratulate the students and the teachers. Many of the student who had struggle earlier in the year have now show remarkable improvement in their performance. The school board are planning to give a special award to the class for their outstanding achievement. Each of the teacher in the department have contribute significantly to the success of the students. It is clear that hard work and dedication always pays off and everyone in the school community are proud of what this class have accomplished this academic year.",errors:["Subject-verb agreement","verb form","pronoun reference","noun plural"],correct:"Each of the students has submitted their assignment on time and the teacher is very happy with the results. The principal has also praised the class for their effort and dedication. Neither the students nor the teacher was absent on the day of the submission. Everyone in the school knows about the excellent performance of this particular class. The assignment, which was supposed to be difficult, was completed by all the students without any assistance. The headmaster has personally visited the classroom to congratulate the students and the teachers. Many of the students who had struggled earlier in the year have now shown remarkable improvement in their performance. The school board is planning to give a special award to the class for their outstanding achievement. Each of the teachers in the department has contributed significantly to the success of the students. It is clear that hard work and dedication always pay off and everyone in the school community is proud of what this class has accomplished this academic year.",errorPositions:["'student' → 'students'","'have submitted' → 'has submitted'","'teacher are' → 'teacher is'","'principal have' → 'principal has'","'was suppose' → 'was supposed'","'were completed' → 'was completed'","'headmaster have' → 'headmaster has'","'had struggle' → 'had struggled'","'have now show' → 'have now shown'","'school board are' → 'school board is'"]},
+  {wrong:"Neither the manager nor the employees was aware about the new policy that have been implement by the company. The HR department have sent a circular but most of the staff did not received it on time. The employees, who was supposed to attend the training, did not showed up. The management are now planning to conduct a special session for all the staffs. Everyone in the office need to understand the new guidelines careful before the end of this month. The new policy include several changes to the leave rules and the attendance system that effects all department. Each of the employee are required to sign a declaration form confirming that they have read and understood the policy thorough. The director of the company have express his disappointment over the lack of awareness among the workers. Neither the department heads nor the HR manager were able to provide a satisfactory explanation for the confusion. The company have now decide to make the policy training mandatory for everyone and failure to attend will results in disciplinary actions.",errors:["Subject-verb agreement","verb form","preposition","adverb form","noun plural"],correct:"Neither the manager nor the employees were aware of the new policy that has been implemented by the company. The HR department has sent a circular but most of the staff did not receive it on time. The employees, who were supposed to attend the training, did not show up. The management is now planning to conduct a special session for all the staff. Everyone in the office needs to understand the new guidelines carefully before the end of this month. The new policy includes several changes to the leave rules and the attendance system that affects all departments. Each of the employees is required to sign a declaration form confirming that they have read and understood the policy thoroughly. The director of the company has expressed his disappointment over the lack of awareness among the workers. Neither the department heads nor the HR manager was able to provide a satisfactory explanation for the confusion. The company has now decided to make the policy training mandatory for everyone and failure to attend will result in disciplinary actions.",errorPositions:["'was aware' → 'were aware'","'aware about' → 'aware of'","'have been implement' → 'has been implemented'","'HR department have' → 'HR department has'","'did not received' → 'did not receive'","'who was supposed' → 'who were supposed'","'did not showed' → 'did not show'","'management are' → 'management is'","'understand the new guidelines careful' → 'carefully'","'each of the employee are' → 'each of the employees is'"]},
+  {wrong:"The committee have decided to postpone the annual event and the participants was inform through email yesterday. Many of the attendees who was registered for the event did not received the notification. The organizing team are currently working to reschedule the date and the new venue are being finalized. The chairman of the committee have personally apologize to all the participants for the inconvenience. A revised schedule will be send to everyone by the end of this weeks. The event were originally planned to celebrate the company's ten years of operation and included many special activities for the staffs. Each of the department head were asked to submit a list of employee who wishes to attend the rescheduled event. The logistics team have already book the catering and the decoration but the arrangements now need to be postpone. Neither the finance team nor the operations manager were consulted before the original date were fixed. The management is determine to ensure that the event is conduct in the most professional and memorable manner possible despite the recent setbacks.",errors:["Subject-verb agreement","passive voice","verb tense","noun plural"],correct:"The committee has decided to postpone the annual event and the participants were informed through email yesterday. Many of the attendees who were registered for the event did not receive the notification. The organizing team is currently working to reschedule the date and the new venue is being finalized. The chairman of the committee has personally apologized to all the participants for the inconvenience. A revised schedule will be sent to everyone by the end of this week. The event was originally planned to celebrate the company's ten years of operation and included many special activities for the staff. Each of the department heads was asked to submit a list of employees who wish to attend the rescheduled event. The logistics team has already booked the catering and the decorations but the arrangements now need to be postponed. Neither the finance team nor the operations manager was consulted before the original date was fixed. The management is determined to ensure that the event is conducted in the most professional and memorable manner possible despite the recent setbacks.",errorPositions:["'committee have' → 'committee has'","'participants was inform' → 'participants were informed'","'attendees who was' → 'attendees who were'","'did not received' → 'did not receive'","'organizing team are' → 'organizing team is'","'new venue are' → 'new venue is'","'chairman have' → 'chairman has'","'will be send' → 'will be sent'","'end of this weeks' → 'end of this week'","'event were' → 'event was'"]},
+  {wrong:"One of the most important factor in achieving success are having a clear goal and working hardly every day. A person who work hard and are dedicated to their aim will surely achieve great heights in their life. Success does not comes easily and one have to face many challenges before they reaches their goal. The peoples who have achieve great things in life always say that patient and hard work is the key. Everyone should try their best and never loose hope even in the most difficult situations. A student who study regular and maintain a disciplined routine always perform better than those who waste their times. The teachers and the school has an important role to play in the development of a child's character and abilities. Each of the successful person in the world have at some point failed and have learn from their mistakes. Hard work, when it is combine with smart planning and a positive attitude, always lead to long-term achievements. The society as a whole need to encourage young peoples to pursue their dreams with confidence and never allow failures to define their future potential.",errors:["Subject-verb agreement","adverb form","plural noun","verb form","preposition"],correct:"One of the most important factors in achieving success is having a clear goal and working hard every day. A person who works hard and is dedicated to their aim will surely achieve great heights in their life. Success does not come easily and one has to face many challenges before they reach their goal. The people who have achieved great things in life always say that patience and hard work are the key. Everyone should try their best and never lose hope even in the most difficult situations. A student who studies regularly and maintains a disciplined routine always performs better than those who waste their time. The teachers and the school have an important role to play in the development of a child's character and abilities. Each of the successful people in the world has at some point failed and has learned from their mistakes. Hard work, when it is combined with smart planning and a positive attitude, always leads to long-term achievements. The society as a whole needs to encourage young people to pursue their dreams with confidence and never allow failures to define their future potential.",errorPositions:["'factor' → 'factors'","'are having' → 'is having'","'working hardly' → 'working hard'","'who work hard' → 'who works hard'","'does not comes' → 'does not come'","'one have' → 'one has'","'before they reaches' → 'before they reach'","'The peoples' → 'The people'","'have achieve' → 'have achieved'","'never loose hope' → 'never lose hope'"]}
+];
+
+
+
+// =====================================================
+// ===== TASK DEFINITIONS =====
+// =====================================================
+let TDEFS=[
+  {id:"data",    name:"Data Entry",          emoji:"📊",items:10,timeMin:60,desc:"Type given data into fields accurately",color:"#EA580C",num:1,hcls:"orange"},
+  {id:"form",    name:"Form Filling",        emoji:"🧾",items:10,timeMin:60,desc:"Fill online forms with provided information",color:"#059669",num:2,hcls:"green"},
+  {id:"typing",  name:"PDF to Word Typing",  emoji:"⌨️",items:10,timeMin:60,desc:"Type PDF content into text format accurately",color:"#7C3AED",num:3,hcls:""},
+  {id:"grammar", name:"Grammar Correction",  emoji:"✍️",items:10,timeMin:60,desc:"Correct grammatical errors in given texts",color:"#7C3AED",num:4,hcls:""},
+];
+
+let HOWTO={
+  typing:["Read the content shown in the yellow box carefully.","Type the exact same content in the text box below — word for word.","You must type at least 100 words to pass this item.","Do NOT copy-paste — type manually using the keyboard.","Spelling and accuracy matter — type carefully."],
+  form:["Read all reference data in the blue box at the top.","Fill each field exactly as shown in the reference (spelling, spacing, case).","Do not skip any field marked with a red asterisk (*).","Type manually — copy-paste is disabled.","Click Save when all fields are filled to see your score."],
+  data:["Study the reference data card at the top of each item.","Type each value exactly as shown — including spaces and formats.","Pay special attention to Aadhar, PAN, DOB, and PIN formats.","All fields are required — do not leave any blank.","Click Save to check your accuracy for that item."],
+  grammar:["Read the incorrect paragraph carefully — error types are shown below.","Identify all grammatical mistakes.","Type the fully corrected paragraph in the text box below.","Do not change the meaning — only fix grammar errors.","Your answer must be at least 13 characters to be accepted."]
+};
+
+// =====================================================
+// ===== STATE =====
+// =====================================================
+
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+let CT=null,TI=null,SL=3600,ST=null,SI={},TN=0,ID=[],ERR_LOG={};
+let TASK_STARTED=false, FINAL_SUBMIT_IN_PROGRESS=false, CURRENT_TASK_SESSION_ID=null;
+
+// --- MOCK LOCAL DB FUNCTIONALITY (Replaces Backend API) ---
+function getDb() {
+  let db = localStorage.getItem('workden_mock_db');
+  return db ? JSON.parse(db) : {};
+}
+function saveDb(db) {
+  localStorage.setItem('workden_mock_db', JSON.stringify(db));
+}
+
+let pendingEmail = '';
+let pendingMobile = '';
+
+
+function togglePasswordVisibility(inputId, btn){
+  const input = document.getElementById(inputId);
+  if(!input) return;
+  const icon = btn ? btn.querySelector('i') : null;
+  const show = input.type === 'password';
+  input.type = show ? 'text' : 'password';
+  if(icon){ icon.className = show ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'; }
+}
+function setAuthTab(tab) {
+  const lf = document.getElementById('loginForm');
+  const rf = document.getElementById('registerForm');
+  const sv = document.getElementById('successView');
+  const tl = document.getElementById('tabBtnLogin');
+  const tr = document.getElementById('tabBtnRegister');
+  const alertBox = document.getElementById('authAlert');
+
+  if (alertBox) alertBox.style.display = 'none';
+  if (sv) sv.style.display = 'none';
+
+  if (tab === 'login') {
+    if (lf) lf.style.display = 'block';
+    if (rf) rf.style.display = 'none';
+    if (tl) tl.classList.add('active');
+    if (tr) tr.classList.remove('active');
+  } else {
+    if (lf) lf.style.display = 'none';
+    if (rf) rf.style.display = 'block';
+    if (tr) tr.classList.add('active');
+    if (tl) tl.classList.remove('active');
+  }
+}
+
+function showAuthError(message) {
+  const alertBox = document.getElementById('authAlert');
+  const msgBox = document.getElementById('authAlertMsg');
+  if (msgBox) msgBox.textContent = message || 'Something went wrong. Please try again.';
+  if (alertBox) alertBox.style.display = 'block';
+}
+
+function hideAuthError() {
+  const alertBox = document.getElementById('authAlert');
+  if (alertBox) alertBox.style.display = 'none';
+}
+
+async function readJsonSafe(response) {
+  const text = await response.text();
+  if (!text || !text.trim()) {
+    return { success: false, message: 'Empty server response. Please check Netlify Function/API deployment.' };
+  }
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    return { success: false, message: 'Invalid server response. API may be returning HTML/404 instead of JSON.' };
+  }
+}
+
+async function demoApi(endpoint, payload) {
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload || {})
+  });
+  const data = await readJsonSafe(res);
+  if (!res.ok || !data.success) {
+    throw new Error(data.message || 'Request failed. Please try again.');
+  }
+  return data;
+}
+
+let pendingRegisterDetails = null;
+
+async function handleDemoRegister(e) {
+  if (e) e.preventDefault();
+
+  const name = document.getElementById('regName').value.trim();
+  const mobile = document.getElementById('regMobile').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const city = (document.getElementById('regCity')?.value || 'Not Provided').trim();
+  const qualification = (document.getElementById('regQual')?.value || 'Not Provided').trim();
+  const submitBtn = document.getElementById('btnRegisterSubmit');
+
+  if (!name || !mobile || !email) {
+    showAuthError('Please fill all required fields.');
+    return;
+  }
+
+  try {
+    hideAuthError();
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Creating Profile...';
+    }
+
+    const data = await demoApi('/api/demo/create', { name, mobile, email, city, qualification });
+
+    pendingRegisterDetails = { email, mobile };
+    document.getElementById('successUserId').textContent = email;
+    document.getElementById('successPassword').textContent = mobile;
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('successView').style.display = 'block';
+    showToast(data.message || 'Profile Generated Successfully!');
+  } catch (err) {
+    console.error('Registration error:', err);
+    showAuthError(err.message || 'Unable to create profile.');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-user-plus mr-2"></i> Create Profile';
+    }
+  }
+}
+
+async function autoLoginAfterRegister() {
+  if (!pendingRegisterDetails) return;
+  const { email, mobile } = pendingRegisterDetails;
+  try {
+    const data = await demoApi('/api/demo/login', { email, mobile });
+    const user = data.user || { email, mobile, name: email.split('@')[0] };
+    localStorage.setItem('demo_user', JSON.stringify({
+      email: user.email,
+      mobile: user.mobile,
+      name: user.name,
+      city: user.city || '',
+      qualification: user.qualification || ''
+    }));
+    applyDemoSession(user, data.history || []);
+    showToast(`Welcome, ${user.name || 'User'}!`);
+    pendingRegisterDetails = null;
+  } catch (err) {
+    console.error('Auto login error:', err);
+    showAuthError(err.message || 'Auto-login failed. Please login manually.');
+    setAuthTab('login');
+  }
+}
+
+async function handleDemoLogin(e) {
+  if (e) e.preventDefault();
+
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const mobile = document.getElementById('loginMobile').value.trim();
+  const submitBtn = document.getElementById('btnLoginSubmit');
+
+  if (!email || !mobile) {
+    showAuthError('Please enter User ID and Password.');
+    return;
+  }
+
+  try {
+    hideAuthError();
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Signing In...';
+    }
+
+    const data = await demoApi('/api/demo/login', { email, mobile });
+    const user = data.user || { email, mobile, name: email.split('@')[0] };
+
+    localStorage.setItem('demo_user', JSON.stringify({
+      email: user.email,
+      mobile: user.mobile,
+      name: user.name,
+      city: user.city || '',
+      qualification: user.qualification || ''
+    }));
+
+    applyDemoSession(user, data.history || []);
+    showToast(`Welcome back, ${user.name || 'User'}!`);
+  } catch (err) {
+    console.error('Login error:', err);
+    showAuthError(err.message || 'Invalid credentials.');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-lock mr-2"></i> Secure Login';
+    }
+  }
+}
+
+
+function wdCleanEmail(value){ return String(value || '').trim().toLowerCase(); }
+function wdHistoryKey(email){ return 'demo_history_' + wdCleanEmail(email).replace(/[^a-z0-9_@.-]/gi,'_'); }
+function loadCachedHistory(email){
+  try { return JSON.parse(localStorage.getItem(wdHistoryKey(email)) || '[]'); }
+  catch(e){ return []; }
+}
+function cacheHistory(email, history){
+  if(!email || !Array.isArray(history)) return;
+  try { localStorage.setItem(wdHistoryKey(email), JSON.stringify(getCleanHistory(history))); } catch(e){}
+}
+function getHistoryUniqueKey(h){
+  if(!h) return '';
+  if(h.taskSessionId) return 'session_' + String(h.taskSessionId);
+  if(h.id) return 'id_' + String(h.id);
+  const rawDate = getAttemptDateRaw(h) || h.submittedAt || h.createdAtISO || h.timestamp || h.date || '';
+  return ['fallback', rawDate, h.taskName || '', h.taskCategory || '', h.totalEntries || 0, h.correctEntries || 0, h.wrongEntries || 0, h.accuracy || 0, h.status || ''].join('|');
+}
+
+function mergeHistory(primary, fallback){
+  const all = [];
+  const seen = new Set();
+  [...(Array.isArray(primary)?primary:[]), ...(Array.isArray(fallback)?fallback:[])].forEach((h)=>{
+    if(!h) return;
+    const key = getHistoryUniqueKey(h);
+    if(!key || seen.has(key)) return;
+    seen.add(key);
+    all.push(h);
+  });
+  return all.sort((a,b)=>{
+    const ad = new Date(getAttemptDateRaw(a) || 0).getTime() || 0;
+    const bd = new Date(getAttemptDateRaw(b) || 0).getTime() || 0;
+    return bd - ad;
+  });
+}
+
+function isManualHistoryAttempt(h){
+  if(!h) return false;
+
+  // HARD GATE: History/Attempts Log me sirf wahi record dikhega jo user ne
+  // task start karke all entries save karke Final Submit button se submit kiya ho.
+  const manualFlags = h.historyEligible === true && h.manualSubmit === true && h.finalSubmitted === true && h.submittedByUser === true;
+  const hasRealReport = !!h.reportData;
+  const hasSession = typeof h.taskSessionId === 'string' && h.taskSessionId.indexOf('wd_') === 0;
+  const hasSubmitTime = !!(h.submittedAt || h.createdAtISO || h.timestamp);
+  const validCounts = Number(h.totalEntries || 0) > 0 && Number(h.correctEntries || 0) >= 0 && Number(h.wrongEntries || 0) >= 0;
+
+  return manualFlags && hasRealReport && hasSession && hasSubmitTime && validCounts;
+}
+function getCleanHistory(history){
+  const clean = (Array.isArray(history) ? history : []).filter(isManualHistoryAttempt);
+  const seen = new Set();
+  const deduped = [];
+  clean.forEach(h => {
+    const key = getHistoryUniqueKey(h);
+    if(!key || seen.has(key)) return;
+    seen.add(key);
+    deduped.push(h);
+  });
+  return deduped.sort((a,b)=>{
+    const ad = new Date(getAttemptDateRaw(a) || 0).getTime() || 0;
+    const bd = new Date(getAttemptDateRaw(b) || 0).getTime() || 0;
+    return bd - ad;
+  });
+}
+function purgeOldAutoHistory(email){
+  // Purana auto/backend generated history local UI se hata dega. Backend/API untouched rahega.
+  if(!email) return [];
+  const clean = getCleanHistory(loadCachedHistory(email));
+  cacheHistory(email, clean);
+  return clean;
+}
+function normalizeDemoUser(user){
+  user = user || {};
+  const stored = (()=>{ try{return JSON.parse(localStorage.getItem('demo_user')||'{}')}catch(e){return {}} })();
+  const out = { ...stored, ...user };
+  out.name = out.name || out.fullName || out.username || out.displayName || 'WorkDen User';
+  out.email = wdCleanEmail(out.email || out.userId || out.userid || '');
+  out.mobile = String(out.mobile || out.phone || out.phoneNumber || out.password || '').trim();
+  out.city = out.city || out.location || out.addressCity || 'Not Provided';
+  out.qualification = out.qualification || out.qual || out.education || out.study || 'Not Provided';
+  out.status = out.status || out.accountStatus || 'Active Demo User';
+  return out;
+}
+function updateProfileDetails(user){
+  const u = normalizeDemoUser(user);
+  const set = (id, value) => { const el=document.getElementById(id); if(el) el.textContent = value || '-'; };
+  set('dashUserName', u.name);
+  set('drawerUserName', u.name);
+  set('drawerUserEmail', u.email || '-');
+  set('profileName', u.name);
+  set('profileMobile', u.mobile || '-');
+  set('profileEmail', u.email || '-');
+  set('profileCity', u.city || 'Not Provided');
+  set('profileQual', u.qualification || 'Not Provided');
+  set('profileStatus', u.status || 'Active Demo User');
+  set('credEmail', u.email || '-');
+  set('credPassword', u.mobile || '-');
+  return u;
+}
+function toggleProfileDrawer(forceClose){
+  const overlay = document.getElementById('profileDrawerOverlay');
+  const drawer = document.getElementById('profileDrawer');
+  if(!overlay || !drawer) return;
+
+  const isOpen = drawer.classList.contains('history-open');
+  const close = forceClose === true || (forceClose !== false && isOpen);
+
+  if(close){
+    drawer.classList.remove('history-open');
+    document.body.classList.remove('history-open-lock');
+    drawer.style.setProperty('right','-100vw','important');
+    setTimeout(()=>{ overlay.style.display = 'none'; }, 250);
+    return;
+  }
+
+  overlay.style.display = 'block';
+  document.body.classList.add('history-open-lock');
+  drawer.classList.add('history-open');
+  drawer.style.setProperty('right','0','important');
+
+  // Always render clean manual-submitted history before server refresh, so the History screen is never blank.
+  try{
+    const storedUser = JSON.parse(localStorage.getItem('demo_user') || '{}');
+    renderHistory(loadCachedHistory(storedUser.email || ''));
+  }catch(e){}
+  refreshHistoryFromServer(false);
+}
+
+function applyDemoSession(user, history) {
+  document.getElementById('demoAuthArea').style.display = 'none';
+  document.getElementById('mainMenu').style.display = 'block';
+  document.getElementById('taskArea').style.display = 'none';
+
+  const u = updateProfileDetails(user);
+  if (u.email) {
+    localStorage.setItem('demo_user', JSON.stringify(u));
+  }
+
+  const cached = purgeOldAutoHistory(u.email);
+  const finalHistory = getCleanHistory(mergeHistory(history || [], cached));
+  cacheHistory(u.email, finalHistory);
+
+  renderMenu();
+  renderHistory(finalHistory);
+}
+
+async function checkDemoSession() {
+  const stored = localStorage.getItem('demo_user');
+  if (!stored) {
+    document.getElementById('demoAuthArea').style.display = 'flex';
+    document.getElementById('mainMenu').style.display = 'none';
+    document.getElementById('taskArea').style.display = 'none';
+    return;
+  }
+
+  try {
+    const user = JSON.parse(stored);
+    document.getElementById('demoAuthArea').style.display = 'none';
+    document.getElementById('mainMenu').style.display = 'block';
+
+    try {
+      const data = await demoApi('/api/demo/login', { email: user.email, mobile: user.mobile });
+      applyDemoSession(data.user || user, data.history || []);
+    } catch (syncErr) {
+      console.warn('Backend session sync failed:', syncErr);
+      applyDemoSession(user, loadCachedHistory(user.email));
+    }
+  } catch (err) {
+    console.error('Stored session parse error:', err);
+    logoutDemoAccount();
+  }
+}
+
+function logoutDemoAccount() {
+  localStorage.removeItem('demo_user');
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginMobile').value = '';
+  document.getElementById('demoAuthArea').style.display = 'flex';
+  document.getElementById('mainMenu').style.display = 'none';
+  document.getElementById('taskArea').style.display = 'none';
+  toggleProfileDrawer(true);
+  clearInterval(TI);
+  showToast('Logged Out Successfully');
+}
+
+async function saveAttemptToServer(attemptData) {
+  if(!attemptData || attemptData.manualSubmit !== true || attemptData.finalSubmitted !== true || !attemptData.reportData || !attemptData.taskSessionId){
+    console.warn('Blocked non-manual/auto history save:', attemptData);
+    return;
+  }
+  const stored = localStorage.getItem('demo_user');
+  if (!stored) return;
+
+  let user = {};
+  try { user = normalizeDemoUser(JSON.parse(stored)); } catch(e) { return; }
+
+  const nowIso = new Date().toISOString();
+  const payload = {
+    email: user.email,
+    userEmail: user.email,
+    userName: user.name,
+    mobile: user.mobile,
+    city: user.city,
+    qualification: user.qualification,
+    taskName: attemptData.taskName,
+    taskCategory: attemptData.taskCategory,
+    totalEntries: attemptData.totalEntries,
+    correctEntries: attemptData.correctEntries,
+    wrongEntries: attemptData.wrongEntries,
+    accuracy: attemptData.accuracy,
+    status: attemptData.status,
+    timestamp: nowIso,
+    createdAtISO: nowIso,
+    submittedAt: nowIso,
+    taskSessionId: attemptData.taskSessionId,
+    startedAt: attemptData.startedAt || null,
+    durationSeconds: attemptData.durationSeconds || 0,
+    reportData: attemptData.reportData || null,
+    finalSubmitted: true,
+    submittedByUser: true,
+    manualSubmit: true,
+    historyEligible: true
+  };
+
+  const cachedBefore = loadCachedHistory(user.email);
+  const localHistory = getCleanHistory(mergeHistory([payload], cachedBefore));
+  cacheHistory(user.email, localHistory);
+  renderHistory(localHistory);
+
+  try {
+    const data = await demoApi('/api/demo/attempt', payload);
+    const newHistory = getCleanHistory(data.history && data.history.length ? data.history : mergeHistory([payload], cachedBefore));
+    cacheHistory(user.email, newHistory);
+    renderHistory(newHistory);
+    showToast('Practice attempt saved permanently!');
+  } catch (err) {
+    console.error('Failed to save attempt:', err);
+    showToast('Attempt saved locally. Firebase/API sync failed.');
+  }
+}
+
+async function refreshHistoryFromServer(showSuccessToast = true) {
+  const stored = localStorage.getItem('demo_user');
+  if (!stored) return;
+
+  let user = {};
+  try { user = normalizeDemoUser(JSON.parse(stored)); } catch(e) { return; }
+
+  try {
+    const data = await demoApi('/api/demo/login', { email: user.email, mobile: user.mobile });
+    const latestUser = normalizeDemoUser(data.user || user);
+    updateProfileDetails(latestUser);
+    localStorage.setItem('demo_user', JSON.stringify(latestUser));
+    const finalHistory = getCleanHistory(mergeHistory(data.history || [], purgeOldAutoHistory(latestUser.email)));
+    cacheHistory(latestUser.email, finalHistory);
+    renderHistory(finalHistory);
+    if (showSuccessToast) showToast('History Updated');
+  } catch (err) {
+    console.error('History refresh failed:', err);
+    updateProfileDetails(user);
+    renderHistory(loadCachedHistory(user.email));
+    if (showSuccessToast) showToast('Showing saved local history. Firebase/API sync failed.');
+  }
+}
+
+function getAttemptDateRaw(att){
+  if(!att) return '';
+  if(att.timestamp) return att.timestamp;
+  if(att.createdAtISO) return att.createdAtISO;
+  if(att.createdAt && typeof att.createdAt === 'object' && att.createdAt.seconds) return new Date(att.createdAt.seconds * 1000).toISOString();
+  if(att.createdAt) return att.createdAt;
+  if(att.date) return att.date;
+  return '';
+}
+function formatAttemptDate(att){
+  const raw = getAttemptDateRaw(att);
+  const dt = raw ? new Date(raw) : new Date();
+  if(isNaN(dt.getTime())) return '-';
+  return dt.toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'}) + ', ' + dt.toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit', hour12:true});
+}
+function taskMeta(cat){
+  if(cat==='data') return {name:'Data Entry', emoji:'📊'};
+  if(cat==='form') return {name:'Form Filling', emoji:'🧾'};
+  if(cat==='grammar') return {name:'Grammar Correction', emoji:'✍️'};
+  if(cat==='typing') return {name:'PDF to Word Typing', emoji:'⌨️'};
+  return {name:'Practice Task', emoji:'📋'};
+}
+function buildSavedReportKey(att, idx){
+  const raw = (getAttemptDateRaw(att) || String(Date.now())) + '_' + idx + '_' + (att.taskCategory || 'task');
+  return 'rep_' + raw.replace(/[^a-zA-Z0-9_]/g,'');
+}
+function renderHistory(historyArr) {
+  const list = document.getElementById('drawerAttemptsList');
+  const totalEl = document.getElementById('drawerStatsTotal');
+  const accEl = document.getElementById('drawerStatsAccuracy');
+  const appEl = document.getElementById('drawerStatsApproved');
+  const rejEl = document.getElementById('drawerStatsRejected');
+  const dashTotalEl = document.getElementById('dashStatsTotal');
+  const dashAppEl = document.getElementById('dashStatsApproved');
+  const dashPendingEl = document.getElementById('dashStatsPending');
+  const dashRejEl = document.getElementById('dashStatsRejected');
+  if (!list) return;
+
+  const attempts = getCleanHistory(historyArr);
+  if (!window.SAVED_REPORTS) window.SAVED_REPORTS = {};
+
+  if (attempts.length === 0) {
+    list.innerHTML = `<div style="text-align:center; padding:30px 0; color:var(--gov-border);"><i class="fas fa-folder-open" style="font-size:2rem; margin-bottom:10px; display:block;"></i><p style="font-size:0.85rem; font-weight:bold; color:var(--gov-text-muted);">No attempts recorded.</p></div>`;
+    if (totalEl) totalEl.textContent = '0';
+    if (accEl) accEl.textContent = '0%';
+    if (appEl) appEl.textContent = '0';
+    if (rejEl) rejEl.textContent = '0';
+    if (dashTotalEl) dashTotalEl.textContent = '0';
+    if (dashAppEl) dashAppEl.textContent = '0';
+    if (dashPendingEl) dashPendingEl.textContent = '0';
+    if (dashRejEl) dashRejEl.textContent = '0';
+    return;
+  }
+
+  list.innerHTML = '';
+  let totalAcc = 0, approved = 0, pending = 0, rejected = 0;
+  attempts.forEach((h, idx) => {
+    const acc = parseFloat(h.accuracy || 0);
+    totalAcc += acc;
+    const rawStatus = String(h.status || '').toLowerCase();
+    const status = rawStatus === 'pending' ? 'Pending' : (acc >= 95 ? 'Approved' : 'Rejected');
+    if(status === 'Approved') approved++; else if(status === 'Pending') pending++; else rejected++;
+    const meta = taskMeta(h.taskCategory);
+    const dateStr = formatAttemptDate(h);
+    const badgeBg = status === 'Approved' ? '#dcfce7' : (status === 'Pending' ? '#ffedd5' : '#fee2e2');
+    const badgeCol = status === 'Approved' ? '#166534' : (status === 'Pending' ? '#c2410c' : '#991b1b');
+    const accCol = acc >= 95 ? 'var(--gov-green)' : acc >= 80 ? 'var(--gov-saffron)' : 'var(--gov-red)';
+    const reportKey = buildSavedReportKey(h, idx);
+
+    window.SAVED_REPORTS[reportKey] = h.reportData ? h.reportData : {
+      isGenerated: false,
+      taskName: h.taskName || meta.name,
+      taskCategory: h.taskCategory,
+      totalEntries: h.totalEntries,
+      correctEntries: h.correctEntries,
+      wrongEntries: h.wrongEntries,
+      accuracy: h.accuracy,
+      status,
+      timestamp: getAttemptDateRaw(h)
+    };
+
+    const card = document.createElement('div');
+    card.style.cssText = 'border:1px solid var(--gov-border); padding:12px; border-radius:4px; margin-bottom:10px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.04);';
+    card.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px;">
+        <div style="display:flex; gap:10px; align-items:flex-start; min-width:0;">
+          <span style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#f4f6f9;border:1px solid var(--gov-border);border-radius:4px;font-size:1.1rem;">${meta.emoji}</span>
+          <div style="min-width:0;">
+            <strong style="color:var(--gov-blue); font-size:0.86rem; display:block; word-break:break-word;">${escHtml(h.taskName || meta.name)}</strong>
+            <span style="font-size:0.72rem; color:var(--gov-text-muted); font-weight:700;">${dateStr}</span>
+          </div>
+        </div>
+        <span style="background:${badgeBg}; color:${badgeCol}; padding:3px 8px; border-radius:10px; font-size:0.68rem; font-weight:900; text-transform:uppercase;">${status}</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; gap:8px; font-size:0.75rem; color:var(--gov-text-muted); border-top:1px dashed #eee; padding-top:8px; flex-wrap:wrap;">
+        <span>Entries: <strong>${h.totalEntries || 0}</strong></span>
+        <span>Correct: <strong style="color:var(--gov-green);">${h.correctEntries || 0}</strong></span>
+        <span>Wrong: <strong style="color:var(--gov-red);">${h.wrongEntries || 0}</strong></span>
+        <span>Acc: <strong style="color:${accCol};">${acc}%</strong></span>
+      </div>
+      <button class="report-history-btn" onclick="showSavedReport('${reportKey}')"><i class="fas fa-file-invoice mr-1"></i> View Performance Report</button>`;
+    list.appendChild(card);
+  });
+
+  const avg = Math.round(totalAcc / attempts.length);
+  if (totalEl) totalEl.textContent = attempts.length;
+  if (accEl) accEl.textContent = avg + '%';
+  if (appEl) appEl.textContent = approved;
+  if (rejEl) rejEl.textContent = rejected;
+  if (dashTotalEl) dashTotalEl.textContent = attempts.length;
+  if (dashAppEl) dashAppEl.textContent = approved;
+  if (dashPendingEl) dashPendingEl.textContent = pending;
+  if (dashRejEl) dashRejEl.textContent = rejected;
+}
+
+function renderMenu(){
+  document.getElementById('taskCards').innerHTML=TDEFS.map(t=>{
+    let iconHtml = ''; let iconBg = '#f4f6f9'; let iconColor = 'var(--gov-blue)';
+    if(t.id==='data'){ iconHtml='<i class="fa-solid fa-file-pen"></i>'; }
+    else if(t.id==='form'){ iconHtml='<i class="fa-solid fa-clipboard-list"></i>'; }
+    else if(t.id==='typing'){ iconHtml='<i class="fa-solid fa-keyboard"></i>'; }
+    else if(t.id==='grammar'){ iconHtml='<i class="fa-solid fa-file-circle-check"></i>'; }
+    return `
+      <div class="task-card">
+        <div style="display:flex; align-items:center;">
+            <div class="task-card-icon-wrap" style="background:${iconBg}; color:${iconColor};">${iconHtml}</div>
+            <div class="task-card-details">
+              <h3 class="task-card-title">${t.name}</h3>
+              <p class="task-card-desc">${t.desc}</p>
+            </div>
+        </div>
+        <button class="task-card-btn" onclick="openTask('${t.id}')">Start Module</button>
+      </div>`;
+  }).join('');
+}
+
+function openTask(id){
+  CT=TDEFS.find(t=>t.id===id);if(!CT)return;
+  SI={};ID=[];TN=CT.items;SL=CT.timeMin*60;ST=Date.now();ERR_LOG={};
+  TASK_STARTED=true;
+  FINAL_SUBMIT_IN_PROGRESS=false;
+  CURRENT_TASK_SESSION_ID='wd_' + Date.now() + '_' + Math.random().toString(36).slice(2,10);
+  if(CT.id==='typing')buildTypingTexts();
+  document.getElementById('taskTitle').textContent=CT.name;
+  document.getElementById('taskSubtitle').textContent=`Demo Mode • ${CT.items} Entries`;
+  document.getElementById('mainMenu').style.display='none';
+  const ta=document.getElementById('taskArea');ta.style.display='flex';
+  const hw=HOWTO[CT.id]||[];
+  document.getElementById('taskHowTo').innerHTML=hw.length?`<div class="ref-box" style="margin:0 20px 20px;"><h5>📌 Instructions:</h5><ol style="margin-left:20px; font-size:0.9rem;">${hw.map(s=>`<li>${s}</li>`).join('')}</ol></div>`:'';
+  upProg();startTimer();renderItems();
+  window.scrollTo(0,0);
+}
+
+function goBack(){if(confirm("Exit this practice session? Progress will be lost.")){clearInterval(TI);goHome();}}
+function goHome(){document.getElementById('resultModal').classList.remove('show');document.getElementById('taskArea').style.display='none';document.getElementById('mainMenu').style.display='block';clearInterval(TI);TASK_STARTED=false;FINAL_SUBMIT_IN_PROGRESS=false;CURRENT_TASK_SESSION_ID=null;}
+function closeReport(){goHome();}
+function startTimer(){clearInterval(TI);TI=setInterval(()=>{SL--;upTimer();if(SL<=0){clearInterval(TI);handleTaskTimeOver();}},1000);}
+function handleTaskTimeOver(){TASK_STARTED=false;FINAL_SUBMIT_IN_PROGRESS=false;CURRENT_TASK_SESSION_ID=null;showToast('Time is over. Task was not submitted, so it will not be added to Task History.');}
+function upTimer(){const h=Math.floor(SL/3600),m=Math.floor((SL%3600)/60),s=SL%60;document.getElementById('timerDisplay').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+function upProg(){document.getElementById('progressChip').textContent=`Saved: ${Object.keys(SI).length}/${TN}`;}
+
+function lockField(el){
+  el.addEventListener('paste',e=>{e.preventDefault();showToast("Paste is not allowed in this task.");});
+  el.addEventListener('copy',e=>{e.preventDefault();});
+  el.addEventListener('cut',e=>{e.preventDefault();});
+  el.addEventListener('contextmenu',e=>{e.preventDefault();});
+  el.addEventListener('drop',e=>{e.preventDefault();});
+}
+
+function renderItems(){
+  const c=document.getElementById('itemsContainer');c.innerHTML='';
+  for(let i=0;i<TN;i++){
+    const w=document.createElement('div');w.className='item-wrapper';w.id='iw'+i;
+    let hdr=`<div class="item-header"><div class="item-num">${i+1}</div><h4>Entry Record #${i+1}</h4><button class="save-btn" id="sb${i}" onclick="saveItem(${i})">💾 Save Data</button></div>`;
+    let body='';
+    if(CT.id==='data'){const d=gDE();ID[i]=d;body=bDE(i,d);}
+    else if(CT.id==='form'){const d=gFF();ID[i]=d;body=bFF(i,d);}
+    else if(CT.id==='grammar'){const d=rand(GRAMMAR);ID[i]=d;body=bGR(i,d);}
+    else if(CT.id==='typing'){const d=TTEXTS[i%TTEXTS.length];ID[i]=d;body=bTY(i,d);}
+    w.innerHTML=hdr+`<div class="item-body">${body}</div>`;c.appendChild(w);
+    
+    w.querySelectorAll('textarea').forEach(ta => {
+      ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px';
+      ta.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'; });
+    });
+  }
+  c.querySelectorAll('input,textarea').forEach(el=>lockField(el));
+  if(CT.id==='typing')for(let i=0;i<TN;i++){const t=document.getElementById('tt'+i);if(t)t.addEventListener('input',()=>upWC(i));}
+}
+
+function fl(id,lb){return `<div class="field-group"><label>${lb} <span>*</span></label><textarea id="${id}" placeholder="Type exactly as shown..." rows="1" autocomplete="off"></textarea></div>`;}
+
+function bDE(i,d){
+  return `<div class="ref-box"><h5>📋 Reference Document:</h5><div class="ref-grid">
+    <div class="ref-item"><strong>Full Name</strong><span>${d.name}</span></div>
+    <div class="ref-item"><strong>Phone</strong><span>${d.phone}</span></div>
+    <div class="ref-item wide"><strong>Email</strong><span>${d.email}</span></div>
+    <div class="ref-item"><strong>Gov ID</strong><span>${d.aadhar}</span></div>
+    <div class="ref-item"><strong>PAN</strong><span>${d.pan}</span></div>
+    <div class="ref-item wide"><strong>Qualification</strong><span>${d.qual}</span></div>
+    <div class="ref-item address-item"><strong>Address</strong><span>${d.address}</span></div>
+    <div class="ref-item"><strong>City</strong><span>${d.city}</span></div>
+    <div class="ref-item"><strong>State</strong><span>${d.state}</span></div>
+    <div class="ref-item"><strong>Pin Code</strong><span>${d.pin}</span></div>
+    <div class="ref-item"><strong>DOB</strong><span>${d.dob}</span></div>
+    <div class="ref-item"><strong>Gender</strong><span>${d.gender}</span></div>
+    <div class="ref-item"><strong>Salary</strong><span>${d.salary}</span></div>
+  </div></div>
+  <div class="fields-grid">
+    ${fl('dn'+i,"Full Name")}${fl('dp'+i,"Phone Number")}${fl('de'+i,"Email Address")}
+    ${fl('da'+i,"Gov ID Number")}${fl('dpa'+i,"PAN Number")}${fl('dq'+i,"Qualification")}
+    ${fl('dad'+i,"Full Address")}${fl('dc'+i,"City")}${fl('ds'+i,"State")}
+    ${fl('dpc'+i,"Pin Code")}${fl('ddo'+i,"DOB")}${fl('dg'+i,"Gender")}${fl('dsl'+i,"Salary")}
+  </div>`;
+}
+
+function bFF(i,d){
+  return `<div class="ref-box"><h5>📋 Data Source:</h5><div class="ref-grid">
+    <div class="ref-item"><strong>Full Name</strong><span>${d.name}</span></div>
+    <div class="ref-item wide"><strong>Email</strong><span>${d.email}</span></div>
+    <div class="ref-item"><strong>Phone</strong><span>${d.phone}</span></div>
+    <div class="ref-item"><strong>Alt Phone</strong><span>${d.altPhone}</span></div>
+    <div class="ref-item"><strong>Gov ID</strong><span>${d.aadhar}</span></div>
+    <div class="ref-item"><strong>PAN</strong><span>${d.pan}</span></div>
+    <div class="ref-item"><strong>City</strong><span>${d.city}</span></div>
+    <div class="ref-item"><strong>State</strong><span>${d.state}</span></div>
+    <div class="ref-item"><strong>Pin Code</strong><span>${d.pin}</span></div>
+    <div class="ref-item"><strong>DOB</strong><span>${d.dob}</span></div>
+    <div class="ref-item"><strong>Gender</strong><span>${d.gender}</span></div>
+    <div class="ref-item"><strong>Nationality</strong><span>${d.nationality}</span></div>
+    <div class="ref-item"><strong>Company</strong><span>${d.company}</span></div>
+    <div class="ref-item"><strong>Experience</strong><span>${d.exp}</span></div>
+    <div class="ref-item wide"><strong>Qualification</strong><span>${d.qual}</span></div>
+    <div class="ref-item"><strong>Marital Status</strong><span>${d.marital}</span></div>
+    <div class="ref-item address-item"><strong>Address</strong><span>${d.address}</span></div>
+  </div></div>
+  <div class="fields-grid">
+    ${fl('fn'+i,"Full Name")}${fl('fe'+i,"Email")}${fl('fp'+i,"Phone")}${fl('fap'+i,"Alt Phone")}
+    ${fl('fa'+i,"Gov ID")}${fl('fpn'+i,"PAN")}${fl('fc'+i,"City")}${fl('fst'+i,"State")}
+    ${fl('fpc'+i,"Pin Code")}${fl('fd'+i,"DOB")}${fl('fg'+i,"Gender")}${fl('fnt'+i,"Nationality")}
+    ${fl('fco'+i,"Company")}${fl('fex'+i,"Experience")}${fl('fq'+i,"Qualification")}${fl('fm'+i,"Marital Status")}
+    <div class="field-group full"><label>Full Address <span>*</span></label><textarea id="fat${i}" placeholder="Type here..." rows="1" autocomplete="off"></textarea></div>
+  </div>`;
+}
+
+function bGR(i,d){
+  const mistakeCount = d.errorPositions ? d.errorPositions.length : 0;
+  return `<div class="grammar-wrong">
+    <div class="grammar-wrong-title">❌ Text Containing Errors (Count: ${mistakeCount})</div>
+    <p style="margin-top:8px;">${d.wrong}</p>
+  </div>
+  <div style="color:var(--gov-blue); font-weight:700; margin-bottom:6px; text-transform:uppercase; font-size:0.85rem;">✅ Rectified Output Box:</div>
+  <textarea class="grammar-textarea" id="gr${i}" placeholder="Enter corrected paragraph here..."></textarea>`;
+}
+
+function bTY(i,d){
+  const cleanText = String(d.text || '').replace(/^\s*📋?\s*Content\s+to\s+type\s*:?\s*/i, '').trim();
+  const lines=cleanText.split('\n');
+  const linesHtml=lines.map(l=>l.trim()===''?'<div style="height:14px;"></div>':`<div style="margin:6px 0;font-family:'Space Mono',monospace;white-space:pre-wrap;line-height:1.72;word-spacing:1px;overflow-wrap:anywhere;">${escHtml(l)}</div>`).join('');
+  return `
+  <div class="typing-split-container">
+    <div style="background:#fdfae6; border:1px solid #fde68a; border-radius:2px; overflow:hidden;">
+      <div style="background:#fcd34d; padding:10px; font-weight:bold; font-size:0.8rem; text-transform:uppercase;">📋 Content to type:</div>
+      <div style="padding:18px 20px; font-size:0.92rem; color:#1f2937; background:#fffdf2;">${linesHtml}</div>
+    </div>
+    <div style="display:flex; flex-direction:column;">
+      <div style="color:var(--gov-blue); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:5px;">✍️ Input Terminal</div>
+      <textarea class="typing-textarea" id="tt${i}" placeholder="Begin typing here..."></textarea>
+      <div style="display:flex; justify-content:space-between; margin-top:5px;">
+        <span style="font-size:0.7rem; color:var(--text-muted);">Copy-paste disabled.</span>
+        <div class="word-counter" id="wc${i}">0 words</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function upWC(i){const t=document.getElementById('tt'+i),w=document.getElementById('wc'+i);if(!t||!w)return;const n=t.value.trim().split(/\s+/).filter(x=>x.length>0).length;w.textContent=n+" words";}
+
+function saveItem(i){
+  const d=ID[i];let cor=0,tot=0,lbl="Correct",wds=undefined; let errors=[];
+
+  if(CT.id==='data'){
+    const fls=[ ['dn'+i,d.name,"Full Name"],['dp'+i,d.phone,"Phone Number"],['de'+i,d.email,"Email Address"], ['da'+i,d.aadhar,"Gov ID Number"],['dpa'+i,d.pan,"PAN Number"],['dq'+i,d.qual,"Qualification"], ['dad'+i,d.address,"Full Address"],['dc'+i,d.city,"City"],['ds'+i,d.state,"State"], ['dpc'+i,String(d.pin),"Pin Code"],['ddo'+i,d.dob,"DOB"],['dg'+i,d.gender,"Gender"],['dsl'+i,d.salary,"Salary"] ];
+    fls.forEach(([id,v,fieldName])=>{
+      tot++; const el=document.getElementById(id);if(!el)return; const got=el.value;
+      const ok=normalizeVal(got)===normalizeVal(v);
+      el.readOnly=true; el.style.background='#f4f6f9'; el.style.cursor='not-allowed';
+      if(ok)cor++; else errors.push({field:fieldName,got:got.trim()||"(empty)",expected:v.trim()});
+    });
+    lbl="Correct Fields";
+  } else if(CT.id==='form'){
+    const fls=[ ['fn'+i,d.name,"Full Name"],['fe'+i,d.email,"Email"],['fp'+i,d.phone,"Phone"],['fap'+i,d.altPhone,"Alt Phone"], ['fa'+i,d.aadhar,"Gov ID"],['fpn'+i,d.pan,"PAN"],['fc'+i,d.city,"City"],['fst'+i,d.state,"State"], ['fpc'+i,String(d.pin),"Pin Code"],['fd'+i,d.dob,"DOB"],['fg'+i,d.gender,"Gender"],['fnt'+i,d.nationality,"Nationality"], ['fco'+i,d.company,"Company"],['fex'+i,d.exp,"Experience"],['fq'+i,d.qual,"Qualification"],['fm'+i,d.marital,"Marital Status"],['fat'+i,d.address,"Full Address"] ];
+    fls.forEach(([id,v,fieldName])=>{
+      tot++; const el=document.getElementById(id);if(!el)return; const got=el.value;
+      const ok=normalizeVal(got)===normalizeVal(v);
+      el.readOnly=true; el.style.background='#f4f6f9'; el.style.cursor='not-allowed';
+      if(ok)cor++; else errors.push({field:fieldName,got:got.trim()||"(empty)",expected:v.trim()});
+    });
+    lbl="Correct Fields";
+  } else if(CT.id==='grammar'){
+    tot=1;const t=document.getElementById('gr'+i);const got=t?t.value.trim():'';
+    if(got.length>12){ cor=1; const matched=normalizeVal(got)===normalizeVal(d.correct); if(!matched)errors.push({field:"Grammar Answer",got:got,expected:d.correct,hint:"Errors: "+d.errorPositions.join(' | ')}); }
+    else{ errors.push({field:"Grammar Answer",got:got||"(empty)",expected:d.correct,hint:"Answer too short."}); }
+    if(t){t.readOnly=true;t.style.background='#f4f6f9';}
+    lbl="Answer";
+  } else if(CT.id==='typing'){
+    tot=1;const t=document.getElementById('tt'+i);wds=t?t.value.trim().split(/\s+/).filter(x=>x.length>0).length:0;
+    if(wds>=100){cor=1;} else{errors.push({field:"Article Length",got:wds+" words written",expected:"Minimum 100 words required",hint:"Keep writing!"});}
+    if(t){t.readOnly=true;t.style.background='#f4f6f9';}
+    lbl="Typed";
+  }
+
+  SI[i]={cor,tot}; ERR_LOG[i]=errors;
+  const btn=document.getElementById('sb'+i);btn.innerHTML='Saved';btn.classList.add('saved');btn.disabled=true;
+  upProg();
+  showToast(`Entry #${i+1} saved successfully.`);
+}
+
+function showMM(idx,cor,tot,lbl,wds,errors){
+  const acc=tot>0?Math.round((cor/tot)*100):0;
+  document.getElementById('mmTitle').textContent=`Entry #${idx+1} Processed`;
+  document.getElementById('mmSub').textContent=acc>=80?'Acceptable Accuracy':'Accuracy Needs Attention';
+  
+  const bar=document.getElementById('mmBar');bar.style.width='0%';
+  bar.style.background=acc>=80?'var(--gov-green)':acc>=60?'var(--gov-saffron)':'var(--gov-red)';
+  setTimeout(()=>bar.style.width=acc+'%',60);
+  
+  const errDiv=document.getElementById('mmErrDetail');
+  if(errors&&errors.length>0){
+    let eHtml=`<div style="background:#fee2e2; border:1px solid #fecaca; padding:10px; border-radius:2px;"><strong style="color:#b91c1c;">Mismatch Log:</strong>`;
+    errors.forEach(e=>{ eHtml+=`<div style="margin-top:5px; border-bottom:1px dashed #fca5a5; padding-bottom:5px;"><strong>${e.field}:</strong> Expected [${e.expected}] but got [${e.got}]</div>`; });
+    eHtml+='</div>'; errDiv.innerHTML=eHtml;
+  } else { errDiv.innerHTML='<div style="color:var(--gov-green); font-weight:bold;">No errors detected.</div>'; }
+  document.getElementById('miniModal').classList.add('show');
+}
+function closeMM(){document.getElementById('miniModal').classList.remove('show');}
+
+function submitAll(userClickedSubmit=false){
+  if(FINAL_SUBMIT_IN_PROGRESS === true){ showToast('Final submit is already processing. Please wait.'); return; }
+  if(userClickedSubmit !== true || !TASK_STARTED || !CT || !CURRENT_TASK_SESSION_ID){
+    showToast('Task was not submitted manually, so it will not be added to Task History.');
+    return;
+  }
+  const completed=Object.keys(SI).length;
+  if(completed<TN){ showToast(`Incomplete. Save all ${TN} records first.`); return; }
+  FINAL_SUBMIT_IN_PROGRESS=true;
+  clearInterval(TI); 
+  setTimeout(()=>{ document.getElementById('miniModal').classList.remove('show'); buildReport(); },450);
+}
+
+function getReportConfig(key, fallback) {
+  if (window.REPORT_CONFIG && window.REPORT_CONFIG[key] !== undefined && window.REPORT_CONFIG[key] !== '') return window.REPORT_CONFIG[key];
+  return fallback;
+}
+
+function buildReport(){
+  let tCor=0,tTot=0;
+  Object.values(SI).forEach(s=>{tCor+=s.cor;tTot+=s.tot;});
+  const comp=Object.keys(SI).length;
+  const timUsedSec=Math.max(1, Math.round((Date.now()-ST)/1000));
+  const timUsedMin=(timUsedSec/60).toFixed(1);
+
+  let correctEntryCount=0, incorrectEntryCount=0;
+  Object.entries(SI).forEach(([idx,s])=>{ if(s.cor===s.tot&&s.tot>0) correctEntryCount++; else incorrectEntryCount++; });
+  const overallAcc=comp>0?Math.round((correctEntryCount/comp)*100):0;
+  const threshold=parseInt(getReportConfig('reportApprovalThreshold','95'),10);
+  const isApproved=overallAcc>=threshold;
+
+  let spellingErrs=0, formatErrs=0, missingErrs=0, correctChars=0, totalChars=0;
+  Object.entries(ERR_LOG).forEach(([idx,errs])=>{
+    if(!errs) return;
+    errs.forEach(e=>{
+      const f=(e.field||'').toLowerCase();
+      const g=String(e.got||'').toLowerCase();
+      const ex=String(e.expected||'').toLowerCase();
+      if(g===''||g==='(empty)') missingErrs++;
+      else if(f.includes('email')||f.includes('aadhar')||f.includes('pan')||f.includes('pin')||f.includes('dob')||f.includes('phone')||f.includes('gov id')) formatErrs++;
+      else spellingErrs++;
+      const minLen=Math.min(g.length,ex.length);
+      for(let ci=0;ci<minLen;ci++){ if(g[ci]===ex[ci]) correctChars++; }
+      totalChars+=Math.max(g.length,ex.length);
+    });
+  });
+
+  const charAcc=totalChars>0?Math.round((correctChars/totalChars)*100):overallAcc;
+  const spellingAcc=Math.max(0, Math.min(100, Math.round(overallAcc - (spellingErrs>0?2:0))));
+  const wordAcc=Math.max(0, Math.min(100, Math.round(overallAcc - (missingErrs>0?1:0))));
+  const avgTimeSec=comp>0?Math.round(timUsedSec/comp):0;
+  const avgTimeDisp=avgTimeSec>=60?`${Math.floor(avgTimeSec/60)}m ${avgTimeSec%60}s`:`${avgTimeSec} sec`;
+
+  let totalTypedWords=0;
+  if(CT.id==='typing'){
+    for(let i=0;i<TN;i++){ const el=document.getElementById('tt'+i); if(el) totalTypedWords+=el.value.trim().split(/\s+/).filter(Boolean).length; }
+  } else {
+    totalTypedWords=Math.round(tTot*3);
+  }
+  const wpm=timUsedSec>0?Math.round(totalTypedWords/(timUsedSec/60)):0;
+  const completionRate=TN>0?Math.round((comp/TN)*100):0;
+
+  let qualityLabel, qualityStars, qualityColor;
+  if(overallAcc>=90){ qualityLabel='Excellent'; qualityStars='⭐ Excellent'; qualityColor='var(--gov-green)'; }
+  else if(overallAcc>=80){ qualityLabel='Good'; qualityStars='⭐ Good'; qualityColor='var(--gov-blue)'; }
+  else if(overallAcc>=70){ qualityLabel='Average'; qualityStars='⭐ Average'; qualityColor='var(--gov-saffron)'; }
+  else { qualityLabel='Needs Improvement'; qualityStars='⚠️ Needs Improvement'; qualityColor='var(--gov-red)'; }
+
+  let grade,gc;
+  if(overallAcc>=95){grade='A+';gc='var(--gov-green)';}
+  else if(overallAcc>=85){grade='A';gc='var(--gov-blue)';}
+  else if(overallAcc>=75){grade='B';gc='var(--gov-saffron)';}
+  else{grade='C';gc='var(--gov-red)';}
+
+  const statusText=isApproved?getReportConfig('reportStatusApprovedText','Task Status: Approved'):getReportConfig('reportStatusRejectedText','Task Status: Rejected');
+  const statusColor=isApproved?'var(--gov-green)':'var(--gov-red)';
+  const statusBg=isApproved?'#f0fdf4':'#fef2f2';
+  const statusBorder=isApproved?'#86efac':'#fca5a5';
+  const statusDesc=isApproved?getReportConfig('reportApprovedDesc','You are eligible for live tasks! Start real work now and start earning.'):getReportConfig('reportRejectedDesc',`Score ${threshold}%+ accuracy to get your task approved for live work.`);
+
+  const meta=taskMeta(CT.id);
+  const eligibleHeading=getReportConfig('reportEligibleHeading','You are eligible for this work.');
+  const eligibleSub=getReportConfig('reportEligibleSub','Please purchase a subscription plan to start earning real money!');
+  const notEligibleHeading=getReportConfig('reportNotEligibleHeading','You are not eligible for this work.');
+  const notEligibleSub=getReportConfig('reportNotEligibleSub',`Please try again to become eligible. You need ${threshold}%+ accuracy.`);
+  const eligibilityBanner=isApproved
+    ? `<div style="background:#ecfdf5;border:2px solid #34d399;border-radius:4px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:12px;"><div style="font-size:2rem;">🎉</div><div><div style="font-weight:900;color:#065f46;font-size:1.02rem;">${escHtml(eligibleHeading)}</div><div style="font-weight:700;color:#047857;font-size:.86rem;margin-top:3px;">${escHtml(eligibleSub)}</div></div></div>`
+    : `<div style="background:#fef2f2;border:2px solid #f87171;border-radius:4px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:12px;"><div style="font-size:2rem;">❌</div><div><div style="font-weight:900;color:#991b1b;font-size:1.02rem;">${escHtml(notEligibleHeading)}</div><div style="font-weight:700;color:#b91c1c;font-size:.86rem;margin-top:3px;">${escHtml(notEligibleSub)}</div></div></div>`;
+
+  document.querySelector('.modal-hero h2').textContent=getReportConfig('reportTitle','Demo Performance Report');
+  document.querySelector('.modal-hero p').textContent=getReportConfig('reportSub','Your performance has been evaluated based on real task parameters.');
+  const gcEl=document.getElementById('gradeCircle'); gcEl.textContent=grade; gcEl.style.color=gc; gcEl.style.borderColor=gc;
+
+  document.getElementById('overallStats').innerHTML=`
+    ${eligibilityBanner}
+    <div class="rpt-section"><div class="rpt-sec-title">1️⃣ Basic Work Data</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">Task Type</span><span class="rpt-v">${meta.emoji} ${CT.name}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">Total Entries Submitted</span><span class="rpt-v" style="color:var(--gov-blue);">${comp}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">Task Completion</span><span class="rpt-v" style="color:var(--gov-green);">${comp}/${TN}</span></div>
+    </div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">2️⃣ Accuracy Report</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">✔ Correct Entries</span><span class="rpt-v" style="color:var(--gov-green);">${correctEntryCount}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">❌ Incorrect Entries</span><span class="rpt-v" style="color:var(--gov-red);">${incorrectEntryCount}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🎯 Overall Accuracy</span><span class="rpt-v" style="color:${gc};">${overallAcc}%</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🔤 Spelling Accuracy</span><span class="rpt-v">${spellingAcc}%</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🔡 Character Accuracy</span><span class="rpt-v">${charAcc}%</span></div>
+      <div class="rpt-kv"><span class="rpt-k">📝 Word Accuracy</span><span class="rpt-v">${wordAcc}%</span></div>
+    </div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">3️⃣ Error Analysis</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">🔡 Spelling Errors</span><span class="rpt-v" style="color:${spellingErrs>0?'var(--gov-red)':'var(--gov-green)'};">${spellingErrs}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">📋 Formatting Errors</span><span class="rpt-v" style="color:${formatErrs>0?'var(--gov-red)':'var(--gov-green)'};">${formatErrs}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🚫 Missing Data Errors</span><span class="rpt-v" style="color:${missingErrs>0?'var(--gov-red)':'var(--gov-green)'};">${missingErrs}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🔁 Duplicate Entries</span><span class="rpt-v" style="color:var(--gov-text-muted);">0</span></div>
+      <div class="rpt-kv"><span class="rpt-k">📊 Total Error Entries</span><span class="rpt-v" style="color:${incorrectEntryCount>0?'var(--gov-red)':'var(--gov-green)'};">${incorrectEntryCount}</span></div>
+    </div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">4️⃣ Speed Performance</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">⏱️ Avg Time per Entry</span><span class="rpt-v" style="color:var(--gov-blue);">${avgTimeDisp}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">⌨️ Typing Speed</span><span class="rpt-v" style="color:var(--gov-saffron);">${wpm} WPM</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🕐 Total Time Taken</span><span class="rpt-v">${timUsedMin} min</span></div>
+    </div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">5️⃣ Productivity Score</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">📈 Task Completion Rate</span><span class="rpt-v" style="color:${completionRate===100?'var(--gov-green)':'var(--gov-saffron)'};">${completionRate}%</span></div>
+      <div class="rpt-kv"><span class="rpt-k">✅ Items Completed</span><span class="rpt-v">${comp} / ${TN}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🏅 Performance Grade</span><span class="rpt-v" style="color:${gc};">${grade}</span></div>
+    </div><div class="rpt-pbar-wrap"><div style="display:flex;justify-content:space-between;font-size:.76rem;font-weight:700;color:var(--gov-text-muted);margin-bottom:4px;"><span>Completion Progress</span><span>${completionRate}%</span></div><div style="background:#e2e8f0;border-radius:10px;height:10px;overflow:hidden;"><div style="height:100%;background:${completionRate===100?'var(--gov-green)':'var(--gov-saffron)'};width:${completionRate}%;"></div></div></div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">6️⃣ Quality Score</div><div class="rpt-quality-box" style="border-color:${qualityColor};background:#f8fafc;"><div style="font-size:1.6rem;font-weight:900;color:${qualityColor};">${overallAcc}%</div><div style="font-size:1.08rem;font-weight:900;color:${qualityColor};margin-top:4px;">${qualityStars}</div><div style="font-size:.75rem;color:var(--gov-text-muted);margin-top:6px;font-weight:600;">90–100% = ⭐ Excellent | 80–89% = ⭐ Good | 70–79% = ⭐ Average | Below 70% = ⚠️ Needs Improvement</div></div></div>
+    <div class="rpt-section" style="background:#f8fafc;border:2px solid var(--gov-blue);"><div class="rpt-sec-title" style="color:var(--gov-blue);">📊 User Performance Summary</div><div style="font-size:.84rem;line-height:2;color:var(--gov-text);font-weight:600;">👤 <strong>Task:</strong> ${meta.emoji} ${CT.name}<br>📌 <strong>Entries:</strong> ${comp}<br>✔ <strong>Correct:</strong> ${correctEntryCount} &nbsp;|&nbsp; ❌ <strong>Incorrect:</strong> ${incorrectEntryCount}<br>🎯 <strong>Accuracy:</strong> ${overallAcc}%<br>🔤 <strong>Spelling:</strong> ${spellingAcc}% &nbsp;|&nbsp; 🔡 <strong>Character:</strong> ${charAcc}% &nbsp;|&nbsp; 📝 <strong>Word:</strong> ${wordAcc}%<br>⚠️ <strong>Errors:</strong> Spelling: ${spellingErrs} | Format: ${formatErrs} | Missing: ${missingErrs} | Duplicate: 0<br>⚡ <strong>Speed:</strong> ${avgTimeDisp}/entry &nbsp;|&nbsp; ${wpm} WPM<br>📈 <strong>Completion:</strong> ${completionRate}%<br>⭐ <strong>Quality:</strong> ${qualityLabel}</div></div>
+    <div style="border-radius:4px;padding:16px 18px;display:flex;align-items:center;gap:14px;background:${statusBg};border:2px solid ${statusBorder};"><div style="font-size:2rem;">${isApproved?'✅':'❌'}</div><div><div style="font-weight:900;font-size:1.05rem;color:${statusColor};">${statusText}</div><div style="font-size:.8rem;color:var(--gov-text-muted);margin-top:3px;">${statusDesc}</div></div></div>`;
+
+  let str,imp,sug;
+  if(overallAcc>=80){ str=getReportConfig('reportStrengthHigh','Excellent accuracy and attention to detail maintained throughout.'); imp=getReportConfig('reportImprovementHigh','Minor mistakes in a few items — review before saving next time.'); sug=getReportConfig('reportSuggestionHigh','You are ready for live tasks. Start real work to earn rewards!'); }
+  else if(overallAcc>=60){ str=getReportConfig('reportStrengthMedium','Good consistency — you completed all items.'); imp=getReportConfig('reportImprovementMedium','Accuracy needs improvement in some areas. Read data more carefully.'); sug=getReportConfig('reportSuggestionMedium',`Practice 2–3 more demo rounds to reach ${threshold}%+ accuracy.`); }
+  else { str=getReportConfig('reportStrengthLow',"You attempted all items — that's a great start!"); imp=getReportConfig('reportImprovementLow','Low accuracy. Take time to read reference data before typing.'); sug=getReportConfig('reportSuggestionLow','Focus on one task type at a time. Practice makes perfect.'); }
+  document.getElementById('breakdownList').innerHTML='';
+  document.getElementById('analysisGrid').innerHTML=`<div class="ac strength"><h5>✔ Strength</h5><p>${escHtml(str)}</p></div><div class="ac improve"><h5>⚠ Improvement Area</h5><p>${escHtml(imp)}</p></div><div class="ac suggest"><h5>💡 Suggestion</h5><p>${escHtml(sug)}</p></div>`;
+
+  const groupedErrors=[];
+  Object.entries(ERR_LOG).forEach(([idx,errs])=>{
+    if(errs && errs.length){
+      groupedErrors.push({ entryNo: parseInt(idx)+1, errors: errs });
+    }
+  });
+  if(groupedErrors.length>0){
+    let tbl=`<h3 style="font-size:1rem;font-weight:bold;color:var(--gov-blue);margin-top:10px;border-bottom:2px solid var(--gov-saffron);display:inline-block;padding-bottom:5px;">🔍 Detailed Mistake Report — Where You Went Wrong</h3><div class="mistake-group-list">`;
+    groupedErrors.forEach(group=>{
+      tbl+=`<div class="mistake-entry-card"><div class="mistake-entry-title">Entry #${group.entryNo} <span>${group.errors.length} mistake${group.errors.length>1?'s':''}</span></div><div class="mistake-entry-table-wrap"><table class="report-err-table grouped-mistake-table"><thead><tr><th>Field</th><th>You Typed</th><th>Correct Answer</th></tr></thead><tbody>`;
+      group.errors.forEach(e=>{
+        tbl+=`<tr><td><strong>${escHtml(e.field)}</strong></td><td style="color:var(--gov-red);font-weight:700;">${escHtml(e.got)}</td><td style="color:var(--gov-green);font-weight:700;">${escHtml(e.expected)}${e.hint?`<div style="font-size:.72rem;color:var(--gov-text-muted);margin-top:3px;">💡 ${escHtml(e.hint)}</div>`:''}</td></tr>`;
+      });
+      tbl+=`</tbody></table></div></div>`;
+    });
+    tbl+='</div>'; document.getElementById('fullErrSection').innerHTML=tbl;
+  } else {
+    document.getElementById('fullErrSection').innerHTML=`<div style="color:var(--gov-green);font-weight:bold;padding:15px;border:1px solid var(--gov-green);background:#e8f5e9;text-align:center;">🎯 Perfect Submission! No errors found.</div>`;
+  }
+
+  document.getElementById('summaryBody').innerHTML=`<tr><td>${meta.emoji} ${CT.name}</td><td>${comp}/${TN}</td><td><span class="acc-pill ${overallAcc>=80?'acc-high':overallAcc>=60?'acc-mid':'acc-low'}">${overallAcc}%</span></td><td style="font-weight:bold;color:${statusColor};">${statusText}</td></tr>`;
+  document.getElementById('resultModal').classList.add('show'); window.scrollTo(0,0);
+
+  if(!FINAL_SUBMIT_IN_PROGRESS || !TASK_STARTED || !CURRENT_TASK_SESSION_ID){
+    showToast('Report generated, but history was not saved because task was not submitted manually.');
+    return;
+  }
+
+  saveAttemptToServer({
+    taskName: CT.name,
+    taskCategory: CT.id,
+    taskSessionId: CURRENT_TASK_SESSION_ID,
+    startedAt: ST ? new Date(ST).toISOString() : null,
+    durationSeconds: ST ? Math.max(1, Math.round((Date.now()-ST)/1000)) : 0,
+    totalEntries: comp,
+    correctEntries: correctEntryCount,
+    wrongEntries: incorrectEntryCount,
+    accuracy: overallAcc,
+    status: isApproved ? 'Approved' : 'Rejected',
+    finalSubmitted: true,
+    submittedByUser: true,
+    manualSubmit: true,
+    historyEligible: true,
+    reportData: {
+      overallStatsHtml: document.getElementById('overallStats').innerHTML,
+      analysisGridHtml: document.getElementById('analysisGrid').innerHTML,
+      fullErrSectionHtml: document.getElementById('fullErrSection').innerHTML,
+      summaryBodyHtml: document.getElementById('summaryBody').innerHTML,
+      gradeText: document.getElementById('gradeCircle').textContent,
+      gradeColor: gc,
+      gradeBorderColor: gc,
+      modalHeroTitle: document.querySelector('.modal-hero h2').textContent,
+      modalHeroSub: document.querySelector('.modal-hero p').textContent
+    }
+  });
+  FINAL_SUBMIT_IN_PROGRESS=false;
+}
+
+window.showSavedReport = function(reportKey){
+  if(!window.SAVED_REPORTS || !window.SAVED_REPORTS[reportKey]){ showToast('Report data not found.'); return; }
+  let r=window.SAVED_REPORTS[reportKey];
+  if(r.isGenerated===false){
+    const accVal=parseFloat(r.accuracy||0), total=parseInt(r.totalEntries||0), correct=parseInt(r.correctEntries||0), wrong=parseInt(r.wrongEntries||0);
+    const meta=taskMeta(r.taskCategory); const isApproved=(r.status==='Approved');
+    let grade='C',gc='var(--gov-red)'; if(accVal>=95){grade='A+';gc='var(--gov-green)';}else if(accVal>=85){grade='A';gc='var(--gov-blue)';}else if(accVal>=75){grade='B';gc='var(--gov-saffron)';}
+    const threshold=parseInt(getReportConfig('reportApprovalThreshold','95'),10);
+    const statusText=isApproved?getReportConfig('reportStatusApprovedText','Task Status: Approved'):getReportConfig('reportStatusRejectedText','Task Status: Rejected');
+    const banner=isApproved?`<div style="background:#ecfdf5;border:2px solid #34d399;border-radius:4px;padding:16px;text-align:center;color:#065f46;margin-bottom:14px;font-weight:900;">🎉 ${getReportConfig('reportEligibleHeading','You are eligible for this work.')}</div>`:`<div style="background:#fef2f2;border:2px solid #f87171;border-radius:4px;padding:16px;text-align:center;color:#991b1b;margin-bottom:14px;font-weight:900;">⚠️ ${getReportConfig('reportNotEligibleHeading','You are not eligible for this work.')}</div>`;
+    r={
+      overallStatsHtml:`${banner}<div class="rpt-section"><div class="rpt-sec-title">1️⃣ Basic Work Data</div><div class="rpt-grid-3"><div class="rpt-kv"><span class="rpt-k">Task Type</span><span class="rpt-v">${meta.emoji} ${escHtml(r.taskName||meta.name)}</span></div><div class="rpt-kv"><span class="rpt-k">Total Entries Submitted</span><span class="rpt-v">${total}</span></div><div class="rpt-kv"><span class="rpt-k">Task Completion</span><span class="rpt-v">${total}/${total}</span></div></div></div><div class="rpt-section"><div class="rpt-sec-title">2️⃣ Accuracy Report</div><div class="rpt-grid-3"><div class="rpt-kv"><span class="rpt-k">✔ Correct Entries</span><span class="rpt-v" style="color:var(--gov-green);">${correct}</span></div><div class="rpt-kv"><span class="rpt-k">❌ Incorrect Entries</span><span class="rpt-v" style="color:var(--gov-red);">${wrong}</span></div><div class="rpt-kv"><span class="rpt-k">🎯 Overall Accuracy</span><span class="rpt-v" style="color:${gc};">${accVal}%</span></div></div></div><div style="border-radius:4px;padding:16px 18px;display:flex;align-items:center;gap:14px;background:${isApproved?'#f0fdf4':'#fef2f2'};border:2px solid ${isApproved?'#86efac':'#fca5a5'};"><div style="font-size:2rem;">${isApproved?'✅':'❌'}</div><div><div style="font-weight:900;font-size:1.05rem;color:${isApproved?'var(--gov-green)':'var(--gov-red)'};">${statusText}</div><div style="font-size:.8rem;color:var(--gov-text-muted);margin-top:3px;">${isApproved?'You are eligible for live tasks.':`You need ${threshold}%+ accuracy to become eligible.`}</div></div></div>`,
+      analysisGridHtml:`<div class="ac strength"><h5>✔ Strength</h5><p>Attempt completed and saved in Firebase history.</p></div><div class="ac improve"><h5>⚠ Improvement Area</h5><p>Old attempts may not contain full itemized mistake logs.</p></div><div class="ac suggest"><h5>💡 Suggestion</h5><p>New submissions will store full report HTML permanently.</p></div>`,
+      fullErrSectionHtml:`<div style="background:#f8fafc;border:1px solid var(--gov-border);padding:14px;text-align:center;font-weight:700;color:var(--gov-blue);">Historical Report: detailed mistakes are available for newly submitted tasks.</div>`,
+      summaryBodyHtml:`<tr><td>${meta.emoji} ${escHtml(r.taskName||meta.name)}</td><td>${total}/${total}</td><td><span class="acc-pill ${accVal>=80?'acc-high':accVal>=60?'acc-mid':'acc-low'}">${accVal}%</span></td><td>${r.status}</td></tr>`,
+      gradeText:grade, gradeColor:gc, gradeBorderColor:gc, modalHeroTitle:'Saved Performance Report', modalHeroSub:'This report was loaded from your Firebase task history.'
+    };
+  }
+  document.getElementById('overallStats').innerHTML=r.overallStatsHtml||'';
+  document.getElementById('analysisGrid').innerHTML=r.analysisGridHtml||'';
+  document.getElementById('fullErrSection').innerHTML=r.fullErrSectionHtml||'';
+  document.getElementById('summaryBody').innerHTML=r.summaryBodyHtml||'';
+  const gcEl=document.getElementById('gradeCircle'); gcEl.textContent=r.gradeText||'A'; gcEl.style.color=r.gradeColor||'var(--gov-blue)'; gcEl.style.borderColor=r.gradeBorderColor||r.gradeColor||'var(--gov-blue)';
+  document.querySelector('.modal-hero h2').textContent=r.modalHeroTitle||'Saved Performance Report';
+  document.querySelector('.modal-hero p').textContent=r.modalHeroSub||'Loaded from your task history.';
+  document.getElementById('resultModal').classList.add('show');
+  if(document.getElementById('profileDrawerOverlay')?.style.display==='block') toggleProfileDrawer(true);
+};
+
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function restartTask(){document.getElementById('resultModal').classList.remove('show');openTask(CT.id);}
+
+window.addEventListener('DOMContentLoaded', () => { 
+  document.body.classList.add('loaded'); 
+  checkDemoSession();
+});
+
+/* ── Netlify Active Tab Fix ── */
+(function(){
+  let p=window.location.pathname;
+  if(p.endsWith('/')&&p.length>1)p=p.slice(0,-1);
+  let c=p.split('/').pop().replace('.html','');
+  if(!c)c='index';
+  document.querySelectorAll('.wd-links a, .wd-mob a').forEach(l=>{
+    l.classList.remove('active');
+    let h=l.getAttribute('href');
+    if(h&&h.replace('.html','')===c)l.classList.add('active');
+  });
+})();
+</script>
+
+
+<script type="module" id="wd-firebase-demo-backend">
+/*
+  WorkDen Firebase Backend Bridge
+  Isme existing frontend functions ko change nahi kiya gaya.
+  Jo old code /api/demo/create, /api/demo/login, /api/demo/attempt par fetch karta hai,
+  usko Firebase Firestore se connect kar diya gaya hai.
+*/
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCO0rqyXTm3CIU5sWRvpmnkyslfFSzbRsY",
+  authDomain: "workdenuser.firebaseapp.com",
+  projectId: "workdenuser",
+  storageBucket: "workdenuser.firebasestorage.app",
+  messagingSenderId: "532345150222",
+  appId: "1:532345150222:web:b6397bfc4b856be4a5155f",
+  measurementId: "G-7QWG7LDCXT"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+isSupported()
+  .then((supported) => {
+    if (supported) getAnalytics(app);
+  })
+  .catch(() => {});
+
+window.workdenFirebaseApp = app;
+window.workdenFirestore = db;
+window.workdenFirebaseReady = true;
+
+const originalFetch = window.fetch ? window.fetch.bind(window) : null;
+
+function cleanEmail(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function safeDocId(email) {
+  return cleanEmail(email).replace(/[.#$[\]/]/g, "_");
+}
+
+function jsonResponse(payload, status = 200) {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: { "Content-Type": "application/json" }
+  });
+}
+
+function normalizeUser(data = {}) {
+  return {
+    name: String(data.name || data.fullName || "").trim(),
+    email: cleanEmail(data.email),
+    mobile: String(data.mobile || data.password || "").trim(),
+    city: String(data.city || "Not Provided").trim(),
+    qualification: String(data.qualification || data.qual || "Not Provided").trim(),
+    updatedAt: new Date().toISOString()
+  };
+}
+
+async function readUserHistory(email) {
+  const userEmail = cleanEmail(email);
+  const historyRef = collection(db, "demoAttempts");
+
+  async function runQuery(field, withOrder = true) {
+    const parts = withOrder
+      ? [historyRef, where(field, "==", userEmail), orderBy("createdAt", "desc")]
+      : [historyRef, where(field, "==", userEmail)];
+    const snap = await getDocs(query(...parts));
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  }
+
+  let rows = [];
+  try { rows = rows.concat(await runQuery("email", true)); }
+  catch (error) { try { rows = rows.concat(await runQuery("email", false)); } catch(e) {} }
+
+  // File 2 / older APIs sometimes saved attempts with userEmail instead of email.
+  try { rows = rows.concat(await runQuery("userEmail", true)); }
+  catch (error) { try { rows = rows.concat(await runQuery("userEmail", false)); } catch(e) {} }
+
+  const seen = new Set();
+  return rows
+    .filter(isManualHistoryAttempt)
+    .filter((r) => {
+      const key = r.id || (r.createdAtISO || r.timestamp || "") + (r.taskName || "");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((a, b) => {
+      const av = a.createdAt?.seconds ? a.createdAt.seconds * 1000 : Date.parse(a.createdAtISO || a.timestamp || a.date || 0) || 0;
+      const bv = b.createdAt?.seconds ? b.createdAt.seconds * 1000 : Date.parse(b.createdAtISO || b.timestamp || b.date || 0) || 0;
+      return bv - av;
+    });
+}
+
+async function firebaseCreateUser(body) {
+  const user = normalizeUser(body);
+
+  if (!user.name || !user.email || !user.mobile) {
+    return jsonResponse({
+      success: false,
+      message: "Please fill all required fields."
+    }, 400);
+  }
+
+  const ref = doc(db, "demoUsers", safeDocId(user.email));
+  const existing = await getDoc(ref);
+
+  await setDoc(ref, {
+    ...user,
+    createdAt: existing.exists() ? (existing.data().createdAt || serverTimestamp()) : serverTimestamp(),
+    updatedAt: serverTimestamp()
+  }, { merge: true });
+
+  const history = await readUserHistory(user.email);
+
+  return jsonResponse({
+    success: true,
+    message: "Demo account created successfully.",
+    user,
+    history
+  });
+}
+
+async function firebaseLoginUser(body) {
+  const email = cleanEmail(body.email);
+  const mobile = String(body.mobile || body.password || "").trim();
+
+  if (!email || !mobile) {
+    return jsonResponse({
+      success: false,
+      message: "Please enter User ID and Password."
+    }, 400);
+  }
+
+  const ref = doc(db, "demoUsers", safeDocId(email));
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) {
+    return jsonResponse({
+      success: false,
+      message: "Account not found. Please create demo account first."
+    }, 404);
+  }
+
+  const user = snap.data();
+
+  if (String(user.mobile || "").trim() !== mobile) {
+    return jsonResponse({
+      success: false,
+      message: "Invalid password/mobile number."
+    }, 401);
+  }
+
+  const history = await readUserHistory(email);
+
+  return jsonResponse({
+    success: true,
+    message: "Login successful.",
+    user: {
+      name: user.name || "",
+      email: user.email || email,
+      mobile: user.mobile || "",
+      city: user.city || "Not Provided",
+      qualification: user.qualification || "Not Provided"
+    },
+    history
+  });
+}
+
+async function firebaseSaveAttempt(body) {
+  const email = cleanEmail(body.email || body.userEmail || body.user?.email);
+
+  if (!email) {
+    return jsonResponse({
+      success: false,
+      message: "User email missing. Please login again."
+    }, 400);
+  }
+
+  const payload = {
+    ...body,
+    email,
+    createdAt: serverTimestamp(),
+    createdAtISO: new Date().toISOString()
+  };
+
+  const ref = await addDoc(collection(db, "demoAttempts"), payload);
+  const history = await readUserHistory(email);
+
+  return jsonResponse({
+    success: true,
+    message: "Attempt saved successfully.",
+    id: ref.id,
+    history
+  });
+}
+
+window.fetch = async function(input, init = {}) {
+  const url = typeof input === "string" ? input : (input && input.url) || "";
+
+  if (!url.includes("/api/demo/")) {
+    if (!originalFetch) throw new Error("Fetch not available");
+    return originalFetch(input, init);
+  }
+
+  let body = {};
+  try {
+    body = JSON.parse(init.body || "{}");
+  } catch (error) {
+    body = {};
+  }
+
+  try {
+    if (url.includes("/api/demo/create")) {
+      return await firebaseCreateUser(body);
+    }
+
+    if (url.includes("/api/demo/login")) {
+      return await firebaseLoginUser(body);
+    }
+
+    if (url.includes("/api/demo/attempt")) {
+      return await firebaseSaveAttempt(body);
+    }
+
+    return jsonResponse({
+      success: false,
+      message: "Unknown Firebase API route."
+    }, 404);
+
+  } catch (error) {
+    console.error("Firebase backend error:", error);
+    return jsonResponse({
+      success: false,
+      message: "Firebase backend error: " + (error.message || "Please check Firestore rules/config.")
+    }, 500);
+  }
+};
+</script>
+
+
+
+<script id="workden-footer-loader-final">
+// --- Footer Fetching: footer.html linked externally ---
+(function(){
+  const holder = document.getElementById('footer-placeholder');
+  if(!holder) return;
+  fetch('footer.html', { cache: 'no-cache' })
+    .then(r => { if(!r.ok) throw new Error('footer.html not found'); return r.text(); })
+    .then(html => {
+      holder.innerHTML = html;
+      const scripts = holder.getElementsByTagName('script');
+      for (let i = 0; i < scripts.length; i++) {
+        try { eval(scripts[i].innerText); } catch(e) { console.warn('Footer script skipped:', e); }
+      }
+    })
+    .catch(() => {
+      holder.innerHTML = `
+<footer class="gov-footer">
+  <div class="gov-footer-inner">
+    <div class="gov-footer-top">
+      <div>
+        <div class="gov-footer-logo"><img src="workden-logo.png" alt="WorkDen" onerror="this.src='https://via.placeholder.com/40x40?text=WD'"><span>WorkDen</span></div>
+        <p style="color:#b8c8dc; font-size:0.9rem; line-height:1.7; max-width:360px;">A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance.</p>
+        <div class="verify-box"><strong>Official Credentials</strong>GSTIN: 10KEJPM6504N1Z7<br>MSME: UDYAM-KR-03-0640514</div>
+      </div>
+      <div class="gov-footer-col"><h4>Portal Links</h4><a href="index.html">Home Page</a><a href="about.html">About Organization</a><a href="projects.html">Work Projects</a><a href="plans.html">Registration Plans</a><a href="demo-task.html">Demo Module</a><a href="blogs.html">Blogs</a></div>
+      <div class="gov-footer-col"><h4>Legal Policies</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="disclaimer.html">Disclaimer</a><a href="refund.html">Refund Policy</a></div>
+      <div class="gov-footer-col"><h4>Helpdesk & Contact</h4><p style="color:#b8c8dc; font-size:0.9rem; margin-bottom:10px;"><i class="fas fa-envelope mr-2"></i> info<!-- -->@<!-- -->workden.online</p><p style="color:#b8c8dc; font-size:0.9rem; margin-bottom:10px;"><i class="fas fa-headset mr-2"></i> support<!-- -->@<!-- -->workden.online</p><p style="color:#b8c8dc; font-size:0.9rem; margin-bottom:10px;"><i class="fas fa-map-marker-alt mr-2"></i> Ashok Nagar, Bangalore</p></div>
+    </div>
+    <div class="gov-footer-bottom"><span>&copy; 2026 WorkDen Entity. All rights reserved.</span><span>Developed for Secure Digital Task Allocation.</span></div>
+  </div>
+</footer>`;
+    });
+})();
+</script>
+
+
+
+<script id="workden-smooth-card-reveal-final">
+// --- Smooth visual reveal only; does not touch task/Firebase/API data ---
+(function(){
+  function initReveal(){
+    const nodes = document.querySelectorAll('.task-card, .auth-card, .item-wrapper, .menu-header-box');
+    if(!('IntersectionObserver' in window)) { nodes.forEach(n=>n.classList.add('wd-show')); return; }
+    nodes.forEach(n=>n.classList.add('wd-reveal'));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('wd-show'); io.unobserve(entry.target); }
+      });
+    }, { threshold: .12 });
+    nodes.forEach(n=>io.observe(n));
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initReveal);
+  else initReveal();
+})();
+</script>
+
+
+<script id="wd-history-final-runtime-patch">
+(function(){
+  function hardCloseHistory(){
+    var overlay=document.getElementById('profileDrawerOverlay');
+    var drawer=document.getElementById('profileDrawer');
+    if(drawer){ drawer.classList.remove('history-open'); drawer.style.setProperty('right','-100vw','important'); }
+    document.body.classList.remove('history-open-lock');
+    if(overlay){ overlay.style.display='none'; }
+  }
+  document.addEventListener('click', function(e){
+    var btn=e.target && e.target.closest ? e.target.closest('.drawer-header button') : null;
+    if(btn && document.getElementById('profileDrawer') && document.getElementById('profileDrawer').contains(btn)){
+      e.preventDefault(); e.stopPropagation(); hardCloseHistory();
+    }
+  }, true);
+  window.addEventListener('keydown', function(e){ if(e.key==='Escape') hardCloseHistory(); });
+})();
+</script>
+</body>
+</html>

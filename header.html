@@ -1,0 +1,490 @@
+<style>
+  :root{
+    --wd-navy:#05124f;
+    --wd-blue:#0d4d92;
+    --wd-blue-2:#0f63b4;
+    --wd-orange:#ff6a2f;
+    --wd-orange-dark:#ec5520;
+    --wd-green:#168348;
+    --wd-text:#263f55;
+    --wd-muted:#6b7f91;
+    --wd-line:#e6edf5;
+    --wd-soft:#f6f9fd;
+    --wd-white:#ffffff;
+    --wd-shadow:0 16px 42px rgba(7,26,65,.10);
+    --wd-shadow-soft:0 8px 24px rgba(7,26,65,.06);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-padding-top:120px}
+  body{margin:0;overflow-x:hidden}
+  a{text-decoration:none;color:inherit}
+
+  .wd-top-strip{
+    width:100%;
+    background:linear-gradient(90deg,#05124f,#0a3f78 52%,#05124f);
+    color:#fff;
+    border-bottom:3px solid var(--wd-orange);
+    font-family:'Poppins',Arial,sans-serif;
+  }
+  .wd-top-inner{
+    max-width:1240px;
+    margin:0 auto;
+    padding:8px 22px;
+    min-height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    font-size:12.5px;
+    line-height:1.45;
+  }
+  .wd-top-left,.wd-top-right{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .wd-top-strip i{color:#ffd19a;margin-right:6px}
+  .wd-top-strip a{color:#fff;opacity:.96;transition:opacity .25s ease,color .25s ease}
+  .wd-top-strip a:hover{opacity:1;color:#ffd19a}
+
+  .wd-main-header{
+    position:sticky;
+    top:0;
+    z-index:9999;
+    width:100%;
+    background:rgba(255,255,255,.94);
+    border-bottom:1px solid rgba(230,237,245,.9);
+    box-shadow:0 10px 28px rgba(7,26,65,.045);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    font-family:'Poppins',Arial,sans-serif;
+    transform:translateZ(0);
+  }
+  .wd-header-inner{
+    max-width:1240px;
+    min-height:82px;
+    margin:0 auto;
+    padding:0 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:22px;
+  }
+
+  .wd-brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    min-width:230px;
+    flex:0 0 auto;
+  }
+  .wd-logo-box{
+    position:relative;
+    width:54px;
+    height:54px;
+    border-radius:14px;
+    background:#fff;
+    border:1px solid var(--wd-line);
+    box-shadow:var(--wd-shadow-soft);
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+  }
+  .wd-logo-box::after{
+    content:'';
+    position:absolute;
+    inset:auto -16px -20px auto;
+    width:46px;
+    height:46px;
+    background:rgba(255,106,47,.12);
+    border-radius:50%;
+  }
+  .wd-logo-box img{width:44px;height:44px;object-fit:contain;display:block;position:relative;z-index:1}
+  .wd-brand-text{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+  .wd-brand-title{font-size:25px;font-weight:800;letter-spacing:-.45px;color:var(--wd-navy)}
+  .wd-brand-sub{font-size:12px;font-weight:500;color:var(--wd-muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:245px}
+
+  .wd-nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    list-style:none;
+    padding:0;
+    margin:0;
+    flex:1 1 auto;
+  }
+  .wd-nav a{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    padding:0 12px;
+    border-radius:10px;
+    color:var(--wd-text);
+    font-size:14px;
+    font-weight:600;
+    white-space:nowrap;
+    transition:color .24s ease,background .24s ease,transform .24s ease;
+  }
+  .wd-nav a::before{
+    content:'';
+    position:absolute;
+    left:14px;
+    right:14px;
+    bottom:7px;
+    height:2px;
+    border-radius:20px;
+    background:linear-gradient(90deg,var(--wd-orange),#ffae54);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .32s cubic-bezier(.22,.61,.36,1);
+  }
+  .wd-nav a:hover,.wd-nav a.active{background:#f6faff;color:var(--wd-navy);transform:translateY(-1px)}
+  .wd-nav a:hover::before,.wd-nav a.active::before{transform:scaleX(1)}
+
+  .wd-header-actions{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+  .wd-head-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:46px;
+    padding:0 17px;
+    border-radius:8px;
+    border:1px solid transparent;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease,color .25s ease;
+  }
+  .wd-btn-outline{background:#fff;color:var(--wd-blue);border-color:#cadaea}
+  .wd-btn-outline:hover{border-color:var(--wd-blue);box-shadow:var(--wd-shadow-soft);transform:translateY(-2px);background:#fafdff}
+  .wd-btn-solid{background:var(--wd-orange);color:#fff;box-shadow:0 12px 22px rgba(255,106,47,.20)}
+  .wd-btn-solid:hover{background:var(--wd-orange-dark);box-shadow:0 18px 34px rgba(255,106,47,.28);transform:translateY(-2px)}
+  .wd-menu-btn{
+    display:none;
+    width:46px;
+    height:46px;
+    border-radius:10px;
+    border:1px solid var(--wd-line);
+    background:#fff;
+    color:var(--wd-navy);
+    font-size:20px;
+    cursor:pointer;
+    transition:transform .25s ease,background .25s ease,box-shadow .25s ease;
+  }
+  .wd-menu-btn:hover{background:#f8fbff;box-shadow:var(--wd-shadow-soft);transform:translateY(-1px)}
+
+  .wd-mobile-overlay{
+    position:fixed;
+    inset:0;
+    z-index:10001;
+    display:none;
+    background:rgba(5,18,79,.42);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    font-family:'Poppins',Arial,sans-serif;
+  }
+  .wd-mobile-overlay.active{display:block}
+  .wd-mobile-panel{
+    width:min(400px,92vw);
+    height:100%;
+    margin-left:auto;
+    background:#fff;
+    box-shadow:-18px 0 60px rgba(7,26,65,.22);
+    padding:22px;
+    overflow-y:auto;
+    animation:wdSlideMenu .34s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  @keyframes wdSlideMenu{from{transform:translate3d(32px,0,0);opacity:.55}to{transform:translate3d(0,0,0);opacity:1}}
+  .wd-mobile-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:18px;border-bottom:1px solid var(--wd-line)}
+  .wd-close-menu{
+    width:42px;height:42px;border-radius:10px;border:1px solid var(--wd-line);background:#fff;color:var(--wd-navy);font-size:18px;cursor:pointer;
+  }
+  .wd-mobile-links{display:flex;flex-direction:column;gap:7px;padding:18px 0}
+  .wd-mobile-links a{
+    display:flex;align-items:center;justify-content:space-between;
+    min-height:50px;padding:0 13px;border-radius:10px;
+    color:var(--wd-text);font-size:15px;font-weight:600;transition:background .24s ease,color .24s ease,transform .24s ease;
+  }
+  .wd-mobile-links a::after{content:'›';color:var(--wd-orange);font-size:24px;line-height:1}
+  .wd-mobile-links a:hover,.wd-mobile-links a.active{background:#f6faff;color:var(--wd-navy);transform:translateX(2px)}
+  .wd-mobile-actions{display:grid;gap:12px;margin-top:4px}
+  .wd-help-card{margin-top:18px;background:#f8fbff;border:1px solid var(--wd-line);border-radius:13px;padding:14px 15px;color:var(--wd-muted);font-size:13px;line-height:1.65}
+  .wd-help-card b{color:var(--wd-navy)}
+
+  .wd-login-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:10002;
+    background:rgba(5,18,79,.68);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    font-family:'Poppins',Arial,sans-serif;
+  }
+  .wd-login-modal.active{display:flex}
+  .wd-modal-box{
+    position:relative;
+    width:100%;
+    max-width:485px;
+    background:#fff;
+    border-radius:16px;
+    border:1px solid rgba(230,237,245,.95);
+    box-shadow:0 28px 80px rgba(0,0,0,.30);
+    padding:30px;
+    overflow:hidden;
+    animation:wdModalIn .28s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  .wd-modal-box::before{content:'';position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,var(--wd-orange),var(--wd-blue),var(--wd-green))}
+  @keyframes wdModalIn{from{transform:translate3d(0,18px,0) scale(.985);opacity:.55}to{transform:translate3d(0,0,0) scale(1);opacity:1}}
+  .wd-modal-close{position:absolute;right:18px;top:18px;width:38px;height:38px;border-radius:50%;border:1px solid var(--wd-line);background:#fff;color:var(--wd-muted);cursor:pointer}
+  .wd-modal-title{margin:0 46px 8px 0;color:var(--wd-navy);font-size:24px;font-weight:800;line-height:1.25}
+  .wd-modal-desc{margin:0 0 18px;color:var(--wd-muted);font-size:14px;line-height:1.65}
+  .wd-version-card{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--wd-line);border-radius:13px;padding:16px;background:#fff;color:var(--wd-text);margin-top:12px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease}
+  .wd-version-card:hover{transform:translateY(-3px);border-color:#d2dfec;background:#fbfdff;box-shadow:var(--wd-shadow-soft)}
+  .wd-version-icon{width:46px;height:46px;border-radius:50%;background:#fff2eb;color:var(--wd-orange);display:grid;place-items:center;flex:0 0 auto}
+  .wd-v-head{display:block;color:var(--wd-navy);font-size:16px;font-weight:800;margin-bottom:3px}
+  .wd-v-desc{display:block;color:var(--wd-muted);font-size:13px;line-height:1.55}
+
+  @media(max-width:1160px){
+    .wd-nav{display:none}
+    .wd-menu-btn{display:inline-grid;place-items:center}
+    .wd-header-actions .wd-btn-outline{display:none}
+  }
+
+  @media(max-width:760px){
+    .wd-top-strip{display:none}
+    .wd-header-inner{min-height:74px;padding:0 16px;gap:10px}
+    .wd-brand{min-width:0;gap:10px}
+    .wd-logo-box{width:46px;height:46px;border-radius:12px}
+    .wd-logo-box img{width:38px;height:38px}
+    .wd-brand-title{font-size:21px}
+    .wd-brand-sub{font-size:11px;max-width:165px}
+
+    .wd-header-actions{gap:8px}
+
+    .wd-btn-solid{
+      min-height:42px;
+      padding:0 12px;
+      font-size:13px;
+    }
+
+    .wd-header-actions .wd-btn-solid span{
+      display:inline-flex !important;
+      align-items:center;
+    }
+
+    .wd-menu-btn{width:42px;height:42px}
+  }
+
+  @media(max-width:390px){
+    .wd-brand-sub{display:none}
+    .wd-brand-title{font-size:20px}
+    .wd-logo-box{width:42px;height:42px}
+    .wd-header-inner{padding:0 10px;gap:8px}
+
+    .wd-header-actions{gap:6px}
+
+    .wd-header-actions .wd-btn-solid{
+      min-height:40px;
+      padding:0 9px;
+      font-size:11.5px;
+      gap:5px;
+      border-radius:8px;
+    }
+
+    .wd-menu-btn{
+      width:40px;
+      height:40px;
+      font-size:18px;
+    }
+  }
+
+  @media(max-width:350px){
+    .wd-brand-title{font-size:18px}
+    .wd-logo-box{width:38px;height:38px}
+    .wd-logo-box img{width:34px;height:34px}
+
+    .wd-header-actions .wd-btn-solid{
+      font-size:10.5px;
+      padding:0 7px;
+    }
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  }
+</style>
+
+<div class="wd-top-strip">
+  <div class="wd-top-inner">
+    <div class="wd-top-left">
+      <span><i class="fas fa-circle-check"></i> GST & MSME details available</span>
+      <span><i class="fas fa-laptop-file"></i> Digital Task Management Portal</span>
+    </div>
+    <div class="wd-top-right">
+      <a href="demo-task.html"><i class="fas fa-play-circle"></i> Try Free Demo</a>
+      <a href="mailto:support@workden.online"><i class="fas fa-envelope"></i> support<!-- -->@workden.online</a>
+    </div>
+  </div>
+</div>
+
+<header class="wd-main-header">
+  <div class="wd-header-inner">
+    <a href="index.html" class="wd-brand" aria-label="WorkDen Home">
+      <span class="wd-logo-box"><img src="workden-logo.png" alt="WorkDen Logo" onerror="this.src='https://via.placeholder.com/50x50?text=WD'"></span>
+      <span class="wd-brand-text">
+        <span class="wd-brand-title">WorkDen</span>
+        <span class="wd-brand-sub">Digital Task Management Portal</span>
+      </span>
+    </a>
+
+    <ul class="wd-nav" id="desktopNav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="plans.html">Plans</a></li>
+      <li><a href="demo-task.html">Demo Task</a></li>
+      <li><a href="earners.html">Top Earners</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li>
+      <li><a href="blogs.html">Blogs</a></li>
+    </ul>
+
+    <div class="wd-header-actions">
+      <a href="#" onclick="showLoginModal(event)" class="wd-head-btn wd-btn-outline">
+        <i class="fas fa-user"></i> <span data-content-id="nav_userLoginBtn">User Login</span>
+      </a>
+      <a href="https://workdenteam2.base44.app/" class="wd-head-btn wd-btn-solid" data-content-href="nav_employeeLoginUrl">
+        <i class="fas fa-user-tie"></i> <span data-content-id="nav_employeeLoginBtn">Employee Login</span>
+      </a>
+      <button class="wd-menu-btn" type="button" aria-label="Open menu" onclick="openWorkDenMenu()"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="wd-mobile-overlay" id="mobileMenu" onclick="closeWorkDenMenu(event)">
+  <div class="wd-mobile-panel">
+    <div class="wd-mobile-head">
+      <a href="index.html" class="wd-brand" style="min-width:0">
+        <span class="wd-logo-box"><img src="workden-logo.png" alt="WorkDen Logo" onerror="this.src='https://via.placeholder.com/50x50?text=WD'"></span>
+        <span class="wd-brand-text"><span class="wd-brand-title">WorkDen</span><span class="wd-brand-sub">Digital Task Portal</span></span>
+      </a>
+      <button class="wd-close-menu" type="button" aria-label="Close menu" onclick="closeWorkDenMenu(null)"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="wd-mobile-links" id="mobileNavLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="plans.html">Plans</a>
+      <a href="demo-task.html">Demo Task</a>
+      <a href="earners.html">Top Earners</a>
+      <a href="testimonials.html">Testimonials</a>
+      <a href="blogs.html">Blogs</a>
+    </div>
+
+    <div class="wd-mobile-actions">
+      <a href="#" onclick="showLoginModal(event); closeWorkDenMenu(null);" class="wd-head-btn wd-btn-outline" style="width:100%">
+        <i class="fas fa-user"></i> <span data-content-id="nav_userLoginBtn">User Login</span>
+      </a>
+      <a href="https://workdenteam2.base44.app/" class="wd-head-btn wd-btn-solid" style="width:100%" data-content-href="nav_employeeLoginUrl">
+        <i class="fas fa-user-tie"></i> <span data-content-id="nav_employeeLoginBtn">Employee Login</span>
+      </a>
+    </div>
+
+    <div class="wd-help-card">
+      <b>Need help?</b><br>
+      For portal access, demo task and dashboard support, contact support<!-- -->@workden.online.
+    </div>
+  </div>
+</div>
+
+<div class="wd-login-modal" id="loginModalGlobal" onclick="closeLoginModal(event)">
+  <div class="wd-modal-box">
+    <button class="wd-modal-close" type="button" aria-label="Close login modal" onclick="closeLoginModal(null)"><i class="fas fa-times"></i></button>
+    <h3 class="wd-modal-title" data-content-id="modal_title">Select User Portal</h3>
+    <p class="wd-modal-desc" data-content-id="modal_desc">Choose your assigned WorkDen portal version to continue with dashboard access.</p>
+
+    <a href="./Workden4.0/index.html" class="wd-version-card" data-content-href="v1_url">
+  <span class="wd-version-icon"><i class="fas fa-layer-group"></i></span>
+  <span>
+    <span class="wd-v-head" data-content-id="v1_label">WorkDen 4.0 Portal</span>
+    <span class="wd-v-desc">Latest dashboard for current task access and updated workflow.</span>
+  </span>
+</a>
+
+    <a href="./Workden3.0/index.html" class="wd-version-card" data-content-href="v2_url">
+      <span class="wd-version-icon"><i class="fas fa-clock-rotate-left"></i></span>
+      <span><span class="wd-v-head" data-content-id="v2_label">WorkDen 3.0 Portal</span><span class="wd-v-desc">Legacy dashboard for existing users assigned to the previous version.</span></span>
+    </a>
+  </div>
+</div>
+
+<script>
+  window.openWorkDenMenu = function(){
+    var menu = document.getElementById('mobileMenu');
+    if(menu) menu.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeWorkDenMenu = function(e){
+    var menu = document.getElementById('mobileMenu');
+    if(menu && (!e || e.target === menu)){
+      menu.classList.remove('active');
+      if(!document.getElementById('loginModalGlobal') || !document.getElementById('loginModalGlobal').classList.contains('active')){
+        document.body.style.overflow = '';
+      }
+    }
+  };
+
+  window.showLoginModal = function(e){
+    if(e) e.preventDefault();
+    var modal = document.getElementById('loginModalGlobal');
+    if(modal){
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  window.closeLoginModal = function(e){
+    var modal = document.getElementById('loginModalGlobal');
+    if(modal && (!e || e.target === modal)){
+      modal.classList.remove('active');
+      if(!document.getElementById('mobileMenu') || !document.getElementById('mobileMenu').classList.contains('active')){
+        document.body.style.overflow = '';
+      }
+    }
+  };
+
+  (function(){
+    function normalizePage(value){
+      if(!value) return 'index';
+      var url;
+      try{ url = new URL(value, window.location.origin); }catch(err){ return ''; }
+      var path = url.pathname.replace(/\/+$/, '');
+      var page = path.split('/').pop() || 'index';
+      return page.replace(/\.html$/i,'') || 'index';
+    }
+
+    var currentPage = normalizePage(window.location.pathname);
+    function setActiveLinks(selector){
+      document.querySelectorAll(selector).forEach(function(link){
+        link.classList.remove('active');
+        if(normalizePage(link.getAttribute('href')) === currentPage){
+          link.classList.add('active');
+        }
+      });
+    }
+    setActiveLinks('#desktopNav a');
+    setActiveLinks('#mobileNavLinks a');
+
+    document.addEventListener('keydown', function(ev){
+      if(ev.key === 'Escape'){
+        closeWorkDenMenu(null);
+        closeLoginModal(null);
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkDen – Digital Task Management Portal</title>
+<meta name="description" content="WorkDen is a digital task management portal for demo access, onboarding, training, task categories and support communication.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --navy:#07133f;
+  --blue:#114779;
+  --sky:#eaf4ff;
+  --text:#35556f;
+  --muted:#75899a;
+  --bg:#f4f7fb;
+  --white:#ffffff;
+  --orange:#ff6236;
+  --orange-dark:#e64e27;
+  --green:#1f8d4d;
+  --border:#e6edf5;
+  --soft:#f9fcff;
+  --shadow:0 14px 34px rgba(12,34,60,.07);
+  --shadow-hover:0 26px 62px rgba(12,34,60,.13);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  font-family:'Poppins',Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.75;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1240px;margin:0 auto;padding:0 22px}
+
+/* Header fallback + external header support */
+#header-placeholder{min-height:122px;background:#fff;position:relative;z-index:20}
+.site-header{background:rgba(255,255,255,.96);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000}
+.header-inner{height:86px;display:flex;align-items:center;justify-content:space-between;gap:26px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:24px;color:var(--navy);letter-spacing:-.3px}.brand img{width:42px;height:42px;object-fit:contain}.nav{display:flex;align-items:center;gap:24px}.nav a{font-size:14px;color:#315069;font-weight:500;position:relative}.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .28s var(--ease)}.nav a:hover{color:var(--navy)}.nav a:hover::after{transform:scaleX(1)}.header-cta{height:42px;padding:0 18px;border-radius:7px;background:var(--navy);color:#fff!important;display:inline-flex;align-items:center;gap:8px}.header-cta:hover{background:#0c1f64}.header-cta::after{display:none}.menu-btn{display:none;background:#fff;border:1px solid var(--border);width:42px;height:42px;border-radius:9px;color:var(--navy);font-size:18px}
+
+/* update ticker */
+.update-bar{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;position:relative;z-index:3}
+.update-inner{max-width:1240px;margin:auto;min-height:46px;padding:0 22px;display:flex;align-items:center;gap:16px}
+.update-label{background:var(--orange);color:#fff;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 10px 20px rgba(255,98,54,.18)}
+.update-marquee{overflow:hidden;flex:1;min-width:0;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.update-track{display:inline-flex;gap:40px;width:max-content;white-space:nowrap;animation:marquee 42s linear infinite;font-size:14px;color:var(--text);will-change:transform}.update-track:hover{animation-play-state:paused}.update-track span{display:inline-flex;align-items:center;gap:8px}.update-track i{color:var(--green)}
+@keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+/* Common */
+.section{padding:82px 0}.section.white{background:#fff}.section.soft{background:var(--bg)}
+.section-head{text-align:center;max-width:790px;margin:0 auto 48px}.section-kicker{color:var(--orange);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.85px;margin-bottom:9px}.section-title{font-size:35px;line-height:1.25;color:var(--navy);font-weight:600;margin-bottom:12px;letter-spacing:-.4px}.section-sub{font-size:16px;color:var(--text);font-weight:400;max-width:720px;margin:0 auto}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:7px;font-size:15px;font-weight:600;transition:transform .28s var(--ease),box-shadow .28s var(--ease),background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease);cursor:pointer;border:0;font-family:inherit}.btn-navy{background:var(--navy);color:#fff;box-shadow:0 14px 28px rgba(7,19,63,.18)}.btn-navy:hover{background:#0b1e65;transform:translateY(-2px);box-shadow:0 18px 40px rgba(7,19,63,.24)}.btn-orange{background:var(--orange);color:#fff;box-shadow:0 14px 28px rgba(255,98,54,.22)}.btn-orange:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 18px 40px rgba(255,98,54,.30)}.btn-outline{background:#fff;color:var(--blue);border:1px solid #cdd9e6}.btn-outline:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 12px 28px rgba(13,34,63,.08)}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#fbfdff 62%,#f4f7fb 100%);padding:94px 0 76px;isolation:isolate}.hero::before{content:"";position:absolute;inset:-120px -80px auto -80px;height:520px;background:radial-gradient(circle at 12% 24%,rgba(17,71,121,.11),transparent 28%),radial-gradient(circle at 84% 18%,rgba(255,98,54,.13),transparent 24%),linear-gradient(120deg,transparent 0 60%,rgba(234,244,255,.8));z-index:-2}.hero::after{content:"";position:absolute;right:-150px;bottom:-180px;width:520px;height:520px;border-radius:50%;background:rgba(234,244,255,.9);z-index:-2}.hero-grid{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:54px;align-items:center}.hero-badge{display:inline-flex;align-items:center;gap:9px;background:#f1f7ff;border:1px solid #d9e8fb;color:var(--blue);border-radius:50px;padding:9px 18px;font-size:13px;font-weight:600;margin-bottom:19px}.hero h1{font-size:52px;line-height:1.16;color:var(--navy);font-weight:650;letter-spacing:-1.1px;margin-bottom:18px;max-width:720px}.hero p{font-size:17px;color:var(--text);max-width:640px;margin-bottom:27px;font-weight:400}.hero-actions{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:30px}.hero-mini-row{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;max-width:680px}.hero-mini{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 17px;box-shadow:0 10px 28px rgba(13,34,63,.04);transition:transform .32s var(--ease),box-shadow .32s var(--ease),border-color .32s var(--ease)}.hero-mini:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(13,34,63,.09);border-color:#d9e5ef}.hero-mini strong{display:block;color:var(--navy);font-size:17px;font-weight:600;line-height:1.25}.hero-mini span{display:block;color:var(--muted);font-size:12.5px;margin-top:4px;line-height:1.5}
+.hero-visual{position:relative;min-height:560px}.visual-card{position:absolute;background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;transform:translateZ(0)}.main-visual{right:18px;top:8px;width:min(500px,100%);padding:30px 30px 22px}.visual-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.visual-dots{display:flex;gap:7px}.visual-dots span{width:9px;height:9px;border-radius:50%;background:#dbe6ef}.visual-status{font-size:12px;color:var(--green);font-weight:700;background:#eefbf4;border:1px solid #d5f1df;border-radius:30px;padding:5px 10px}.main-visual-img{width:86%;margin:8px auto 10px;filter:drop-shadow(0 22px 28px rgba(20,42,73,.12));animation:floatClean 6.5s var(--ease) infinite}.visual-lines{display:grid;gap:10px;margin-top:13px}.visual-lines span{height:10px;border-radius:12px;background:#eef4fa}.visual-lines span:nth-child(2){width:76%}.visual-lines span:nth-child(3){width:58%}.side-stat{left:0;top:86px;width:206px;padding:18px;animation:floatClean 7.2s var(--ease) infinite .2s}.side-stat img{width:56px;margin-bottom:10px}.side-stat b{display:block;color:var(--navy);font-size:15px}.side-stat span{font-size:12.5px;color:var(--muted);line-height:1.45}.support-stat{right:0;bottom:50px;width:220px;padding:18px;animation:floatClean 7s var(--ease) infinite .6s}.support-stat img{width:60px;margin-bottom:9px}.support-stat b{display:block;color:var(--navy);font-size:15px}.support-stat span{font-size:12.5px;color:var(--muted)}.mini-bubbles{position:absolute;left:48px;bottom:95px;display:grid;gap:12px}.mini-bubble{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--border);box-shadow:0 12px 28px rgba(13,34,63,.07);border-radius:50px;padding:10px 15px;color:var(--navy);font-size:13px;font-weight:600;animation:floatClean 6s var(--ease) infinite}.mini-bubble:nth-child(2){animation-delay:.8s}.mini-bubble i{color:var(--orange)}@keyframes floatClean{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
+
+/* image strip */
+.visual-strip{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0}.visual-strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.visual-tile{background:#fbfdff;border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;align-items:center;gap:16px;transition:transform .34s var(--ease),box-shadow .34s var(--ease),background .34s var(--ease)}.visual-tile:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(13,34,63,.09);background:#fff}.visual-tile img{width:58px;height:58px;object-fit:contain}.visual-tile b{display:block;color:var(--navy);font-size:15px}.visual-tile span{display:block;color:var(--muted);font-size:12px;margin-top:2px;line-height:1.45}
+
+/* Highlight strip */
+.highlights{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:52px 0}.highlight-panel{display:grid;grid-template-columns:280px 1fr;background:#fff;border:1px solid #e8eef6;border-radius:20px;overflow:hidden;box-shadow:0 20px 45px rgba(13,34,63,.07)}.highlight-title{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:10px;font-size:21px;font-weight:600;line-height:1.35;padding:28px 22px}.highlight-title i{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.13);font-size:22px}.highlight-list{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:24px}.highlight-item{position:relative;background:#fbfdff;border:1px solid #edf2f7;border-radius:14px;padding:18px 18px 18px 56px;color:var(--text);font-size:14.5px;line-height:1.65;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease)}.highlight-item i{position:absolute;left:18px;top:19px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#fff2ed;color:var(--orange);font-size:12px}.highlight-item:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(13,34,63,.08);background:#fff}
+
+/* service cards */
+.service-bg{background:var(--bg);position:relative;overflow:hidden}.service-bg::before{content:"";position:absolute;left:-180px;top:80px;width:380px;height:380px;border-radius:50%;background:rgba(234,244,255,.75)}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;position:relative}.ai-card{background:#fff;border-radius:12px;min-height:330px;text-align:center;padding:42px 34px 36px;border:1px solid rgba(231,237,245,.95);box-shadow:0 8px 22px rgba(13,34,63,.035);position:relative;overflow:hidden;transition:transform .40s var(--ease),box-shadow .40s var(--ease),border-color .40s var(--ease)}.ai-card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--orange),#ff9c50);transform:scaleX(0);transform-origin:left;transition:transform .42s var(--ease)}.ai-card::after{content:"";position:absolute;right:-58px;bottom:-58px;width:130px;height:130px;border-radius:50%;background:#f2f8ff;transition:transform .45s var(--ease)}.ai-card:hover{transform:translateY(-9px);box-shadow:var(--shadow-hover);border-color:#dde8f3}.ai-card:hover::before{transform:scaleX(1)}.ai-card:hover::after{transform:scale(1.28)}.ai-icon{height:98px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}.ai-icon img{width:92px;height:92px;object-fit:contain;transition:transform .42s var(--ease),filter .42s var(--ease);filter:drop-shadow(0 10px 14px rgba(13,34,63,.07))}.ai-card:hover .ai-icon img{transform:translateY(-7px) scale(1.045)}.ai-card h3{font-size:24px;color:var(--navy);font-weight:600;line-height:1.35;margin-bottom:14px}.ai-card p{font-size:15.5px;line-height:1.9;color:var(--text);font-weight:400;max-width:350px;margin:0 auto 24px}.ai-card .card-link{height:48px;min-width:168px;border-radius:7px;background:var(--orange);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:600;transition:background .28s var(--ease),transform .28s var(--ease),box-shadow .28s var(--ease)}.ai-card .card-link:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,87,51,.25)}
+
+/* process */
+.process-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}.process-box,.verify-box{background:#fff;border:1px solid var(--border);border-radius:15px;box-shadow:var(--shadow);padding:35px}.process-list{list-style:none;display:grid;gap:18px}.process-step{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start}.step-no{width:48px;height:48px;border-radius:50%;background:#eef5ff;border:1px solid #d6e6fb;color:var(--blue);display:grid;place-items:center;font-weight:700;transition:transform .34s var(--ease),background .34s var(--ease)}.process-step:hover .step-no{transform:scale(1.07);background:#fff2ed;color:var(--orange)}.process-step h4{font-size:17px;color:var(--navy);font-weight:600;margin-bottom:3px}.process-step p{font-size:14px;color:var(--muted);line-height:1.7}.verify-item{display:flex;gap:15px;align-items:flex-start;background:#f9fbfe;border:1px solid var(--border);border-radius:10px;padding:17px;margin-top:14px;transition:transform .32s var(--ease),box-shadow .32s var(--ease),background .32s var(--ease)}.verify-item:hover{transform:translateX(5px);box-shadow:0 14px 30px rgba(13,34,63,.07);background:#fff}.verify-item i{width:42px;height:42px;border-radius:50%;background:#fff2ed;color:var(--orange);display:grid;place-items:center;flex:0 0 auto}.verify-item b{display:block;color:var(--navy);font-size:15px;font-weight:600}.verify-item span{font-size:13px;color:var(--muted)}
+
+/* reviews */
+.reviews-wrap{overflow:hidden;position:relative;padding:3px 0 12px;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}.reviews-row{display:flex;gap:26px;width:max-content;animation:reviewMove 34s linear infinite;will-change:transform}.reviews-wrap:hover .reviews-row{animation-play-state:paused}.review-card{flex:0 0 390px;background:#fff;border:1px solid var(--border);border-radius:13px;box-shadow:0 10px 28px rgba(13,34,63,.04);padding:30px;transition:transform .34s var(--ease),box-shadow .34s var(--ease)}.review-card:hover{transform:translateY(-6px);box-shadow:0 20px 45px rgba(13,34,63,.10)}.stars{color:#ffb23f;font-size:13px;margin-bottom:14px}.review-card p{font-size:15px;color:var(--text);line-height:1.9;margin-bottom:18px}.review-card b{color:var(--navy);font-size:15px;font-weight:600}.review-card span{display:block;color:var(--muted);font-size:13px;margin-top:2px}@keyframes reviewMove{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-50% - 13px),0,0)}}
+
+/* CTA & Footer */
+.cta{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;text-align:center;padding:74px 20px;position:relative;overflow:hidden}.cta::before{content:"";position:absolute;left:-80px;top:-120px;width:260px;height:260px;border-radius:50%;border:36px solid rgba(255,255,255,.06)}.cta::after{content:"";position:absolute;right:-100px;bottom:-120px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.06)}.cta .container{position:relative}.cta h2{font-size:34px;font-weight:600;margin-bottom:12px}.cta p{max-width:760px;margin:0 auto 28px;color:#dce8ff;font-size:16px}.cta .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}.cta .btn-outline:hover{border-color:#fff}
+#footer-placeholder{min-height:300px;background:#fff}.footer{background:#fff;border-top:1px solid var(--border);padding:55px 0 20px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:34px}.footer-logo{display:flex;align-items:center;gap:12px;color:var(--navy);font-size:24px;font-weight:700;margin-bottom:14px}.footer-logo img{height:44px;width:44px;object-fit:contain}.footer p,.footer a{display:block;color:var(--text);font-size:14px;margin-bottom:9px;line-height:1.7}.footer h4{color:var(--navy);font-size:17px;font-weight:600;margin-bottom:17px}.footer a:hover{color:var(--orange)}.footer-credential{margin-top:16px;background:#f8fbff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--text)}.footer-bottom{margin-top:34px;border-top:1px solid var(--border);padding-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+/* Video Modal */
+.video-modal{position:fixed;inset:0;background:rgba(2,8,63,.78);z-index:20000;display:none;align-items:center;justify-content:center;padding:20px}.video-modal.active{display:flex}.video-box{width:min(960px,100%);background:#fff;border-radius:14px;box-shadow:0 28px 80px rgba(0,0,0,.35);overflow:hidden;animation:modalIn .32s var(--ease)}@keyframes modalIn{from{opacity:0;transform:translate3d(0,18px,0) scale(.985)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}.video-modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border)}.video-modal-head h3{font-size:18px;color:var(--navy);font-weight:600}.video-close{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:#fff;color:var(--navy);cursor:pointer}.video-frame{aspect-ratio:16/9;background:#000}.video-frame iframe{width:100%;height:100%;border:0;display:block}
+
+/* smooth reveal: transform-only = no fake blur/flicker */
+.reveal-left,.reveal-up,.reveal-right,.reveal-scale,.text-reveal{opacity:0;will-change:opacity,transform;transition:opacity .82s var(--ease),transform .82s var(--ease)}.reveal-left{transform:translate3d(-42px,0,0)}.reveal-right{transform:translate3d(42px,0,0)}.reveal-up{transform:translate3d(0,28px,0)}.reveal-scale{transform:translate3d(0,18px,0) scale(.986)}.text-reveal{transform:translate3d(0,22px,0)}.is-visible{opacity:1!important;transform:translate3d(0,0,0) scale(1)!important}.hero-text .text-reveal{animation:textRise .78s var(--ease) forwards}.hero-text .hero-badge{animation-delay:.04s}.hero-text h1{animation-delay:.12s}.hero-text p{animation-delay:.20s}.hero-text .hero-actions{animation-delay:.28s}.hero-text .hero-mini-row{animation-delay:.36s}.hero-visual{opacity:0;transform:translate3d(34px,0,0);animation:panelIn .84s var(--ease) .16s forwards}@keyframes textRise{to{opacity:1;transform:translate3d(0,0,0)}}@keyframes panelIn{to{opacity:1;transform:translate3d(0,0,0)}}
+
+@media(max-width:1050px){.hero-grid,.process-grid{grid-template-columns:1fr}.hero-visual{min-height:520px}.service-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.visual-strip-grid{grid-template-columns:repeat(2,1fr)}.nav{display:none}.menu-btn{display:inline-grid;place-items:center}.header-inner{height:76px}}
+@media(max-width:720px){#header-placeholder{min-height:76px}.section{padding:60px 0}.hero{padding:58px 0 54px}.hero h1{font-size:35px;letter-spacing:-.6px}.section-title{font-size:27px}.hero-mini-row{grid-template-columns:1fr}.hero-visual{min-height:510px}.main-visual{position:relative;right:auto;top:auto;width:100%;padding:22px 18px}.side-stat,.support-stat{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:100%;margin-top:14px;display:flex;gap:14px;align-items:center}.side-stat img,.support-stat img{width:52px;margin-bottom:0}.mini-bubbles{position:relative;left:auto;bottom:auto;margin-top:14px}.visual-strip-grid{grid-template-columns:1fr}.service-grid{grid-template-columns:1fr;gap:22px}.ai-card{min-height:auto;padding:38px 24px 34px}.highlight-panel{grid-template-columns:1fr;border-radius:14px}.highlight-title{padding:22px 18px;font-size:18px}.highlight-list{grid-template-columns:1fr;padding:16px;gap:12px}.process-box,.verify-box{padding:26px}.footer-grid{grid-template-columns:1fr}.review-card{flex-basis:86vw}.update-inner{padding:0 12px;gap:10px}.update-label{font-size:12px;padding:7px 11px}.update-track{font-size:13px;animation-duration:34s}.btn{width:100%;max-width:340px}.hero-actions{gap:11px}.brand{font-size:21px}.brand img{width:38px;height:38px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.reveal-left,.reveal-up,.reveal-right,.reveal-scale,.text-reveal,.hero-visual{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<div class="update-bar">
+  <div class="update-inner">
+    <div class="update-label">Platform Updates</div>
+    <div class="update-marquee">
+      <div class="update-track">
+        <span><i class="fas fa-check-circle"></i> GSTIN: 10KEJPM6504N1Z7</span>
+        <span><i class="fas fa-check-circle"></i> MSME: UDYAM-KR-03-0640514</span>
+        <span><i class="fas fa-certificate"></i> ISO 9001:2015 Certified</span>
+        <span><i class="fas fa-circle-info"></i> Demo module available before registration</span>
+        <span><i class="fas fa-headset"></i> Simple portal workflow with support access</span>
+        <span><i class="fas fa-check-circle"></i> GSTIN: 10KEJPM6504N1Z7</span>
+        <span><i class="fas fa-check-circle"></i> MSME: UDYAM-KR-03-0640514</span>
+        <span><i class="fas fa-certificate"></i> ISO 9001:2015 Certified</span>
+        <span><i class="fas fa-circle-info"></i> Demo module available before registration</span>
+        <span><i class="fas fa-headset"></i> Simple portal workflow with support access</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <div class="hero-badge text-reveal"><i class="fas fa-laptop-file"></i> Digital Task Management Portal</div>
+      <h1 class="text-reveal">Start Digital Tasks with WorkDen</h1>
+      <p class="text-reveal">WorkDen provides a simple and transparent portal for demo access, onboarding, training information, task categories, submission tracking and support communication.</p>
+      <div class="hero-actions text-reveal">
+        <a href="#" onclick="showLoginModal(event)" class="btn btn-navy"><i class="fas fa-right-to-bracket"></i> Portal Login</a>
+        <a href="demo-task.html" class="btn btn-orange"><i class="fas fa-play"></i> Try Free Demo</a>
+        <button type="button" class="btn btn-outline" onclick="openVideoModal()"><i class="fas fa-circle-play"></i> See Platform Overview</button>
+      </div>
+      <div class="hero-mini-row text-reveal">
+        <div class="hero-mini"><strong>Demo</strong><span>Explore before registration</span></div>
+        <div class="hero-mini"><strong>Training</strong><span>Simple instructions included</span></div>
+        <div class="hero-mini"><strong>Support</strong><span>Email helpdesk assistance</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-label="Work from home laptop illustration">
+      <div class="visual-card main-visual">
+        <div class="visual-top"><div class="visual-dots"><span></span><span></span><span></span></div><div class="visual-status"><i class="fas fa-circle"></i> Online Portal</div></div>
+        <img class="main-visual-img" src="https://img.icons8.com/fluency/480/work-from-home.png" alt="Work from home laptop user">
+        <div class="visual-lines"><span></span><span></span><span></span></div>
+      </div>
+      <div class="visual-card side-stat"><img src="https://img.icons8.com/fluency/96/laptop.png" alt="Laptop icon"><div><b>Task Dashboard</b><span>Clean digital task workspace</span></div></div>
+      <div class="visual-card support-stat"><img src="https://img.icons8.com/fluency/96/customer-support.png" alt="Support icon"><div><b>Support Access</b><span>Helpdesk information included</span></div></div>
+      <div class="mini-bubbles">
+        <div class="mini-bubble"><i class="fas fa-keyboard"></i> Manual Typing Flow</div>
+        <div class="mini-bubble"><i class="fas fa-shield-alt"></i> Simple Verification</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visual-strip">
+  <div class="container visual-strip-grid">
+    <div class="visual-tile reveal-up"><img src="https://img.icons8.com/fluency/96/online-support.png" alt="Online support"><div><b>Online Support</b><span>Helpdesk for portal queries</span></div></div>
+    <div class="visual-tile reveal-up"><img src="https://img.icons8.com/fluency/96/task.png" alt="Task list"><div><b>Task Modules</b><span>Category-wise clean flow</span></div></div>
+    <div class="visual-tile reveal-up"><img src="https://img.icons8.com/fluency/96/working-with-a-laptop.png" alt="Laptop work"><div><b>Work From Home</b><span>Laptop-friendly interface</span></div></div>
+    <div class="visual-tile reveal-up"><img src="https://img.icons8.com/fluency/96/analytics.png" alt="Tracking"><div><b>Portal Tracking</b><span>Dashboard status updates</span></div></div>
+  </div>
+</section>
+
+<section class="highlights">
+  <div class="container">
+    <div class="highlight-panel reveal-up">
+      <div class="highlight-title"><i class="fas fa-bullhorn"></i> Latest Portal Highlights</div>
+      <div class="highlight-list">
+        <div class="highlight-item"><i class="fas fa-check"></i> New users can explore the demo module before registration.</div>
+        <div class="highlight-item"><i class="fas fa-check"></i> Step-by-step task instructions are available inside the portal.</div>
+        <div class="highlight-item"><i class="fas fa-check"></i> Dashboard keeps task history, support details and updates organized.</div>
+        <div class="highlight-item"><i class="fas fa-check"></i> Helpdesk support is available for onboarding and portal assistance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section service-bg">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <div class="section-kicker">WorkDen Services</div>
+      <h2 class="section-title">Available Digital Task Categories</h2>
+      <p class="section-sub">Explore simple digital task categories with clear instructions and an organized workflow.</p>
+    </div>
+    <div class="service-grid">
+      <div class="ai-card reveal-left"><div class="ai-icon"><img src="https://img.icons8.com/fluency/120/data-configuration.png" alt="Data Entry"></div><h3>Data Entry</h3><p>Enter provided records into structured fields with clean formatting and guided workflow.</p><a href="projects.html" class="card-link"><i class="fas fa-arrow-right"></i> View Details</a></div>
+      <div class="ai-card reveal-left"><div class="ai-icon"><img src="https://img.icons8.com/fluency/120/form.png" alt="Form Filling"></div><h3>Form Filling</h3><p>Complete form-based entries using reference data and simple portal instructions.</p><a href="projects.html" class="card-link"><i class="fas fa-arrow-right"></i> View Details</a></div>
+      <div class="ai-card reveal-left"><div class="ai-icon"><img src="https://img.icons8.com/fluency/120/keyboard.png" alt="PDF to Word"></div><h3>PDF to Word</h3><p>Type visible content from work files into the given text fields through the portal.</p><a href="projects.html" class="card-link"><i class="fas fa-arrow-right"></i> View Details</a></div>
+      <div class="ai-card reveal-left"><div class="ai-icon"><img src="https://img.icons8.com/fluency/120/spell-check.png" alt="Grammar Correction"></div><h3>Grammar Correction</h3><p>Review short text lines and correct the content using the given task rules.</p><a href="projects.html" class="card-link"><i class="fas fa-arrow-right"></i> View Details</a></div>
+      <div class="ai-card reveal-left"><div class="ai-icon"><img src="https://img.icons8.com/fluency/120/customer-support.png" alt="Email Support"></div><h3>Email Support</h3><p>Use support-style response templates and basic communication guidelines.</p><a href="projects.html" class="card-link"><i class="fas fa-arrow-right"></i> View Details</a></div>
+      <div class="ai-card reveal-left"><div class="ai-icon"><img src="https://img.icons8.com/fluency/120/combo-chart.png" alt="Portal Tracking"></div><h3>Portal Tracking</h3><p>Track demo access, dashboard updates, task status and support information.</p><a href="demo-task.html" class="card-link"><i class="fas fa-arrow-right"></i> Try Demo</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section white">
+  <div class="container process-grid">
+    <div class="process-box reveal-left">
+      <div class="section-kicker">Process</div>
+      <h2 class="section-title" style="text-align:left;font-size:30px">Simple 4-Step Workflow</h2>
+      <ul class="process-list">
+        <li class="process-step"><div class="step-no">01</div><div><h4>Try Demo Task</h4><p>Check the workflow and understand the task format first.</p></div></li>
+        <li class="process-step"><div class="step-no">02</div><div><h4>Complete Registration</h4><p>Submit required details for account creation and dashboard access.</p></div></li>
+        <li class="process-step"><div class="step-no">03</div><div><h4>View Task Guidelines</h4><p>Read category instructions and follow the portal workflow.</p></div></li>
+        <li class="process-step"><div class="step-no">04</div><div><h4>Track Updates</h4><p>Review dashboard status, support information and task updates.</p></div></li>
+      </ul>
+    </div>
+
+    <div class="verify-box reveal-right">
+      <div class="section-kicker">Verification</div>
+      <h2 class="section-title" style="text-align:left;font-size:30px">Verification & Support</h2>
+      <div class="verify-item"><i class="fas fa-file-invoice"></i><div><b>GSTIN Details</b><span>10KEJPM6504N1Z7</span></div></div>
+      <div class="verify-item"><i class="fas fa-industry"></i><div><b>MSME / Udyam Details</b><span>UDYAM-KR-03-0640514</span></div></div>
+      <div class="verify-item"><i class="fas fa-certificate"></i><div><b>ISO Certified</b><span>ISO 9001:2015 Certified</span></div></div>
+      <div class="verify-item"><i class="fas fa-envelope-open-text"></i><div><b>Support Email</b><span>support@workden.online</span></div></div>
+      <div class="verify-item"><i class="fas fa-location-dot"></i><div><b>Office Address</b><span>Ashok Nagar, Bangalore – 560001</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <div class="section-kicker">Feedback</div>
+      <h2 class="section-title">User Experience</h2>
+      <p class="section-sub">Feedback regarding dashboard clarity, demo workflow and portal support experience.</p>
+    </div>
+    <div class="reviews-wrap reveal-up">
+      <div class="reviews-row" id="reviews-row">
+        <div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>“The dashboard is simple and the demo task helped me understand the complete workflow before registration.”</p><b>Ankit Singh</b><span>Bangalore, India</span></div>
+        <div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>“Task instructions are clear and the submission process is easy to follow. The interface looks clean.”</p><b>Priya Kapoor</b><span>Pune, India</span></div>
+        <div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p>“Support response and task tracking are useful. I liked the simple portal layout and guideline-based process.”</p><b>Manish Reddy</b><span>Hyderabad, India</span></div>
+        <div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>“The work-from-home style dashboard is neat and easy to understand on laptop and mobile.”</p><b>Rohit Verma</b><span>Delhi, India</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container reveal-up">
+    <h2>Start with WorkDen Demo Module</h2>
+    <p>Explore the demo workflow, understand the task categories and review portal support details before moving ahead.</p>
+    <div class="hero-actions" style="justify-content:center;margin:0">
+      <a href="demo-task.html" class="btn btn-orange"><i class="fas fa-play"></i> Try Free Demo</a>
+      <a href="contact.html" class="btn btn-outline"><i class="fas fa-headset"></i> Contact Support</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<div class="video-modal" id="videoModal" onclick="closeVideoModal(event)">
+  <div class="video-box">
+    <div class="video-modal-head">
+      <h3>WorkDen Platform Overview</h3>
+      <button class="video-close" onclick="closeVideoModal(null)" aria-label="Close video"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="video-frame" id="videoFrame"></div>
+  </div>
+</div>
+
+<script>
+  const fallbackHeader = `
+<style>
+  :root{
+    --wd-navy:#02083f;
+    --wd-blue:#123f7a;
+    --wd-text:#36566f;
+    --wd-muted:#6b8297;
+    --wd-white:#ffffff;
+    --wd-orange:#ff5733;
+    --wd-orange-dark:#e74725;
+    --wd-green:#1f8d4d;
+    --wd-border:#e7edf5;
+    --wd-soft:#f7fbff;
+    --wd-shadow:0 16px 42px rgba(15,34,68,.08);
+    --wd-ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;overflow-x:hidden}
+  .wd-header-shell{position:sticky;top:0;z-index:9999;font-family:'Poppins',Arial,sans-serif;background:#fff;box-shadow:0 10px 28px rgba(15,34,68,.045)}
+  .wd-topbar{width:100%;background:linear-gradient(90deg,#f9fcff,#fff,#fff7f3);border-bottom:1px solid var(--wd-border)}
+  .wd-topbar-inner{max-width:1240px;margin:0 auto;padding:8px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;font-size:13px;color:var(--wd-muted)}
+  .wd-topbar-left,.wd-topbar-right{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.wd-topbar i{color:var(--wd-orange);margin-right:6px}.wd-topbar a{color:var(--wd-muted);text-decoration:none;transition:color .25s var(--wd-ease)}.wd-topbar a:hover{color:var(--wd-blue)}
+  .wd-header{width:100%;background:rgba(255,255,255,.94);backdrop-filter:saturate(150%) blur(15px);border-bottom:1px solid rgba(231,237,245,.86)}
+  .wd-header-inner{max-width:1240px;margin:0 auto;min-height:78px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .wd-brand{display:flex;align-items:center;gap:12px;min-width:225px;text-decoration:none;transform:translateZ(0)}
+  .wd-brand-logo{width:52px;height:52px;border-radius:15px;background:linear-gradient(145deg,#fff,#f6fbff);border:1px solid var(--wd-border);display:grid;place-items:center;overflow:hidden;box-shadow:0 12px 26px rgba(15,34,68,.07);position:relative;flex:0 0 auto;transition:transform .3s var(--wd-ease),box-shadow .3s var(--wd-ease)}
+  .wd-brand-logo::after{content:'';position:absolute;inset:-42%;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.85) 50%,transparent 64%);transform:translateX(-80%) rotate(10deg);transition:transform .75s var(--wd-ease)}
+  .wd-brand:hover .wd-brand-logo{transform:translateY(-2px);box-shadow:0 18px 34px rgba(15,34,68,.1)}.wd-brand:hover .wd-brand-logo::after{transform:translateX(80%) rotate(10deg)}
+  .wd-brand-logo img{width:43px;height:43px;object-fit:contain;display:block}.wd-brand-name{display:flex;flex-direction:column;line-height:1.12}.wd-brand-title{color:var(--wd-navy);font-size:24px;font-weight:700;letter-spacing:-.45px}.wd-brand-sub{color:var(--wd-muted);font-size:12px;font-weight:500;margin-top:5px;letter-spacing:.15px;white-space:nowrap}
+  .wd-nav{display:flex;align-items:center;justify-content:center;gap:3px;list-style:none;margin:0;padding:0;flex:1}.wd-nav a{position:relative;display:inline-flex;align-items:center;min-height:43px;padding:0 13px;border-radius:10px;color:var(--wd-text);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap;transition:color .25s var(--wd-ease),background .25s var(--wd-ease),transform .25s var(--wd-ease)}
+  .wd-nav a::before{content:'';position:absolute;inset:8px 8px;border-radius:9px;background:#f4f9ff;opacity:0;transform:scale(.94);transition:opacity .25s var(--wd-ease),transform .25s var(--wd-ease);z-index:-1}.wd-nav a::after{content:'';position:absolute;left:15px;right:15px;bottom:6px;height:2px;border-radius:20px;background:linear-gradient(90deg,var(--wd-orange),#ff9b55);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--wd-ease)}
+  .wd-nav a:hover,.wd-nav a.active{color:var(--wd-navy);transform:translateY(-1px)}.wd-nav a:hover::before,.wd-nav a.active::before{opacity:1;transform:scale(1)}.wd-nav a:hover::after,.wd-nav a.active::after{transform:scaleX(1)}
+  .wd-actions{display:flex;align-items:center;gap:10px}.wd-btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:transform .25s var(--wd-ease),box-shadow .25s var(--wd-ease),background .25s var(--wd-ease),border-color .25s var(--wd-ease),color .25s var(--wd-ease)}
+  .wd-btn-outline{background:#fff;color:var(--wd-blue);border-color:#cbd8e6}.wd-btn-outline:hover{transform:translateY(-2px);border-color:var(--wd-blue);box-shadow:0 12px 26px rgba(15,34,68,.07)}.wd-btn-orange{background:var(--wd-orange);color:#fff;box-shadow:0 12px 24px rgba(255,87,51,.2)}.wd-btn-orange:hover{background:var(--wd-orange-dark);transform:translateY(-2px);box-shadow:0 18px 38px rgba(255,87,51,.28)}
+  .wd-menu-btn{display:none;width:44px;height:44px;border:1px solid var(--wd-border);background:#fff;color:var(--wd-navy);border-radius:10px;font-size:20px;cursor:pointer;transition:background .25s var(--wd-ease),transform .25s var(--wd-ease),box-shadow .25s var(--wd-ease)}.wd-menu-btn:hover{background:#f8fbff;transform:translateY(-1px);box-shadow:0 10px 20px rgba(15,34,68,.06)}
+  .wd-mobile-menu{display:none;position:fixed;inset:0;z-index:10001;background:rgba(10,18,45,.42);backdrop-filter:blur(9px);font-family:'Poppins',Arial,sans-serif}.wd-mobile-menu.active{display:block}.wd-mobile-panel{width:min(400px,92vw);height:100%;background:#fff;margin-left:auto;padding:22px;box-shadow:-18px 0 60px rgba(15,34,68,.2);animation:wdPanelIn .36s var(--wd-ease) forwards;overflow-y:auto}@keyframes wdPanelIn{from{transform:translateX(36px);opacity:.45}to{transform:translateX(0);opacity:1}}
+  .wd-mobile-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:18px;border-bottom:1px solid var(--wd-border)}.wd-close-btn{width:42px;height:42px;border:1px solid var(--wd-border);background:#fff;color:var(--wd-navy);border-radius:9px;font-size:18px;cursor:pointer}.wd-mobile-links{display:flex;flex-direction:column;padding:18px 0;gap:7px}.wd-mobile-links a{display:flex;align-items:center;justify-content:space-between;min-height:50px;color:var(--wd-text);text-decoration:none;font-size:15px;font-weight:500;border-radius:10px;padding:0 13px;transition:background .25s var(--wd-ease),color .25s var(--wd-ease),transform .25s var(--wd-ease)}.wd-mobile-links a::after{content:'›';color:var(--wd-orange);font-size:24px;line-height:1}.wd-mobile-links a:hover,.wd-mobile-links a.active{background:#f8fbff;color:var(--wd-navy);transform:translateX(3px)}
+  .wd-mobile-actions{display:grid;gap:12px;padding-top:8px}.wd-mobile-note{margin-top:18px;background:linear-gradient(135deg,#f8fbff,#fff7f3);border:1px solid var(--wd-border);border-radius:12px;padding:15px;color:var(--wd-muted);font-size:13px;line-height:1.6}.wd-mobile-note b{color:var(--wd-navy)}
+  .wd-modal-overlay{display:none;position:fixed;inset:0;z-index:10002;background:rgba(7,13,35,.64);align-items:center;justify-content:center;padding:20px;font-family:'Poppins',Arial,sans-serif}.wd-modal-overlay.active{display:flex}.wd-modal-box{width:100%;max-width:485px;background:#fff;border-radius:16px;border:1px solid var(--wd-border);box-shadow:0 28px 80px rgba(0,0,0,.28);padding:28px;position:relative;animation:wdModalIn .3s var(--wd-ease) forwards}@keyframes wdModalIn{from{transform:translateY(18px) scale(.985);opacity:.55}to{transform:translateY(0) scale(1);opacity:1}}
+  .wd-modal-close{position:absolute;right:18px;top:18px;width:38px;height:38px;border:1px solid var(--wd-border);background:#fff;color:var(--wd-muted);border-radius:50%;cursor:pointer;font-size:15px}.wd-modal-title{color:var(--wd-navy);font-size:24px;font-weight:700;margin:0 44px 8px 0;line-height:1.25}.wd-modal-desc{color:var(--wd-muted);font-size:14px;line-height:1.65;margin:0 0 18px}.wd-version-card{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid var(--wd-border);border-radius:13px;padding:16px;color:var(--wd-text);text-decoration:none;margin-top:12px;transition:transform .25s var(--wd-ease),box-shadow .25s var(--wd-ease),border-color .25s var(--wd-ease),background .25s var(--wd-ease)}.wd-version-card:hover{transform:translateY(-3px);border-color:#d3e1ef;background:#fbfdff;box-shadow:0 14px 30px rgba(15,34,68,.08)}.wd-version-icon{width:44px;height:44px;border-radius:50%;background:#fff3ef;color:var(--wd-orange);display:grid;place-items:center;flex:0 0 auto}.wd-v-head{display:block;color:var(--wd-navy);font-weight:700;font-size:16px;margin-bottom:3px}.wd-v-desc{display:block;color:var(--wd-muted);font-size:13px;line-height:1.55}
+  @media(max-width:1120px){.wd-nav{display:none}.wd-menu-btn{display:inline-grid;place-items:center}.wd-actions .wd-btn-outline{display:none}.wd-brand{min-width:auto}}
+  @media(max-width:760px){.wd-topbar{display:none}.wd-header-inner{min-height:74px;padding:0 16px;gap:12px}.wd-brand-logo{width:46px;height:46px;border-radius:12px}.wd-brand-logo img{width:38px;height:38px}.wd-brand-title{font-size:21px}.wd-brand-sub{font-size:11px;max-width:172px;overflow:hidden;text-overflow:ellipsis}.wd-actions .wd-btn-orange{min-height:42px;padding:0 12px;font-size:13px}.wd-actions .wd-btn-orange span{display:none}}
+  @media(max-width:390px){.wd-brand-sub{display:none}.wd-brand-title{font-size:20px}.wd-brand-logo{width:42px;height:42px}.wd-actions{gap:8px}}
+</style>
+
+<div class="wd-header-shell">
+  <div class="wd-topbar">
+    <div class="wd-topbar-inner">
+      <div class="wd-topbar-left">
+        <span><i class="fas fa-envelope"></i> support@workden.online</span>
+        <span><i class="fas fa-circle-check"></i> GST, MSME & ISO Certified details available</span>
+      </div>
+      <div class="wd-topbar-right">
+        <a href="demo-task.html"><i class="fas fa-play-circle"></i> Try Free Demo</a>
+        <a href="projects.html"><i class="fas fa-briefcase"></i> Task Categories</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="wd-header">
+    <div class="wd-header-inner">
+      <a href="index.html" class="wd-brand" aria-label="WorkDen Home">
+        <span class="wd-brand-logo"><img src="workden-logo.png" alt="WorkDen Logo" onerror="this.src='https://img.icons8.com/fluency/96/task.png'"></span>
+        <span class="wd-brand-name"><span class="wd-brand-title">WorkDen</span><span class="wd-brand-sub">Digital Task Management Portal</span></span>
+      </a>
+      <ul class="wd-nav" id="desktopNav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="plans.html">Plans</a></li>
+        <li><a href="demo-task.html">Demo Task</a></li>
+        <li><a href="testimonials.html">Reviews</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+      </ul>
+      <div class="wd-actions">
+        <a href="#" onclick="showLoginModal(event)" class="wd-btn wd-btn-outline"><i class="fas fa-user"></i> User Login</a>
+        <a href="https://workdenteam2.base44.app/" class="wd-btn wd-btn-orange"><i class="fas fa-user-tie"></i> <span>Employee Login</span></a>
+        <button class="wd-menu-btn" type="button" aria-label="Open menu" onclick="openWorkDenMenu()"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="wd-mobile-menu" id="mobileMenu" onclick="closeWorkDenMenu(event)">
+  <div class="wd-mobile-panel">
+    <div class="wd-mobile-head">
+      <a href="index.html" class="wd-brand" style="min-width:0"><span class="wd-brand-logo"><img src="workden-logo.png" alt="WorkDen Logo" onerror="this.src='https://img.icons8.com/fluency/96/task.png'"></span><span class="wd-brand-name"><span class="wd-brand-title">WorkDen</span><span class="wd-brand-sub">Digital Task Portal</span></span></a>
+      <button class="wd-close-btn" type="button" onclick="closeWorkDenMenu(null)"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="wd-mobile-links" id="mobileNavLinks">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="plans.html">Plans</a><a href="demo-task.html">Demo Task</a><a href="testimonials.html">Reviews</a><a href="blogs.html">Blogs</a>
+    </div>
+    <div class="wd-mobile-actions">
+      <a href="#" onclick="showLoginModal(event); closeWorkDenMenu(null);" class="wd-btn wd-btn-outline" style="width:100%"><i class="fas fa-user"></i> User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="wd-btn wd-btn-orange" style="width:100%"><i class="fas fa-user-tie"></i> Employee Login</a>
+    </div>
+    <div class="wd-mobile-note"><b>Need help?</b><br>Contact support@workden.online for portal access, demo task and dashboard assistance.</div>
+  </div>
+</div>
+
+<div class="wd-modal-overlay" id="loginModalGlobal" onclick="closeLoginModal(event)">
+  <div class="wd-modal-box">
+    <button class="wd-modal-close" type="button" onclick="closeLoginModal(null)"><i class="fas fa-times"></i></button>
+    <h3 class="wd-modal-title">Select User Portal</h3>
+    <p class="wd-modal-desc">Choose your assigned WorkDen portal version to continue with dashboard access.</p>
+    <a href="./Workden4.0/index.html" class="wd-version-card">
+  <span class="wd-version-icon"><i class="fas fa-layer-group"></i></span>
+  <span>
+    <span class="wd-v-head">WorkDen 4.0 Portal</span>
+    <span class="wd-v-desc">Latest dashboard for current task access and updated workflow.</span>
+  </span>
+</a>
+    <a href="./Workden3.0/index.html" class="wd-version-card"><span class="wd-version-icon"><i class="fas fa-clock-rotate-left"></i></span><span><span class="wd-v-head">WorkDen 3.0 Portal</span><span class="wd-v-desc">Legacy dashboard for existing users assigned to previous version.</span></span></a>
+  </div>
+</div>
+
+<script>
+  window.openWorkDenMenu = function(){var menu=document.getElementById('mobileMenu');if(menu) menu.classList.add('active');document.body.style.overflow='hidden';};
+  window.closeWorkDenMenu = function(e){var menu=document.getElementById('mobileMenu');if(menu && (!e || e.target===menu)){menu.classList.remove('active');document.body.style.overflow='';}};
+  window.showLoginModal = function(e){if(e) e.preventDefault();var modal=document.getElementById('loginModalGlobal');if(modal){modal.classList.add('active');document.body.style.overflow='hidden';}};
+  window.closeLoginModal = function(e){var modal=document.getElementById('loginModalGlobal');if(modal && (!e || e.target===modal)){modal.classList.remove('active');if(!document.getElementById('mobileMenu') || !document.getElementById('mobileMenu').classList.contains('active')) document.body.style.overflow='';}};
+  (function(){
+    function normalizePage(value){if(!value) return 'index';var url;try{url=new URL(value,window.location.origin);}catch(err){return '';}var path=url.pathname.replace(/\/+$/,'');var page=path.split('/').pop()||'index';return page.replace(/\.html$/i,'')||'index';}
+    var currentPage=normalizePage(window.location.pathname);
+    function setActiveLinks(selector){document.querySelectorAll(selector).forEach(function(link){link.classList.remove('active');if(normalizePage(link.getAttribute('href'))===currentPage) link.classList.add('active');});}
+    setActiveLinks('#desktopNav a');setActiveLinks('#mobileNavLinks a');
+    document.addEventListener('keydown',function(ev){if(ev.key==='Escape'){closeWorkDenMenu(null);closeLoginModal(null);}});
+  })();
+<\/script>
+
+  `;
+
+  const fallbackFooter = `
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-logo"><img src="workden-logo.png" onerror="this.src='https://img.icons8.com/fluency/96/task.png'" alt="WorkDen Logo"> WorkDen</div>
+          <p>WorkDen is a digital task management portal for demo access, onboarding, task categories and support communication.</p>
+          <div class="footer-credential"><b>GSTIN:</b> 10KEJPM6504N1Z7<br><b>MSME:</b> UDYAM-KR-03-0640514<br><b>ISO:</b> 9001:2015 Certified</div>
+        </div>
+        <div><h4>Quick Links</h4><a href="index.html">Home</a><a href="projects.html">Task Categories</a><a href="demo-task.html">Demo Task</a><a href="training.html">Training</a></div>
+        <div><h4>Support</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="refund.html">Refund Policy</a></div>
+        <div><h4>Contact</h4><p><i class="fas fa-envelope"></i> support@workden.online</p><p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p><p><i class="fas fa-headset"></i> Helpdesk support for portal-related queries.</p></div>
+      </div>
+      <div class="container footer-bottom">© 2026 WorkDen. All rights reserved.</div>
+    </footer>`;
+
+  function runInlineScripts(container){
+    const scripts = container.getElementsByTagName('script');
+    for(let i = 0; i < scripts.length; i++){
+      try { new Function(scripts[i].innerText)(); } catch(err) { console.error('Fragment script error:', err); }
+    }
+  }
+
+  function loadFragment(id, file, fallback){
+    const target = document.getElementById(id);
+    if(!target) return Promise.resolve();
+    return fetch(file, {cache:'no-store'})
+      .then(response => {
+        if(!response.ok) throw new Error(file + ' not found');
+        return response.text();
+      })
+      .then(html => {
+        target.innerHTML = html;
+        runInlineScripts(target);
+      })
+      .catch(() => {
+        target.innerHTML = fallback;
+        runInlineScripts(target);
+      });
+  }
+
+  Promise.all([
+    loadFragment('header-placeholder', 'header.html', fallbackHeader),
+    loadFragment('footer-placeholder', 'footer.html', fallbackFooter)
+  ]);
+
+  function openVideoModal(){
+    const modal = document.getElementById('videoModal');
+    const frame = document.getElementById('videoFrame');
+    frame.innerHTML = '<iframe src="https://drive.google.com/file/d/1Smh_G3h1MXoHzgRdg-gSZ-_U0CIJRK6d/preview" allow="autoplay" allowfullscreen></iframe>';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVideoModal(e){
+    const modal = document.getElementById('videoModal');
+    if(!e || e.target === modal){
+      modal.classList.remove('active');
+      document.getElementById('videoFrame').innerHTML = '';
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeVideoModal(null); });
+
+  document.addEventListener('DOMContentLoaded', function(){
+    const row = document.getElementById('reviews-row');
+    if(row && !row.dataset.cloned){ row.innerHTML = row.innerHTML + row.innerHTML; row.dataset.cloned = 'true'; }
+
+    const animated = document.querySelectorAll('.reveal-left, .reveal-up, .reveal-right, .reveal-scale');
+    animated.forEach((el) => {
+      const siblings = Array.from(el.parentElement ? el.parentElement.children : []);
+      const rowIndex = Math.max(siblings.indexOf(el), 0);
+      const delay = el.classList.contains('ai-card') || el.classList.contains('visual-tile') ? Math.min(rowIndex * 105, 420) : 0;
+      el.style.transitionDelay = delay + 'ms';
+    });
+
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:.12, rootMargin:'0px 0px -50px 0px'});
+
+    animated.forEach(el=>observer.observe(el));
+  });
+</script>
+</body>
+</html>

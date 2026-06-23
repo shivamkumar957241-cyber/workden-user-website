@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy – WorkDen | Data Protection</title>
+<meta name="description" content="Read WorkDen Privacy Policy, data protection practices, task data usage, privacy rights, cookies and contact details.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --navy:#02083f;
+  --blue:#113f7a;
+  --text:#365a73;
+  --muted:#6b8297;
+  --bg:#f3f5fb;
+  --white:#ffffff;
+  --orange:#ff5733;
+  --orange-dark:#e74725;
+  --green:#1f8d4d;
+  --border:#e8edf5;
+  --shadow:0 14px 36px rgba(13,34,63,.06);
+  --shadow-hover:0 24px 58px rgba(13,34,63,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;opacity:0;transition:opacity .35s ease}
+body.loaded{opacity:1}
+a{text-decoration:none;color:inherit}
+#header-placeholder{min-height:110px;background:#fff}
+#footer-placeholder{min-height:360px;background:#fff}
+.container{max-width:1180px;margin:0 auto;padding:0 22px}
+.legal-hero{position:relative;overflow:hidden;background:#fff;padding:88px 0 72px;border-bottom:1px solid var(--border)}
+.legal-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 10% 18%,rgba(17,63,122,.09),transparent 30%),radial-gradient(circle at 92% 12%,rgba(255,87,51,.10),transparent 28%);pointer-events:none}
+.legal-hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--orange),var(--green))}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:48px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;background:#f1f7ff;border:1px solid #d9e8fb;color:var(--blue);border-radius:50px;padding:9px 18px;font-size:13px;font-weight:700;margin-bottom:18px}
+.legal-hero h1{font-size:48px;line-height:1.14;color:var(--navy);font-weight:650;letter-spacing:-.8px;margin-bottom:18px}
+.legal-hero p{font-size:16px;color:var(--text);max-width:720px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 15px;border-radius:50px;background:#fff;border:1px solid var(--border);box-shadow:0 10px 26px rgba(13,34,63,.06);font-size:13px;font-weight:700;color:var(--blue)}
+.hero-visual{position:relative;min-height:335px;border-radius:18px;background:linear-gradient(135deg,#fff,#f7fbff);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;padding:28px;display:flex;align-items:center;justify-content:center}
+.hero-visual::before{content:'';position:absolute;width:240px;height:240px;border-radius:50%;background:rgba(255,87,51,.10);right:-72px;top:-72px}
+.hero-visual::after{content:'';position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(17,63,122,.08);left:-80px;bottom:-80px}
+.privacy-graphic{position:relative;z-index:1;width:min(330px,86%);height:auto;filter:drop-shadow(0 22px 28px rgba(13,34,63,.12));animation:floatY 5s ease-in-out infinite}
+.float-note{position:absolute;z-index:2;background:#fff;border:1px solid var(--border);box-shadow:0 14px 34px rgba(13,34,63,.10);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;color:var(--navy);font-size:13px;font-weight:700}
+.float-note i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#fff2ed;color:var(--orange)}
+.fn-1{left:20px;top:24px}.fn-2{right:20px;bottom:26px}.fn-3{left:28px;bottom:34px}
+.legal-section{padding:76px 0;background:var(--bg)}
+.legal-shell{display:grid;grid-template-columns:270px 1fr;gap:28px;align-items:start}
+.sidebar-card{position:sticky;top:110px;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.sidebar-head{padding:22px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff}
+.sidebar-head strong{display:block;font-size:17px;margin-bottom:6px}
+.sidebar-head span{display:block;font-size:13px;color:#dce8ff;line-height:1.55}
+.side-list{padding:16px;display:grid;gap:10px}
+.side-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;background:#fbfdff;border:1px solid var(--border);font-size:13px;font-weight:700;color:var(--blue)}
+.side-item i{color:var(--orange)}
+.policy-intro{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:30px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.policy-intro::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--orange),var(--blue))}
+.policy-intro p{font-size:16px;color:var(--text)}
+.policy-grid{display:grid;gap:18px}
+.policy-card{position:relative;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 28px rgba(13,34,63,.045);padding:24px 26px;display:grid;grid-template-columns:54px 1fr;gap:18px;overflow:hidden;transition:transform .38s cubic-bezier(.22,.61,.36,1),box-shadow .38s cubic-bezier(.22,.61,.36,1),border-color .38s ease}
+.policy-card::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--orange),#ff9c50);transform:scaleX(0);transform-origin:left;transition:transform .42s cubic-bezier(.22,.61,.36,1)}
+.policy-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-color:#dbe7f3}
+.policy-card:hover::before{transform:scaleX(1)}
+.policy-icon{width:54px;height:54px;border-radius:14px;background:#f1f7ff;border:1px solid #dbeafb;display:grid;place-items:center;color:var(--blue);font-size:21px;transition:transform .38s ease,background .38s ease,color .38s ease}
+.policy-card:hover .policy-icon{transform:translateY(-3px) rotate(-2deg);background:#fff2ed;color:var(--orange)}
+.policy-content h3{font-size:20px;color:var(--navy);font-weight:650;line-height:1.35;margin-bottom:8px}
+.policy-content p,.legal-list li{font-size:15px;color:var(--text)}
+.legal-list{list-style:none;display:grid;gap:9px;margin-top:4px}
+.legal-list li{position:relative;padding-left:22px}
+.legal-list li::before{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;left:0;top:1px;color:var(--green);font-size:12px}
+.policy-content strong{color:var(--blue);font-weight:700}
+.contact-card{margin-top:24px;background:linear-gradient(135deg,#fff,#f7fbff);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:28px 30px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;overflow:hidden;position:relative}
+.contact-card::before{content:'';position:absolute;width:150px;height:150px;border-radius:50%;right:-50px;top:-60px;background:rgba(255,87,51,.10)}
+.contact-card h3{position:relative;color:var(--navy);font-size:22px;margin-bottom:8px}
+.contact-card p{position:relative;color:var(--text);font-size:15px}
+.contact-info{position:relative;display:grid;gap:10px}
+.contact-link{display:flex;align-items:center;gap:9px;color:var(--blue);font-weight:700;font-size:14px}
+.contact-link i{color:var(--orange)}
+.reveal,.reveal-card{opacity:0;transform:translate3d(0,28px,0);transition:opacity .75s cubic-bezier(.22,.61,.36,1),transform .75s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.reveal.left{transform:translate3d(-42px,0,0)}.reveal.right{transform:translate3d(42px,0,0)}.show{opacity:1!important;transform:translate3d(0,0,0)!important}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr}.legal-hero h1{font-size:40px}.legal-shell{grid-template-columns:1fr}.sidebar-card{position:relative;top:auto}.side-list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){#header-placeholder{min-height:76px}#footer-placeholder{min-height:520px}.legal-hero{padding:58px 0}.legal-hero h1{font-size:34px}.hero-visual{min-height:290px}.float-note{display:none}.legal-section{padding:56px 0}.side-list{grid-template-columns:1fr}.policy-card{grid-template-columns:1fr;padding:22px}.contact-card{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.reveal,.reveal-card{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<section class="legal-hero">
+  <div class="container hero-grid">
+    <div class="reveal left">
+      <span class="hero-badge"><i class="fas fa-shield-halved"></i> Data Protection</span>
+      <h1>Privacy Policy</h1>
+      <p>WorkDen respects user privacy and explains how information is collected, used, protected, retained and managed while using our website, task portal and related services.</p>
+      <div class="hero-actions">
+        <span class="pill"><i class="fas fa-building-shield"></i> GSTIN: 10KEJPM6504N1Z7</span>
+        <span class="pill"><i class="fas fa-calendar-check"></i> Updated: 2026</span>
+      </div>
+    </div>
+    <div class="hero-visual reveal right">
+      <img class="privacy-graphic" src="https://img.icons8.com/clouds/500/privacy-policy.png" alt="Privacy policy security illustration" onerror="this.src='https://img.icons8.com/clouds/500/security-checked.png'">
+      <div class="float-note fn-1"><i class="fas fa-lock"></i> Secure workflow</div>
+      <div class="float-note fn-2"><i class="fas fa-user-check"></i> User rights</div>
+      <div class="float-note fn-3"><i class="fas fa-file-shield"></i> Data policy</div>
+    </div>
+  </div>
+</section>
+
+<main class="legal-section">
+  <div class="container legal-shell">
+    <aside class="sidebar-card reveal left">
+      <div class="sidebar-head">
+        <strong>Policy Overview</strong>
+        <span>Simple, structured and readable privacy information for WorkDen users.</span>
+      </div>
+      <div class="side-list">
+        <a class="side-item" href="#privacy-details"><i class="fas fa-list-check"></i> Privacy Details</a>
+        <a class="side-item" href="#privacy-contact"><i class="fas fa-headset"></i> Contact Support</a>
+        <a class="side-item" href="terms.html"><i class="fas fa-file-contract"></i> Terms</a>
+        <a class="side-item" href="refund.html"><i class="fas fa-receipt"></i> Refund Policy</a>
+      </div>
+    </aside>
+
+    <section id="privacy-details">
+      <div class="policy-intro reveal">
+        <p><strong>WorkDen ("we", "our", "us")</strong> respects your privacy and is committed to protecting the personal information of users ("you", "user") who access or use our website, platform, or related services. By using WorkDen, you agree to the collection and use of information in accordance with this Privacy Policy.</p>
+      </div>
+
+      <div class="policy-grid">
+        <article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-user-shield"></i></div>
+          <div class="policy-content">
+            <h3>1. Information We Collect</h3>
+            <ul class="legal-list"><li><strong>Personal Information:</strong> Full name, email address, contact number, city/state details, account identifiers.</li><li><strong>Account & Task Information:</strong> Login details, submissions, performance records.</li><li><strong>Technical Information:</strong> IP address, browser type, device data, login timestamps, cookies.</li></ul>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-gears"></i></div>
+          <div class="policy-content">
+            <h3>2. How We Use Your Information</h3>
+            <ul class="legal-list"><li>Create and manage accounts</li><li>Allocate and review tasks</li><li>Ensure platform security</li><li>Communicate updates and support</li><li>Prevent fraud or misuse</li></ul>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-share-nodes"></i></div>
+          <div class="policy-content">
+            <h3>3. Data Sharing & Disclosure</h3>
+            <p>We do not sell, rent, or trade personal user data. Information may be shared only with trusted service providers, to comply with legal obligations, or to protect the rights and safety of WorkDen and its users.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-lock"></i></div>
+          <div class="policy-content">
+            <h3>4. Data Security</h3>
+            <p>We implement reasonable safeguards to protect user data. However, no online platform can guarantee complete security.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-cookie-bite"></i></div>
+          <div class="policy-content">
+            <h3>5. Cookies & Tracking Technologies</h3>
+            <p>Cookies may be used to maintain login sessions and improve user experience.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-user-check"></i></div>
+          <div class="policy-content">
+            <h3>6. User Responsibilities</h3>
+            <p>Users must keep login credentials confidential and provide accurate information. Misuse may result in suspension.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-file-lines"></i></div>
+          <div class="policy-content">
+            <h3>7. Task Data & Uploaded Files</h3>
+            <p>Task-related files are used strictly for verification and quality review. Data is not reused or distributed.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-receipt"></i></div>
+          <div class="policy-content">
+            <h3>8. Registration Fees & Refund Policy</h3>
+            <p>WorkDen may charge a one-time registration or portal access fee. <strong>Refunds are handled as per the Refund Policy, including eligible cases such as duplicate payment, verified payment error, or failure to provide access after successful verification.</strong></p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="policy-content">
+            <h3>9. Third-Party Services</h3>
+            <p>We are not responsible for privacy practices of external platforms such as payment gateways or external links.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-database"></i></div>
+          <div class="policy-content">
+            <h3>10. Data Retention</h3>
+            <p>User data is retained only as long as necessary to operate the platform and meet legal or audit requirements.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-id-card"></i></div>
+          <div class="policy-content">
+            <h3>11. User Rights</h3>
+            <p>Users may request access, correction, or deletion of their personal data by contacting us. Requests will be handled within a reasonable timeframe.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-child-reaching"></i></div>
+          <div class="policy-content">
+            <h3>12. Children's Privacy</h3>
+            <p>WorkDen services are intended for users aged 18 or older. We do not knowingly collect data from minors.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-rotate"></i></div>
+          <div class="policy-content">
+            <h3>13. Policy Updates</h3>
+            <p>We may update this Privacy Policy periodically. Continued use of the platform indicates acceptance of changes.</p>
+          </div>
+        </article>
+<article class="policy-card reveal-card">
+          <div class="policy-icon"><i class="fas fa-scale-balanced"></i></div>
+          <div class="policy-content">
+            <h3>14. Governing Law</h3>
+            <p>This Privacy Policy shall be governed by the laws of India.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="contact-card reveal" id="privacy-contact">
+        <div>
+          <h3>Contact for Privacy Matters</h3>
+          <p>For access, correction, deletion or privacy-related queries, contact the WorkDen support desk.</p>
+        </div>
+        <div class="contact-info">
+          <a class="contact-link" href="mailto:support@workden.online"><i class="fas fa-envelope"></i> support@workden.online</a>
+          <a class="contact-link" href="https://workden.online"><i class="fas fa-globe"></i> workden.online</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="content-sync.js?v=3.5"></script>
+<script>
+  function runFragmentScripts(container){
+    const scripts = container.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      const s = document.createElement('script');
+      if(oldScript.src) s.src = oldScript.src;
+      s.textContent = oldScript.textContent;
+      document.body.appendChild(s);
+      oldScript.remove();
+    });
+  }
+
+  function loadFragment(id, file){
+    const el = document.getElementById(id);
+    if(!el) return Promise.resolve();
+    return fetch(file)
+      .then(r => {
+        if(!r.ok) throw new Error(file + ' not found');
+        return r.text();
+      })
+      .then(html => {
+        el.innerHTML = html;
+        runFragmentScripts(el);
+      })
+      .catch(err => console.error('Error loading ' + file + ':', err));
+  }
+
+  function initReveal(){
+    const items = document.querySelectorAll('.reveal, .reveal-card');
+    items.forEach((el, i) => {
+      const isCard = el.classList.contains('reveal-card');
+      el.style.transitionDelay = isCard ? Math.min(i * 65, 520) + 'ms' : Math.min(i * 70, 240) + 'ms';
+    });
+
+    if(!('IntersectionObserver' in window)){
+      items.forEach(el => el.classList.add('show'));
+      return;
+    }
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -55px 0px' });
+
+    items.forEach(el => obs.observe(el));
+  }
+
+  Promise.all([
+    loadFragment('header-placeholder','header.html'),
+    loadFragment('footer-placeholder','footer.html')
+  ]).finally(() => {
+    document.body.classList.add('loaded');
+    initReveal();
+  });
+</script>
+</body>
+</html>

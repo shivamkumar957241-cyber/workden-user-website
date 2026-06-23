@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disclaimer – WorkDen | Official Platform</title>
+<meta name="description" content="WorkDen platform disclaimer including no income guarantee, task availability, refund, accuracy and user responsibility terms.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root{
+  --navy:#02083f;
+  --blue:#113f7a;
+  --blue-soft:#f1f7ff;
+  --text:#365a73;
+  --muted:#6b8297;
+  --bg:#f3f5fb;
+  --white:#ffffff;
+  --orange:#ff5733;
+  --orange-dark:#e74725;
+  --green:#1f8d4d;
+  --border:#e8edf5;
+  --warning:#fff7ed;
+  --shadow:0 14px 36px rgba(13,34,63,.06);
+  --shadow-hover:0 26px 64px rgba(13,34,63,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Poppins',Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.75;
+  overflow-x:hidden;
+  opacity:0;
+  transition:opacity .35s ease;
+}
+body.loaded{opacity:1}
+a{text-decoration:none;color:inherit}
+#header-placeholder{min-height:110px;background:#fff}
+#footer-placeholder{min-height:360px;background:#fff}
+.container{max-width:1180px;margin:0 auto;padding:0 22px}
+
+.legal-hero{
+  position:relative;
+  overflow:hidden;
+  background:#fff;
+  padding:84px 0 70px;
+  border-bottom:1px solid var(--border);
+}
+.legal-hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 8% 18%,rgba(17,63,122,.08),transparent 31%),
+    radial-gradient(circle at 92% 15%,rgba(255,87,51,.10),transparent 28%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:relative;
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  gap:48px;
+  align-items:center;
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  background:var(--blue-soft);
+  border:1px solid #d9e8fb;
+  color:var(--blue);
+  border-radius:50px;
+  padding:9px 18px;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:18px;
+}
+.legal-hero h1{
+  font-size:48px;
+  line-height:1.16;
+  color:var(--navy);
+  font-weight:650;
+  letter-spacing:-.8px;
+  margin-bottom:16px;
+}
+.legal-hero p{
+  font-size:17px;
+  max-width:680px;
+  color:var(--text);
+}
+.hero-note{
+  margin-top:22px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.note-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#fff;
+  border:1px solid var(--border);
+  box-shadow:0 10px 24px rgba(13,34,63,.05);
+  border-radius:8px;
+  padding:10px 14px;
+  color:var(--blue);
+  font-size:13px;
+  font-weight:600;
+}
+.hero-visual{
+  position:relative;
+  min-height:300px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#fff,#f7fbff);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+}
+.hero-visual::before{
+  content:'';
+  position:absolute;
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  background:rgba(255,87,51,.10);
+  right:-68px;
+  top:-68px;
+}
+.hero-visual::after{
+  content:'';
+  position:absolute;
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  background:rgba(17,63,122,.08);
+  left:-80px;
+  bottom:-80px;
+}
+.legal-illustration{
+  position:relative;
+  z-index:2;
+  width:min(360px,100%);
+  max-height:320px;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 24px 30px rgba(13,34,63,.12));
+  animation:floatY 5s ease-in-out infinite;
+}
+.float-mini{
+  position:absolute;
+  z-index:3;
+  background:#fff;
+  border:1px solid var(--border);
+  box-shadow:0 14px 34px rgba(13,34,63,.10);
+  border-radius:12px;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--navy);
+  font-size:13px;
+  font-weight:600;
+}
+.float-mini i{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#fff2ed;
+  color:var(--orange);
+}
+.fm-1{left:24px;top:28px}
+.fm-2{right:24px;bottom:30px}
+
+.legal-section{
+  padding:72px 0;
+  background:var(--bg);
+}
+.legal-shell{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:34px;
+  align-items:start;
+}
+.side-panel{
+  position:sticky;
+  top:22px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.side-head{
+  padding:22px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:#fff;
+}
+.side-head h3{
+  font-size:18px;
+  line-height:1.35;
+  font-weight:600;
+  margin-bottom:6px;
+}
+.side-head p{
+  color:#dce8ff;
+  font-size:13px;
+}
+.side-list{
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.side-list a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:9px;
+  color:var(--text);
+  font-size:13px;
+  font-weight:600;
+  transition:background .25s ease,color .25s ease,transform .25s ease;
+}
+.side-list a i{color:var(--orange);width:17px}
+.side-list a:hover{
+  background:#f6f9fd;
+  color:var(--blue);
+  transform:translateX(3px);
+}
+
+.legal-content{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.intro-card,
+.disclaimer-card,
+.contact-card{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.intro-card{
+  padding:28px;
+  border-left:4px solid var(--blue);
+}
+.intro-card h2{
+  color:var(--navy);
+  font-size:25px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+.intro-card p{
+  font-size:15px;
+  color:var(--text);
+}
+.disclaimer-card{
+  display:grid;
+  grid-template-columns:68px 1fr;
+  min-height:130px;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s cubic-bezier(.22,.61,.36,1),border-color .35s ease;
+}
+.disclaimer-card::before{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--orange),#ff9c50);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .42s cubic-bezier(.22,.61,.36,1);
+}
+.disclaimer-card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow-hover);
+  border-color:#dde8f3;
+}
+.disclaimer-card:hover::before{transform:scaleX(1)}
+.disclaimer-icon{
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:24px;
+  background:linear-gradient(180deg,#fbfdff,#f4f8ff);
+  border-right:1px solid var(--border);
+}
+.disclaimer-icon span{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:#fff2ed;
+  color:var(--orange);
+  box-shadow:0 12px 22px rgba(255,87,51,.10);
+}
+.disclaimer-body{
+  padding:24px 26px;
+}
+.disclaimer-body h3{
+  color:var(--navy);
+  font-size:20px;
+  line-height:1.35;
+  font-weight:600;
+  margin-bottom:8px;
+}
+.disclaimer-body p{
+  font-size:15px;
+  color:var(--text);
+  margin-bottom:9px;
+}
+.disclaimer-body p:last-child{margin-bottom:0}
+.warning-card{
+  border-color:#ffe1c2;
+  background:linear-gradient(135deg,#fff,#fffaf4);
+}
+.warning-card .disclaimer-icon span{
+  background:#fff0df;
+  color:#bd5a12;
+}
+.warning-label{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:9px;
+  color:#bd5a12;
+  font-size:13px;
+  font-weight:700;
+}
+
+.contact-card{
+  margin-top:6px;
+  padding:28px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:center;
+  border-left:4px solid var(--blue);
+}
+.contact-card h3{
+  color:var(--navy);
+  font-size:22px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+.contact-card p{
+  font-size:15px;
+  color:var(--text);
+}
+.contact-badge{
+  width:74px;
+  height:74px;
+  border-radius:18px;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:26px;
+  box-shadow:0 18px 35px rgba(2,8,63,.16);
+}
+
+.reveal{
+  opacity:0;
+  transform:translate3d(0,26px,0);
+  transition:opacity .76s cubic-bezier(.22,.61,.36,1),transform .76s cubic-bezier(.22,.61,.36,1);
+  will-change:opacity,transform;
+}
+.reveal.left{transform:translate3d(-42px,0,0)}
+.reveal.right{transform:translate3d(42px,0,0)}
+.show{
+  opacity:1!important;
+  transform:translate3d(0,0,0)!important;
+}
+
+@keyframes floatY{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+@media(max-width:1040px){
+  .hero-grid{grid-template-columns:1fr}
+  .legal-hero h1{font-size:40px}
+  .legal-shell{grid-template-columns:1fr}
+  .side-panel{position:relative;top:auto}
+  .side-list{display:grid;grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:720px){
+  #header-placeholder{min-height:76px}
+  #footer-placeholder{min-height:520px}
+  .legal-hero{padding:56px 0}
+  .legal-hero h1{font-size:33px}
+  .legal-hero p{font-size:15px}
+  .hero-visual{min-height:270px}
+  .float-mini{display:none}
+  .legal-section{padding:50px 0}
+  .side-list{grid-template-columns:1fr}
+  .disclaimer-card{grid-template-columns:1fr}
+  .disclaimer-icon{
+    justify-content:flex-start;
+    padding:20px 24px 0;
+    border-right:0;
+    background:#fff;
+  }
+  .disclaimer-body{padding:16px 22px 24px}
+  .contact-card{grid-template-columns:1fr}
+  .contact-badge{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<section class="legal-hero">
+  <div class="container hero-grid">
+    <div class="reveal left">
+      <span class="hero-badge"><i class="fas fa-circle-exclamation"></i> Official Disclaimer</span>
+      <h1>Platform Disclaimer</h1>
+      <p>WorkDen – Verified Digital Task Platform</p>
+      <div class="hero-note">
+        <span class="note-pill"><i class="fas fa-ban"></i> No Income Guarantee</span>
+        <span class="note-pill"><i class="fas fa-list-check"></i> Task-Based Work</span>
+        <span class="note-pill"><i class="fas fa-shield-halved"></i> Policy Compliance</span>
+      </div>
+    </div>
+    <div class="hero-visual reveal right">
+      <img class="legal-illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='390' viewBox='0 0 520 390'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%23ffffff'/%3E%3Cstop offset='1' stop-color='%23eef6ff'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' x2='1'%3E%3Cstop stop-color='%2302083f'/%3E%3Cstop offset='1' stop-color='%23113f7a'/%3E%3C/linearGradient%3E%3Cfilter id='s' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='18' stdDeviation='16' flood-color='%230d223f' flood-opacity='.16'/%3E%3C/filter%3E%3C/defs%3E%3Ccircle cx='98' cy='72' r='48' fill='%23fff2ed'/%3E%3Ccircle cx='420' cy='310' r='56' fill='%23eef6ff'/%3E%3Crect x='112' y='50' width='296' height='260' rx='28' fill='url(%23a)' stroke='%23dfe9f5' stroke-width='3' filter='url(%23s)'/%3E%3Crect x='148' y='92' width='224' height='26' rx='13' fill='%23113f7a' opacity='.15'/%3E%3Crect x='148' y='138' width='224' height='15' rx='8' fill='%23365a73' opacity='.22'/%3E%3Crect x='148' y='170' width='178' height='15' rx='8' fill='%23365a73' opacity='.18'/%3E%3Crect x='148' y='202' width='206' height='15' rx='8' fill='%23365a73' opacity='.18'/%3E%3Crect x='148' y='238' width='124' height='42' rx='21' fill='%23ff5733'/%3E%3Cpath d='M322 236l88 42-40 15-16 44-32-101z' fill='url(%23b)' filter='url(%23s)'/%3E%3Ccircle cx='342' cy='153' r='42' fill='%23fff2ed' stroke='%23ffd4c5' stroke-width='3'/%3E%3Cpath d='M342 128v32' stroke='%23ff5733' stroke-width='10' stroke-linecap='round'/%3E%3Ccircle cx='342' cy='178' r='6' fill='%23ff5733'/%3E%3Crect x='80' y='274' width='122' height='52' rx='16' fill='%23ffffff' stroke='%23e8edf5' stroke-width='2' filter='url(%23s)'/%3E%3Ccircle cx='108' cy='300' r='13' fill='%23fff2ed'/%3E%3Cpath d='M102 300l5 5 10-12' fill='none' stroke='%23ff5733' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='130' y='292' width='48' height='9' rx='5' fill='%23113f7a' opacity='.22'/%3E%3Crect x='130' y='307' width='34' height='7' rx='4' fill='%23365a73' opacity='.18'/%3E%3C/svg%3E" alt="Disclaimer notice PNG illustration" loading="eager" decoding="async">
+      <div class="float-mini fm-1"><i class="fas fa-file-lines"></i> Legal Notice</div>
+      <div class="float-mini fm-2"><i class="fas fa-check"></i> Clear Terms</div>
+    </div>
+  </div>
+</section>
+
+<main class="legal-section">
+  <div class="container legal-shell">
+    <aside class="side-panel reveal">
+      <div class="side-head">
+        <h3>Disclaimer Overview</h3>
+        <p>Important points about platform nature, refunds, task approval and responsibility.</p>
+      </div>
+      <nav class="side-list">
+        <a href="#income"><i class="fas fa-ban"></i> No Income Guarantee</a>
+        <a href="#availability"><i class="fas fa-clock"></i> Task Availability</a>
+        <a href="#responsibility"><i class="fas fa-user-shield"></i> User Responsibility</a>
+        <a href="#refund"><i class="fas fa-receipt"></i> Refund Access</a>
+        <a href="#accuracy"><i class="fas fa-bullseye"></i> Accuracy Approval</a>
+        <a href="#decision"><i class="fas fa-gavel"></i> Final Decision</a>
+      </nav>
+    </aside>
+
+    <div class="legal-content">
+      <section class="intro-card reveal">
+        <h2>Important Legal Notice</h2>
+        <p>By accessing and utilizing WorkDen, you acknowledge and agree to the following terms regarding the nature of our platform and services.</p>
+      </section>
+
+      <section class="disclaimer-card warning-card reveal" id="income">
+        <div class="disclaimer-icon"><span><i class="fas fa-ban"></i></span></div>
+        <div class="disclaimer-body">
+          <div class="warning-label"><i class="fas fa-circle-info"></i> Important Notice</div>
+          <h3>1. No Income Guarantee</h3>
+          <p>WorkDen is a digital task facilitation platform. We do not provide employment contracts, nor do we guarantee any fixed salary, monthly income, or continuous volume of work. Your earnings are performance-based and depend solely on the accuracy, quality, and completion of the tasks you choose to perform.</p>
+        </div>
+      </section>
+
+      <section class="disclaimer-card reveal" id="availability">
+        <div class="disclaimer-icon"><span><i class="fas fa-clock"></i></span></div>
+        <div class="disclaimer-body">
+          <h3>2. Task Availability</h3>
+          <p>All digital tasks are subject to project availability and client requirements. We do not promise a fixed number of tasks per day. The platform serves as a bridge between skilled users and task requirements.</p>
+        </div>
+      </section>
+
+      <section class="disclaimer-card reveal" id="responsibility">
+        <div class="disclaimer-icon"><span><i class="fas fa-user-shield"></i></span></div>
+        <div class="disclaimer-body">
+          <h3>3. User Responsibility</h3>
+          <p>The user is solely responsible for compliance with task guidelines and quality standards. WorkDen is not liable for user-side technical issues, device compatibility problems, browser errors, power cuts, or internet connectivity failures.</p>
+        </div>
+      </section>
+
+      <section class="disclaimer-card warning-card reveal" id="refund">
+        <div class="disclaimer-icon"><span><i class="fas fa-receipt"></i></span></div>
+        <div class="disclaimer-body">
+          <div class="warning-label"><i class="fas fa-circle-info"></i> Digital Access Disclaimer</div>
+          <h3>4. Refund & Digital Access Disclaimer</h3>
+          <p>WorkDen provides digital portal access, onboarding support, task guidelines, demo modules, training materials, and platform-related assistance. Once access, credentials, training, or onboarding service has been activated or shared, the service is considered delivered.</p>
+          <p>Because the service is digital in nature and access cannot be fully revoked after activation, payments are generally non-refundable except in cases such as duplicate payment, verified payment error, or failure to provide portal access after successful verification.</p>
+        </div>
+      </section>
+
+      <section class="disclaimer-card reveal">
+        <div class="disclaimer-icon"><span><i class="fas fa-circle-xmark"></i></span></div>
+        <div class="disclaimer-body">
+          <h3>5. No Refund for User-Side Reasons</h3>
+          <p>Refunds will not be applicable for change of mind, misunderstanding after activation, inability to complete tasks, low accuracy, rejected submissions due to guideline violations, inactivity, user-side device issues, or internet-related problems.</p>
+        </div>
+      </section>
+
+      <section class="disclaimer-card reveal" id="accuracy">
+        <div class="disclaimer-icon"><span><i class="fas fa-bullseye"></i></span></div>
+        <div class="disclaimer-body">
+          <h3>6. Accuracy & Approval</h3>
+          <p>Task approval depends on quality check, accuracy, manual typing compliance, and platform guidelines. Any copied, automated, AI-generated, third-party assisted, or incorrect submission may be rejected as per platform rules.</p>
+        </div>
+      </section>
+
+      <section class="disclaimer-card reveal" id="decision">
+        <div class="disclaimer-icon"><span><i class="fas fa-gavel"></i></span></div>
+        <div class="disclaimer-body">
+          <h3>7. Final Decision</h3>
+          <p>All refund requests, payment disputes, account reviews, and task-related decisions are reviewed by the WorkDen support team. The final decision will be based on payment records, access status, task activity, and platform policy.</p>
+        </div>
+      </section>
+
+      <section class="contact-card reveal">
+        <div>
+          <h3>Need Policy Help?</h3>
+          <p>For disclaimer, refund, task review, or account-related queries, contact the official WorkDen support desk.</p>
+        </div>
+        <div class="contact-badge"><i class="fas fa-headset"></i></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="content-sync.js?v=3.5"></script>
+<script>
+function runFragmentScripts(container){
+  const scripts = container.querySelectorAll('script');
+  scripts.forEach(oldScript => {
+    const script = document.createElement('script');
+    if(oldScript.src) script.src = oldScript.src;
+    script.textContent = oldScript.textContent;
+    document.body.appendChild(script);
+    oldScript.remove();
+  });
+}
+function loadFragment(id, file){
+  const el = document.getElementById(id);
+  if(!el) return Promise.resolve();
+  return fetch(file)
+    .then(response => {
+      if(!response.ok) throw new Error(file + ' not found');
+      return response.text();
+    })
+    .then(html => {
+      el.innerHTML = html;
+      runFragmentScripts(el);
+    })
+    .catch(error => {
+      console.error('Error loading ' + file + ':', error);
+    });
+}
+function initReveal(){
+  const items = document.querySelectorAll('.reveal');
+  items.forEach((el, i) => {
+    el.style.transitionDelay = Math.min(i * 65, 520) + 'ms';
+  });
+  if(!('IntersectionObserver' in window)){
+    items.forEach(el => el.classList.add('show'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
+  items.forEach(el => observer.observe(el));
+}
+Promise.all([
+  loadFragment('header-placeholder','header.html'),
+  loadFragment('footer-placeholder','footer.html')
+]).finally(() => {
+  document.body.classList.add('loaded');
+  initReveal();
+});
+</script>
+</body>
+</html>

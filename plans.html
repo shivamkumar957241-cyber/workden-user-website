@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plans – WorkDen Access Plans | WorkDen</title>
+<meta name="description" content="Choose WorkDen plans: Online Typing Work plan and Freelance Telecaller/Affiliate Marketer opportunity.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --navy:#02083f;
+  --blue:#113f7a;
+  --blue-soft:#f1f7ff;
+  --text:#365a73;
+  --muted:#6b8297;
+  --bg:#f3f5fb;
+  --white:#ffffff;
+  --orange:#ff5733;
+  --orange-dark:#e74725;
+  --green:#1f8d4d;
+  --border:#e8edf5;
+  --shadow:0 14px 36px rgba(13,34,63,.06);
+  --shadow-hover:0 26px 64px rgba(13,34,63,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;opacity:1}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+#header-placeholder{min-height:110px;background:#fff}
+#footer-placeholder{min-height:360px;background:#fff}
+.container{max-width:1240px;margin:0 auto;padding:0 22px}
+.btn{min-height:50px;padding:0 24px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:600;border:1px solid transparent;cursor:pointer;transition:transform .28s ease,box-shadow .28s ease,background .28s ease,border-color .28s ease,color .28s ease}
+.btn-orange{background:var(--orange);color:#fff;box-shadow:0 12px 25px rgba(255,87,51,.20)}
+.btn-orange:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 16px 34px rgba(255,87,51,.25)}
+.btn-outline{background:#fff;color:var(--blue);border-color:#cdd9e6}
+.btn-outline:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 12px 28px rgba(13,34,63,.08)}
+.page-hero{position:relative;overflow:hidden;background:#fff;padding:86px 0 72px;border-bottom:1px solid var(--border)}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 9% 14%,rgba(17,63,122,.08),transparent 31%),radial-gradient(circle at 91% 14%,rgba(255,87,51,.10),transparent 28%);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:54px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;background:var(--blue-soft);border:1px solid #d9e8fb;color:var(--blue);border-radius:50px;padding:9px 18px;font-size:13px;font-weight:600;margin-bottom:18px}
+.page-hero h1{font-size:48px;line-height:1.16;color:var(--navy);font-weight:650;letter-spacing:-.9px;margin-bottom:18px}
+.page-hero p{font-size:17px;color:var(--text);max-width:700px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.hero-visual{position:relative;min-height:360px;border-radius:18px;background:linear-gradient(135deg,#fff,#f7fbff);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:28px}
+.hero-visual::before{content:'';position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,87,51,.10);right:-70px;top:-70px}
+.hero-visual::after{content:'';position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(17,63,122,.08);left:-80px;bottom:-80px}
+.hero-visual img{position:relative;z-index:1;width:min(420px,100%);height:280px;object-fit:cover;border-radius:18px;border:1px solid rgba(232,237,245,.95);box-shadow:0 22px 36px rgba(13,34,63,.14);animation:floatY 5.4s ease-in-out infinite}
+.float-card{position:absolute;z-index:2;background:#fff;border:1px solid var(--border);box-shadow:0 14px 34px rgba(13,34,63,.10);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;color:var(--navy);font-size:13px;font-weight:600}
+.float-card i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#fff2ed;color:var(--orange)}
+.fc-1{left:22px;top:28px}.fc-2{right:22px;bottom:32px}.fc-3{left:38px;bottom:42px}
+.plans-section{padding:78px 0;background:var(--bg)}
+.section-head{max-width:820px;margin:0 auto 40px;text-align:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-size:13px;text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:10px}
+.title{font-size:36px;line-height:1.22;color:var(--navy);font-weight:600;letter-spacing:-.5px;margin-bottom:12px}
+.sub{font-size:16px;color:var(--text);max-width:780px;margin:0 auto}
+.pricing-toggle{display:flex;justify-content:center;margin:0 0 42px}
+.toggle-wrap{position:relative;display:inline-flex;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:6px;gap:6px}
+.toggle-btn{position:relative;z-index:1;min-height:46px;padding:0 22px;border:0;background:transparent;color:var(--muted);font-size:14px;font-weight:700;border-radius:8px;cursor:pointer;transition:color .25s ease,background .25s ease,transform .25s ease}
+.toggle-btn:hover{transform:translateY(-1px)}
+.toggle-btn.active{background:var(--blue);color:#fff;box-shadow:0 10px 24px rgba(17,63,122,.18)}
+.plan-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:34px;max-width:1080px;margin:0 auto;align-items:stretch}
+.plan-card{position:relative;width:calc(33.333% - 23px);min-width:315px;max-width:390px;background:#fff;border:1px solid rgba(231,237,245,.92);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:none;transition:opacity .34s ease,transform .42s cubic-bezier(.22,.61,.36,1),box-shadow .42s cubic-bezier(.22,.61,.36,1),border-color .38s ease}
+.plan-card::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--orange),#ff9c50);transform:scaleX(0);transform-origin:left;transition:transform .42s cubic-bezier(.22,.61,.36,1);z-index:4}
+.plan-card:hover{transform:translateY(-9px);box-shadow:var(--shadow-hover);border-color:#dde8f3}
+.plan-card:hover::before{transform:scaleX(1)}
+.plan-card.popular{box-shadow:0 18px 44px rgba(255,87,51,.10);border-color:#ffd8cd}
+.plan-art{position:relative;height:176px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#fbfdff,#f4f8ff);border-bottom:1px solid var(--border);overflow:hidden;padding:14px}
+.plan-art::after{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(17,63,122,.07);right:12px;bottom:-52px;pointer-events:none}
+.plan-art img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:13px;border:1px solid rgba(232,237,245,.95);box-shadow:0 16px 28px rgba(13,34,63,.11);transition:transform .42s cubic-bezier(.22,.61,.36,1)}
+.plan-card:hover .plan-art img{transform:translateY(-7px) scale(1.035)}
+.card-header{padding:24px 26px 20px;text-align:center;border-bottom:1px solid var(--border);background:#fff}
+.plan-pill{display:inline-flex;align-items:center;gap:7px;background:#fff2ed;color:var(--orange);border:1px solid #ffd9cf;border-radius:50px;padding:6px 12px;font-size:12px;font-weight:700;margin-bottom:14px}
+.card-plan-name{font-size:23px;line-height:1.32;font-weight:600;color:var(--navy);margin-bottom:12px}
+.card-price-row{display:flex;justify-content:center;align-items:baseline;margin-bottom:10px}
+.card-currency{font-size:22px;font-weight:700;color:var(--navy)}
+.card-amount,.card-free{font-size:44px;font-weight:700;color:var(--navy);line-height:1;letter-spacing:-1px}
+.card-free{font-size:36px;color:var(--green)}
+.card-period{font-size:13px;color:var(--muted);font-weight:600;margin-left:5px}
+.card-desc{font-size:14px;color:var(--text);line-height:1.7}
+.card-content{padding:24px 26px 26px;flex-grow:1;display:flex;flex-direction:column}
+.card-feat-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.card-feat-list{list-style:none;display:flex;flex-direction:column;gap:11px;flex-grow:1}
+.card-feat-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text);font-weight:500;line-height:1.55}
+.card-feat-list li i{color:var(--green);margin-top:4px}
+.card-refund-note{margin-top:20px;padding:13px 14px;background:#fff7ed;border:1px solid #ffe4c5;border-left:3px solid var(--orange);font-size:13px;color:#9a4b12;font-weight:600;border-radius:0 8px 8px 0;line-height:1.6}
+.card-details-btn{width:100%;min-height:48px;margin-top:20px;background:#f1f7ff;color:var(--blue);border:1px solid #d4e7fb;border-radius:6px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:transform .28s ease,box-shadow .28s ease,background .28s ease,color .28s ease,border-color .28s ease}
+.card-details-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue);transform:translateY(-2px);box-shadow:0 12px 28px rgba(17,63,122,.16)}
+.hide-plan{display:none!important}
+.value-section{padding:78px 0;background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+.value-mini{position:relative;background:#fff;border:1px solid var(--border);border-radius:12px;padding:30px 26px;text-align:left;box-shadow:none;overflow:hidden;transition:transform .38s cubic-bezier(.22,.61,.36,1),box-shadow .38s ease,border-color .38s ease}
+.value-mini::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(var(--orange),#ff9c50);transform:scaleY(0);transform-origin:top;transition:transform .42s ease}
+.value-mini:hover{transform:translateY(-7px);box-shadow:var(--shadow-hover);border-color:#dde8f3}
+.value-mini:hover::before{transform:scaleY(1)}
+.value-icon{width:54px;height:54px;border-radius:14px;background:#fff2ed;color:var(--orange);display:grid;place-items:center;font-size:21px;margin-bottom:16px}
+.value-mini strong{display:block;font-size:19px;color:var(--navy);margin-bottom:8px;font-weight:600}
+.value-mini span{display:block;font-size:14px;color:var(--text);line-height:1.75}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(2,8,63,.68);z-index:2000;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}
+.modal-overlay.active{display:flex;animation:fadeIn .2s ease both}
+.modal-box{background:#fff;width:90%;max-width:500px;border-radius:14px;position:relative;box-shadow:0 18px 54px rgba(0,0,0,.25);overflow:hidden}
+.pdf-modal-box{width:95%;max-width:1000px;height:85vh;display:flex;flex-direction:column}
+.pdf-modal-header{background:var(--navy);padding:15px 20px;display:flex;justify-content:space-between;align-items:center;color:#fff}
+.pdf-modal-header h4{margin:0;font-size:16px;display:flex;align-items:center;gap:10px}
+.pdf-close-btn{background:transparent;color:#fff;border:none;font-size:20px;cursor:pointer}
+.pdf-iframe-container{flex:1;background:#e0e7f0;position:relative}.pdf-iframe-container iframe{width:100%;height:100%;border:0;display:block}
+.video-modal-box{width:95%;max-width:980px;background:#fff;border-radius:14px;position:relative;box-shadow:0 18px 54px rgba(0,0,0,.25);overflow:hidden}
+.video-modal-header{background:var(--navy);padding:15px 20px;display:flex;justify-content:space-between;align-items:center;color:#fff}
+.video-modal-header h4{margin:0;font-size:16px;display:flex;align-items:center;gap:10px}
+.video-close-btn{background:transparent;color:#fff;border:none;font-size:20px;cursor:pointer}
+.video-iframe-container{background:#050b3f;position:relative;aspect-ratio:16/9;width:100%}
+.video-iframe-container iframe{width:100%;height:100%;border:0;display:block;background:#050b3f}
+.video-watch-note{padding:12px 18px;background:#f8fbff;border-top:1px solid var(--border);font-size:13px;color:var(--muted);line-height:1.6}
+.reveal,.reveal-card{opacity:0;transform:translate3d(0,28px,0);transition:opacity .78s cubic-bezier(.22,.61,.36,1),transform .78s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}.reveal.left{transform:translate3d(-42px,0,0)}.reveal.right{transform:translate3d(42px,0,0)}.show{opacity:1!important;transform:translate3d(0,0,0)!important}
+.plan-grid.switching .plan-card{animation:softPop .36s ease both}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes softPop{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:1050px){.hero-grid{grid-template-columns:1fr}.page-hero h1{font-size:40px}.value-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){#header-placeholder{min-height:76px}#footer-placeholder{min-height:520px}.page-hero{padding:58px 0}.page-hero h1{font-size:34px}.title{font-size:28px}.hero-visual{min-height:300px}.float-card{display:none}.plans-section,.value-section{padding:58px 0}.toggle-wrap{width:100%;display:grid;grid-template-columns:1fr}.toggle-btn{width:100%;padding:0 14px}.plan-card{width:100%;min-width:0;max-width:none}.value-grid{grid-template-columns:1fr;gap:22px}.btn{width:100%;max-width:340px}.pdf-modal-box{height:82vh}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.reveal,.reveal-card{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<header class="page-hero">
+  <div class="container hero-grid">
+    <div class="reveal left">
+      <span class="hero-badge"><i class="fas fa-crown"></i> WorkDen Plans</span>
+      <h1 data-content-id="pageHeroTitle">Choose Your WorkDen Access Plan</h1>
+      <p data-content-id="pageHeroDesc">Select an appropriate engagement model. Paid options are available for direct digital tasks, while zero-investment plans exist for affiliate operations.</p>
+      <div class="hero-actions">
+        <a href="#plans" class="btn btn-orange"><i class="fas fa-layer-group"></i> View Plans</a>
+        <a href="demo-task.html" class="btn btn-outline"><i class="fas fa-play"></i> Demo Module</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal right">
+      <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85&fm=png" alt="Real WorkDen office planning photo" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=900';">
+      <div class="float-card fc-1"><i class="fas fa-id-card"></i> ID access</div>
+      <div class="float-card fc-2"><i class="fas fa-headset"></i> Helpdesk</div>
+      <div class="float-card fc-3"><i class="fas fa-file-signature"></i> SOP based</div>
+    </div>
+  </div>
+</header>
+
+<section class="plans-section" id="plans">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker"><i class="fas fa-shield-alt"></i> Authorized Plans</span>
+      <h2 class="title" data-content-id="plansTitle">Available Authorized Plans</h2>
+      <p class="sub" data-content-id="plansSubtitle">Trusted by thousands of citizens across India. Transparent structure, strictly regulated.</p>
+    </div>
+
+    <div class="pricing-toggle reveal">
+      <div class="toggle-wrap" role="tablist" aria-label="Plan type toggle">
+        <button class="toggle-btn active" id="btnPaid" onclick="switchPlan('paid')" data-content-id="togglePaidBtn" type="button">₹999 Work Plan</button>
+        <button class="toggle-btn" id="btnFree" onclick="switchPlan('free')" data-content-id="toggleFreeBtn" type="button">Free Affiliate Plans</button>
+      </div>
+    </div>
+
+    <div class="plan-grid" id="planGrid">
+      <article class="plan-card popular reveal-card" id="card-paid-1">
+        <div class="plan-art"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=650&q=85&fm=png" alt="Real online typing work photo" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg?auto=compress&cs=tinysrgb&w=650';"></div>
+        <div class="card-header">
+          <span class="plan-pill"><i class="fas fa-star"></i> Direct Task Access</span>
+          <h3 class="card-plan-name" data-content-id="plan1Name">Online Typing Work</h3>
+          <div class="card-price-row"><span class="card-currency">₹</span><span class="card-amount" data-content-id="plan1Price">999</span><span class="card-period">/1 Year</span></div>
+          <p class="card-desc" data-content-id="plan1Desc">Task portal access including official training, ID card allocation, and priority desk support.</p>
+        </div>
+        <div class="card-content">
+          <h4 class="card-feat-title">Benefits Included:</h4>
+          <ul class="card-feat-list">
+            <li data-content-id="plan1Feat1"><i class="fas fa-check-circle"></i> Full Access to All Tasks</li>
+            <li data-content-id="plan1Feat2"><i class="fas fa-check-circle"></i> Professional VIP ID Card</li>
+            <li data-content-id="plan1Feat3"><i class="fas fa-check-circle"></i> Complete Training & SOPs</li>
+            <li data-content-id="plan1Feat4"><i class="fas fa-check-circle"></i> Live Priority Helpdesk Support</li>
+            <li data-content-id="plan1Feat5"><i class="fas fa-check-circle"></i> Structured Daily Allocation</li>
+            <li data-content-id="plan1Feat6"><i class="fas fa-check-circle"></i> Regulated Task Approval</li>
+            <li data-content-id="plan1Feat7"><i class="fas fa-check-circle"></i> Minimum Withdrawal: ₹500</li>
+            <li data-content-id="plan1Feat8"><i class="fas fa-check-circle"></i> Fair Evaluation Framework</li>
+          </ul>
+          <div class="card-refund-note" data-content-id="plan1RefundNote"><i class="fas fa-exclamation-triangle"></i> <strong>Official Notice:</strong> Refund is not applicable once the system ID is generated and activated. Read policies carefully.</div>
+          <button class="card-details-btn" onclick="showPdfModal(event, 'https://drive.google.com/file/d/1nAYqOYYaq018kneiectQn8J3GnrjCt_B/preview')" type="button"><i class="fas fa-file-pdf"></i> View Official Plan Details</button>
+        </div>
+      </article>
+
+      <article class="plan-card hide-plan reveal-card" id="card-free-1">
+        <div class="plan-art"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=650&q=85&fm=png" alt="Real freelance telecaller work photo" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/7709287/pexels-photo-7709287.jpeg?auto=compress&cs=tinysrgb&w=650';"></div>
+        <div class="card-header">
+          <span class="plan-pill"><i class="fas fa-phone-volume"></i> Calling Work</span>
+          <h3 class="card-plan-name" data-content-id="plan2Name">Freelance Telecaller</h3>
+          <div class="card-price-row"><span class="card-free" data-content-id="plan2Price">Free Access</span></div>
+          <p class="card-desc" data-content-id="plan2Desc">Facilitate platform awareness through authorized calling and follow-up procedures. Zero fee setup.</p>
+        </div>
+        <div class="card-content">
+          <h4 class="card-feat-title">Benefits Included:</h4>
+          <ul class="card-feat-list">
+            <li data-content-id="plan2Feat1"><i class="fas fa-check-circle"></i> Free Registration — ₹0</li>
+            <li data-content-id="plan2Feat2"><i class="fas fa-check-circle"></i> Remote Telecalling Work</li>
+            <li data-content-id="plan2Feat3"><i class="fas fa-check-circle"></i> Affiliate Tracking Support</li>
+            <li data-content-id="plan2Feat4"><i class="fas fa-check-circle"></i> Basic Operational Training</li>
+            <li data-content-id="plan2Feat5"><i class="fas fa-check-circle"></i> Unrestricted Operating Hours</li>
+            <li data-content-id="plan2Feat6"><i class="fas fa-check-circle"></i> Performance-Based Incentives</li>
+            <li data-content-id="plan2Feat7"><i class="fas fa-check-circle"></i> Weekly Bank/UPI Payouts</li>
+            <li data-content-id="plan2Feat8"><i class="fas fa-check-circle"></i> Official Community Access</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="plan-card hide-plan reveal-card" id="card-free-2">
+        <div class="plan-art"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=650&q=85&fm=png" alt="Real affiliate marketing dashboard photo" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=650';"></div>
+        <div class="card-header">
+          <span class="plan-pill"><i class="fas fa-bullhorn"></i> Promotion Work</span>
+          <h3 class="card-plan-name" data-content-id="plan3Name">Affiliate Marketer</h3>
+          <div class="card-price-row"><span class="card-free" data-content-id="plan3Price">Free Access</span></div>
+          <p class="card-desc" data-content-id="plan3Desc">Promote portal services independently. Generate commission on every verified referral completion.</p>
+        </div>
+        <div class="card-content">
+          <h4 class="card-feat-title">Benefits Included:</h4>
+          <ul class="card-feat-list">
+            <li data-content-id="plan3Feat1"><i class="fas fa-check-circle"></i> Flat Commission Per Conversion</li>
+            <li data-content-id="plan3Feat2"><i class="fas fa-check-circle"></i> Official Affiliate Dashboard</li>
+            <li data-content-id="plan3Feat3"><i class="fas fa-check-circle"></i> Verified Marketing Collaterals</li>
+            <li data-content-id="plan3Feat4"><i class="fas fa-check-circle"></i> Compliance-Approved Tools</li>
+            <li data-content-id="plan3Feat5"><i class="fas fa-check-circle"></i> No Mandatory Target Quotas</li>
+            <li data-content-id="plan3Feat6"><i class="fas fa-check-circle"></i> Independent Remote Setup</li>
+            <li data-content-id="plan3Feat7"><i class="fas fa-check-circle"></i> Transparent Accounting</li>
+            <li data-content-id="plan3Feat8"><i class="fas fa-check-circle"></i> Designated B2B Support</li>
+          </ul>
+          <button class="card-details-btn" onclick="showAffiliateVideoModal(event, 'https://drive.google.com/file/d/14s-ZR3TRO-CEdu2AUAsQy_8fCo1gbzdo/preview')" type="button"><i class="fas fa-circle-play"></i> Watch Detailed Video</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="value-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker"><i class="fas fa-award"></i> WorkDen Framework</span>
+      <h2 class="title" data-content-id="valueTitle">Why Choose WorkDen Engagement Plans?</h2>
+      <p class="sub" data-content-id="valueDesc">Every module is structured transparently to ensure compliance, proper training, and reliable remuneration mechanics.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-mini reveal-card"><div class="value-icon"><i class="fas fa-layer-group"></i></div><strong data-content-id="value1Title">Structured Framework</strong><span data-content-id="value1Desc">Portals, task lists, helpdesk, and training manuals follow standard operating procedures.</span></div>
+      <div class="value-mini reveal-card"><div class="value-icon"><i class="fas fa-file-signature"></i></div><strong data-content-id="value2Title">Verified Registration</strong><span data-content-id="value2Desc">Platform operates securely under valid GSTIN and MSME documentation frameworks.</span></div>
+      <div class="value-mini reveal-card"><div class="value-icon"><i class="fas fa-headset"></i></div><strong data-content-id="value3Title">Guided Support</strong><span data-content-id="value3Desc">Active assistance protocols ensure all citizens understand tasks prior to submission.</span></div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<div class="modal-overlay" id="pdfModal" onclick="closePdfModal(event)">
+  <div class="modal-box pdf-modal-box">
+    <div class="pdf-modal-header"><h4><i class="fas fa-file-pdf" style="color:#ffcccc"></i> Official Document Viewer</h4><button class="pdf-close-btn" onclick="closePdfModal(null)" type="button"><i class="fas fa-times"></i></button></div>
+    <div class="pdf-iframe-container"><iframe id="pdfIframe" src="" allow="autoplay"></iframe></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="affiliateVideoModal" onclick="closeAffiliateVideoModal(event)">
+  <div class="video-modal-box">
+    <div class="video-modal-header"><h4><i class="fas fa-circle-play" style="color:#ffcccc"></i> Affiliate Marketer Detailed Video</h4><button class="video-close-btn" onclick="closeAffiliateVideoModal(null)" type="button"><i class="fas fa-times"></i></button></div>
+    <div class="video-iframe-container"><iframe id="affiliateVideoIframe" src="" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <div class="video-watch-note"><i class="fas fa-shield-alt"></i> Video website ke andar hi open hota hai. Close karne ke liye top right cross button use karein.</div>
+  </div>
+</div>
+
+<script src="content-sync.js?v=3.5"></script>
+<script>
+  function runFragmentScripts(container){
+    const scripts = container.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      const s = document.createElement('script');
+      if(oldScript.src) s.src = oldScript.src;
+      s.textContent = oldScript.textContent;
+      document.body.appendChild(s);
+      oldScript.remove();
+    });
+  }
+  function loadFragment(id, file){
+    const el = document.getElementById(id);
+    if(!el) return Promise.resolve();
+    return fetch(file).then(r => {
+      if(!r.ok) throw new Error(file + ' not found');
+      return r.text();
+    }).then(html => {
+      el.innerHTML = html;
+      runFragmentScripts(el);
+    }).catch(err => console.error('Error loading ' + file + ':', err));
+  }
+  function showPdfModal(e, pdfUrl){
+    if(e) e.preventDefault();
+    const modal = document.getElementById('pdfModal');
+    const frame = document.getElementById('pdfIframe');
+    if(modal && frame){ modal.classList.add('active'); frame.src = pdfUrl; }
+  }
+  function closePdfModal(e){
+    const modal = document.getElementById('pdfModal');
+    if(e && e.target !== modal) return;
+    const frame = document.getElementById('pdfIframe');
+    if(modal) modal.classList.remove('active');
+    if(frame) frame.src = '';
+  }
+  function showAffiliateVideoModal(e, videoUrl){
+    if(e) e.preventDefault();
+    const modal = document.getElementById('affiliateVideoModal');
+    const frame = document.getElementById('affiliateVideoIframe');
+    if(modal && frame){
+      modal.classList.add('active');
+      frame.src = videoUrl;
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  function closeAffiliateVideoModal(e){
+    const modal = document.getElementById('affiliateVideoModal');
+    if(e && e.target !== modal) return;
+    const frame = document.getElementById('affiliateVideoIframe');
+    if(modal) modal.classList.remove('active');
+    if(frame) frame.src = '';
+    document.body.style.overflow = '';
+  }
+  function switchPlan(type){
+    const btnPaid = document.getElementById('btnPaid');
+    const btnFree = document.getElementById('btnFree');
+    const cardPaid1 = document.getElementById('card-paid-1');
+    const cardFree1 = document.getElementById('card-free-1');
+    const cardFree2 = document.getElementById('card-free-2');
+    const grid = document.getElementById('planGrid');
+    if(!btnPaid || !btnFree || !cardPaid1 || !cardFree1 || !cardFree2) return;
+    if(type === 'paid'){
+      btnPaid.classList.add('active'); btnFree.classList.remove('active');
+      cardPaid1.classList.remove('hide-plan'); cardFree1.classList.add('hide-plan'); cardFree2.classList.add('hide-plan');
+    }else{
+      btnFree.classList.add('active'); btnPaid.classList.remove('active');
+      cardPaid1.classList.add('hide-plan'); cardFree1.classList.remove('hide-plan'); cardFree2.classList.remove('hide-plan');
+    }
+    if(grid){
+      grid.classList.remove('switching');
+      void grid.offsetWidth;
+      grid.classList.add('switching');
+      setTimeout(() => grid.classList.remove('switching'), 420);
+    }
+  }
+  function initReveal(){
+    const items = document.querySelectorAll('.reveal, .reveal-card');
+    items.forEach((el, i) => {
+      const isCard = el.classList.contains('reveal-card');
+      el.style.transitionDelay = isCard ? Math.min(i * 90, 540) + 'ms' : Math.min(i * 70, 260) + 'ms';
+    });
+    if(!('IntersectionObserver' in window)){
+      items.forEach(el => el.classList.add('show'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.13, rootMargin:'0px 0px -60px 0px'});
+    items.forEach(el => obs.observe(el));
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      closePdfModal(null);
+      closeAffiliateVideoModal(null);
+    }
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    switchPlan('paid');
+    Promise.all([
+      loadFragment('header-placeholder','header.html'),
+      loadFragment('footer-placeholder','footer.html')
+    ]).finally(initReveal);
+  });
+</script>
+</body>
+</html>

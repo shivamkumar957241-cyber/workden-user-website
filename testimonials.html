@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials – WorkDen | Official Platform</title>
+<meta name="description" content="Read reviews and watch testimonials from verified WorkDen users across India.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --navy:#02083f;--blue:#113f7a;--text:#365a73;--muted:#6b8297;--bg:#f3f5fb;--white:#ffffff;
+  --orange:#ff5733;--orange-dark:#e74725;--green:#1f8d4d;--border:#e8edf5;
+  --shadow:0 14px 36px rgba(13,34,63,.06);--shadow-hover:0 26px 64px rgba(13,34,63,.13);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;opacity:0;transition:opacity .35s ease}
+body.loaded{opacity:1}
+a{text-decoration:none;color:inherit}
+#header-placeholder{min-height:110px;background:#fff}
+#footer-placeholder{min-height:360px;background:#fff}
+.container{max-width:1240px;margin:0 auto;padding:0 22px}
+.btn{min-height:50px;padding:0 24px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:transform .28s ease,box-shadow .28s ease,background .28s ease}
+.btn-orange{background:var(--orange);color:#fff;box-shadow:0 12px 25px rgba(255,87,51,.20)}
+.btn-orange:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 16px 34px rgba(255,87,51,.25)}
+.page-hero{position:relative;overflow:hidden;background:#fff;padding:90px 0 76px;border-bottom:1px solid var(--border)}
+.page-hero:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 8% 16%,rgba(17,63,122,.08),transparent 31%),radial-gradient(circle at 92% 18%,rgba(255,87,51,.10),transparent 28%);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+.hero-badge,.section-kicker{display:inline-flex;align-items:center;gap:9px;background:#f1f7ff;border:1px solid #d9e8fb;color:var(--blue);border-radius:50px;padding:9px 18px;font-size:13px;font-weight:600;margin-bottom:18px}
+.page-hero h1{font-size:50px;line-height:1.15;color:var(--navy);font-weight:650;letter-spacing:-.9px;margin-bottom:18px}
+.page-hero p{font-size:17px;color:var(--text);max-width:680px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.hero-panel{position:relative;min-height:370px;border-radius:18px;background:linear-gradient(135deg,#fff,#f7fbff);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;padding:28px;display:grid;place-items:center}
+.hero-panel:before{content:'';position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,87,51,.10);right:-70px;top:-70px}
+.hero-panel:after{content:'';position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(17,63,122,.08);left:-80px;bottom:-80px}
+.hero-preview{position:relative;z-index:2;width:min(430px,100%);display:grid;gap:14px;animation:floatY 5.5s ease-in-out infinite}
+.mini-review{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 14px 34px rgba(13,34,63,.09);padding:16px;display:flex;gap:13px;align-items:center}
+.mini-review:nth-child(2){margin-left:42px}
+.mini-review:nth-child(3){margin-right:42px}
+.mini-avatar{width:48px;height:48px;border-radius:50%;background:#f1f7ff;color:var(--blue);display:grid;place-items:center;font-weight:700;flex:none}
+.mini-review strong{display:block;color:var(--navy);font-size:14px}
+.mini-review small{color:var(--muted);font-weight:500}
+.section{padding:78px 0;background:var(--bg)}
+.section.white{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-head{max-width:790px;margin:0 auto 44px;text-align:center}
+.section-kicker{background:#fff2ed;border-color:#ffd7c9;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;font-weight:700}
+.section-title{font-size:36px;line-height:1.22;color:var(--navy);font-weight:600;letter-spacing:-.5px;margin-bottom:12px}
+.section-sub{font-size:16px;color:var(--text);max-width:760px;margin:0 auto}
+.video-strip{position:relative;overflow:hidden;padding:12px 0}
+.video-strip:before,.video-strip:after{content:'';position:absolute;top:0;bottom:0;width:95px;z-index:4;pointer-events:none}
+.video-strip:before{left:0;background:linear-gradient(90deg,#fff,rgba(255,255,255,0))}
+.video-strip:after{right:0;background:linear-gradient(270deg,#fff,rgba(255,255,255,0))}
+.video-track{display:flex;gap:24px;width:max-content;animation:videoRight 45s linear infinite;will-change:transform}
+.video-track:hover{animation-play-state:paused}
+.video-card{width:346px;flex:0 0 auto;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:transform .34s cubic-bezier(.22,.61,.36,1),box-shadow .34s ease,border-color .34s ease}
+.video-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-hover);border-color:#dbe7f5}
+.video-frame{height:205px;background:#eef4fb;position:relative;overflow:hidden}
+.video-frame:before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(2,8,63,.05),rgba(255,87,51,.06));pointer-events:none;z-index:1}
+.video-frame iframe{position:relative;z-index:2;width:100%;height:100%;display:block;border:0}
+.video-info{display:flex;align-items:center;gap:12px;padding:15px 17px;background:#fbfdff;border-top:1px solid var(--border)}
+.video-avatar,.photo-avatar,.w-avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-weight:700;font-size:13px;flex:none}
+.video-info strong,.photo-info strong{display:block;color:var(--navy);font-size:14px}
+.video-info small,.photo-info small{display:block;color:var(--muted);font-size:12px;font-weight:500}
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.photo-card{background:#fff;border:1px solid rgba(231,237,245,.95);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .38s cubic-bezier(.22,.61,.36,1),box-shadow .38s ease,border-color .38s ease}
+.photo-card:hover{transform:translateY(-9px);box-shadow:var(--shadow-hover);border-color:#dbe7f5}
+.photo-wrap{height:255px;background:#edf3fa;position:relative;overflow:hidden}
+.photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);transition:transform .55s cubic-bezier(.22,.61,.36,1),filter .4s ease}
+.photo-card:hover .photo-wrap img{transform:scale(1.07);filter:saturate(1.05) contrast(1.03)}
+.zoom-chip{position:absolute;right:13px;top:13px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(2,8,63,.82);color:#fff;opacity:0;transform:translateY(-8px);transition:.28s ease}
+.photo-card:hover .zoom-chip{opacity:1;transform:translateY(0)}
+.photo-info{display:flex;align-items:center;gap:12px;padding:15px 16px;background:#fff;border-top:1px solid var(--border)}
+.written-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.w-card{position:relative;background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:var(--shadow);overflow:hidden;transition:transform .38s cubic-bezier(.22,.61,.36,1),box-shadow .38s ease,border-color .38s ease}
+.w-card:before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--orange),#ff9c50);transform:scaleX(0);transform-origin:left;transition:.4s ease}
+.w-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover);border-color:#dbe7f5}
+.w-card:hover:before{transform:scaleX(1)}
+.w-stars{color:var(--orange);font-size:14px;margin-bottom:14px}
+.w-text{font-size:15px;line-height:1.82;color:var(--text);margin-bottom:20px}
+.w-author{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px dashed var(--border)}
+.w-name{font-size:14px;font-weight:700;color:var(--navy)}
+.w-city{font-size:12px;color:var(--muted);font-weight:500}
+
+.earners-section{background:linear-gradient(180deg,#f3f5fb 0%,#eef3f9 100%)}
+.earners-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.earner-card{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;transition:transform .38s cubic-bezier(.22,.61,.36,1),box-shadow .38s ease,border-color .38s ease}
+.earner-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-color:#dbe7f5}
+.earner-card-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 24px;background:linear-gradient(135deg,#ffffff,#f7fbff);border-bottom:1px solid var(--border)}
+.earner-card-head h3{font-size:22px;color:var(--navy);line-height:1.25;font-weight:650;margin-top:3px}
+.earner-label{display:inline-block;font-size:12px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px}
+.earner-pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:#fff2ed;color:var(--orange);border:1px solid #ffd7c9;border-radius:50px;padding:8px 13px;font-size:12px;font-weight:700}
+.earner-pill.soft{background:#f1f7ff;color:var(--blue);border-color:#d9e8fb}
+.earner-table-wrap{width:100%;overflow:auto;-webkit-overflow-scrolling:touch}
+.earner-table{width:100%;border-collapse:separate;border-spacing:0;min-width:560px}
+.earner-table th{background:#fbfdff;color:var(--navy);font-size:12px;text-transform:uppercase;letter-spacing:.55px;text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);white-space:nowrap}
+.earner-table td{padding:15px 18px;border-bottom:1px solid var(--border);font-size:14px;color:var(--text);vertical-align:middle}
+.earner-table tbody tr:last-child td{border-bottom:0}
+.earner-table tbody tr{transition:background .25s ease}
+.earner-table tbody tr:hover{background:#f8fbff}
+.rank-badge{display:inline-flex;align-items:center;justify-content:center;min-width:58px;padding:7px 10px;border-radius:999px;background:#eef4fb;color:var(--blue);font-size:13px;font-weight:800;white-space:nowrap}
+.rank-gold{background:linear-gradient(135deg,#fff5cc,#ffd76a);color:#7a4a00}
+.rank-silver{background:linear-gradient(135deg,#f3f6fb,#cfd8e8);color:#314057}
+.rank-bronze{background:linear-gradient(135deg,#fff0e3,#d99a5f);color:#673700}
+.amount{font-weight:800;color:var(--green)!important;white-space:nowrap}
+.old-earners-card{margin-top:8px}
+.old-note{margin:20px 24px 0;background:#f1f7ff;border:1px solid #d9e8fb;color:var(--blue);border-radius:12px;padding:12px 15px;font-size:13px;font-weight:600}
+.old-note i{margin-right:8px}
+.old-table-wrap{max-height:680px;overflow:auto;border-top:1px solid var(--border);margin-top:20px}
+.old-table-wrap thead th{position:sticky;top:0;z-index:3}
+@media(max-width:980px){.earners-layout{grid-template-columns:1fr}.old-table-wrap{max-height:none}}
+@media(max-width:640px){
+  .earner-card-head{align-items:flex-start;flex-direction:column;padding:20px}
+  .earner-pill{white-space:normal}
+  .earner-table{min-width:0;border-spacing:0}
+  .earner-table thead{display:none}
+  .earner-table tr{display:block;padding:12px 16px;border-bottom:1px solid var(--border)}
+  .earner-table td{display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:0;padding:7px 0;text-align:right;font-size:14px}
+  .earner-table td::before{content:attr(data-label);font-weight:700;color:var(--navy);text-align:left}
+  .rank-badge{min-width:auto}
+  .old-note{margin:16px 16px 0}
+}
+
+.trust-summary{position:relative;overflow:hidden;margin-top:54px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:48px 34px;text-align:center;border-radius:16px;box-shadow:0 18px 44px rgba(2,8,63,.16)}
+.trust-summary:before{content:'';position:absolute;right:-70px;top:-90px;width:230px;height:230px;border-radius:50%;background:rgba(255,87,51,.18)}
+.ts-stars,.ts-heading,.ts-sub,.trust-summary .btn{position:relative}
+.ts-stars{color:#ffd56a;font-size:22px;letter-spacing:3px;margin-bottom:10px}
+.ts-heading{font-size:30px;line-height:1.3;margin-bottom:10px;font-weight:650}
+.ts-sub{color:#dce8ff;margin-bottom:26px}
+.lightbox-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(2,8,24,.92);align-items:center;justify-content:center;padding:22px}
+.lightbox-overlay.active{display:flex;animation:fadeIn .22s ease}
+.lightbox-img-wrap{max-width:92vw;max-height:92vh;text-align:center}
+.lightbox-img-wrap img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:12px;display:block;border:2px solid rgba(255,255,255,.82);box-shadow:0 24px 70px rgba(0,0,0,.4);margin:0 auto}
+.lightbox-close{position:fixed;top:22px;right:24px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.6);color:#fff;width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer;display:grid;place-items:center;transition:.25s ease}
+.lightbox-close:hover{background:#fff;color:#111}
+.lightbox-name{color:#fff;margin-top:16px;font-size:18px;font-weight:700}
+.lightbox-city{color:#ccd5e3;font-size:14px;margin-top:4px}
+.reveal,.reveal-card{opacity:0;transform:translate3d(0,28px,0);transition:opacity .78s cubic-bezier(.22,.61,.36,1),transform .78s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.reveal.left{transform:translate3d(-42px,0,0)}.reveal.right{transform:translate3d(42px,0,0)}.show{opacity:1!important;transform:translate3d(0,0,0)!important}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes videoRight{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:1050px){.hero-grid{grid-template-columns:1fr}.photo-grid{grid-template-columns:repeat(3,1fr)}.page-hero h1{font-size:40px}}
+@media(max-width:850px){.photo-grid,.written-grid{grid-template-columns:repeat(2,1fr)}.video-card{width:310px}}
+@media(max-width:720px){#header-placeholder{min-height:76px}#footer-placeholder{min-height:520px}.page-hero{padding:58px 0}.page-hero h1{font-size:34px}.section-title{font-size:28px}.section{padding:58px 0}.hero-panel{min-height:310px}.mini-review:nth-child(n){margin:0}.photo-grid,.written-grid{grid-template-columns:1fr}.photo-wrap{height:300px}.trust-summary{padding:40px 20px}.ts-heading{font-size:24px}.btn{width:100%;max-width:340px}}
+@media(max-width:640px){.video-strip{padding:8px 0;overflow:hidden}.video-strip:before,.video-strip:after{width:42px}.video-track{gap:16px;animation-duration:28s;transform:translate3d(-50%,0,0);backface-visibility:hidden}.video-card{width:82vw;max-width:310px}.video-frame{height:184px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.reveal,.reveal-card{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div class="reveal left">
+      <span class="hero-badge"><i class="fas fa-star"></i> Testimonials</span>
+      <h1 data-content-id="pageHeroTitle">Real People. Real Experiences.</h1>
+      <p data-content-id="pageHeroDesc">Hear from actual citizens who work through the verified WorkDen platform every day across India.</p>
+      <div class="hero-actions"><a href="demo-task.html" class="btn btn-orange"><i class="fas fa-play"></i> Initiate Free Demo Task</a></div>
+    </div>
+    <div class="hero-panel reveal right">
+      <div class="hero-preview">
+        <div class="mini-review"><span class="mini-avatar">RS</span><div><strong>Video reviews</strong><small>Smooth moving testimonial row</small></div></div>
+        <div class="mini-review"><span class="mini-avatar">WD</span><div><strong>User screenshots</strong><small>Clean photo cards with lightbox</small></div></div>
+        <div class="mini-review"><span class="mini-avatar">5★</span><div><strong>Written feedback</strong><small>Structured review cards</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section white">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-kicker"><i class="fas fa-video"></i> Verified Video Reviews</span>
+      <h2 class="section-title">Video Testimonials</h2>
+      <p class="section-sub">Watch real video feedback from WorkDen users sharing their experience with tasks, support, and platform workflow.</p>
+    </div>
+  </div>
+  <div class="video-strip reveal">
+    <div class="video-track">
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1TfgX3JHS3dr-aoNM6MfVNFzdTiqe4zDy/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">RS</span><div><strong>Rahul Sharma</strong><small>Delhi, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1WOQP62KcC0EeVufQl4mCDrKK-K7cxNT3/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">AV</span><div><strong>Aman Verma</strong><small>Mumbai, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1H8ziVfY7GlJMd5SQ3nTwVhNhWx2p2czl/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">VG</span><div><strong>Vikas Gupta</strong><small>Bangalore, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1uSjJiSWYrCn3FMXpJSXpfl4n3Hk3PNch/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">PS</span><div><strong>Shivam Singh</strong><small>Lucknow, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1gCnbQb8TZetJpcCaXn2i6_r8Jp-_9ciL/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">AP</span><div><strong>Amit Patel</strong><small>Ahmedabad, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1TfgX3JHS3dr-aoNM6MfVNFzdTiqe4zDy/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">RS</span><div><strong>Rahul Sharma</strong><small>Delhi, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1WOQP62KcC0EeVufQl4mCDrKK-K7cxNT3/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">AV</span><div><strong>Aman Verma</strong><small>Mumbai, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1H8ziVfY7GlJMd5SQ3nTwVhNhWx2p2czl/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">VG</span><div><strong>Vikas Gupta</strong><small>Bangalore, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1uSjJiSWYrCn3FMXpJSXpfl4n3Hk3PNch/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">PS</span><div><strong>Shivam Singh</strong><small>Lucknow, India</small></div></div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><iframe src="https://drive.google.com/file/d/1gCnbQb8TZetJpcCaXn2i6_r8Jp-_9ciL/preview" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>
+        <div class="video-info"><span class="video-avatar">AP</span><div><strong>Amit Patel</strong><small>Ahmedabad, India</small></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-kicker"><i class="fas fa-images"></i> Official User Screenshots</span>
+      <h2 class="section-title">Photo Testimonials</h2>
+      <p class="section-sub">Real payment screenshots shared by WorkDen users after successful task approval and payout.</p>
+    </div>
+    <div class="photo-grid">
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP&sz=w1200','Aarav Sharma','Delhi, India')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP" alt="Testimonial 1" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">AS</span>
+          <div><strong>Aarav Sharma</strong><small>Delhi, India</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY&sz=w1200','Pooja Patel','Ahmedabad, Gujarat')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY" alt="Testimonial 2" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">PP</span>
+          <div><strong>Pooja Patel</strong><small>Ahmedabad, Gujarat</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas&sz=w1200','Ravi Kumar','Hyderabad, Telangana')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas" alt="Testimonial 3" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">RK</span>
+          <div><strong>Ravi Kumar</strong><small>Hyderabad, Telangana</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8&sz=w1200','Sneha Joshi','Pune, Maharashtra')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8" alt="Testimonial 4" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">SJ</span>
+          <div><strong>Sneha Joshi</strong><small>Pune, Maharashtra</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1Dp7HowTJWav60reJoNy5aBVoehecO6oJ&sz=w1200','Mohit Yadav','Lucknow, UP')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1Dp7HowTJWav60reJoNy5aBVoehecO6oJ&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1Dp7HowTJWav60reJoNy5aBVoehecO6oJ" alt="Testimonial 5" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">MY</span>
+          <div><strong>Mohit Yadav</strong><small>Lucknow, UP</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY&sz=w1200','Divya Mishra','Bhopal, MP')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY" alt="Testimonial 6" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">DM</span>
+          <div><strong>Divya Mishra</strong><small>Bhopal, MP</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp&sz=w1200','Suresh Reddy','Chennai, Tamil Nadu')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp" alt="Testimonial 7" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">SR</span>
+          <div><strong>Suresh Reddy</strong><small>Chennai, Tamil Nadu</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL&sz=w1200','Rohan Verma','Lucknow, UP')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL" alt="Testimonial 8" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">RV</span>
+          <div><strong>Rohan Verma</strong><small>Lucknow, UP</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth&sz=w1200','Priya Sharma','Indore, MP')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth" alt="Testimonial 9" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">PS</span>
+          <div><strong>Priya Sharma</strong><small>Indore, MP</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1gaDk9evdh01Hsv2209gdjDMbsA1mTto0&sz=w1200','Kavya Singh','Jaipur, Rajasthan')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1gaDk9evdh01Hsv2209gdjDMbsA1mTto0&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1gaDk9evdh01Hsv2209gdjDMbsA1mTto0" alt="Testimonial 10" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">KS</span>
+          <div><strong>Kavya Singh</strong><small>Jaipur, Rajasthan</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs&sz=w1200','Aman Raj','Patna, Bihar')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs" alt="Testimonial 11" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">AR</span>
+          <div><strong>Aman Raj</strong><small>Patna, Bihar</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM&sz=w1200','Sneha Kapoor','Chandigarh, Punjab')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM" alt="Testimonial 12" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">SK</span>
+          <div><strong>Sneha Kapoor</strong><small>Chandigarh, Punjab</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=132aft4symoWWwKJHEfoE9hpHL87rsRic&sz=w1200','Rahul Meena','Kota, Rajasthan')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=132aft4symoWWwKJHEfoE9hpHL87rsRic&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/132aft4symoWWwKJHEfoE9hpHL87rsRic" alt="Testimonial 13" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">RM</span>
+          <div><strong>Rahul Meena</strong><small>Kota, Rajasthan</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee&sz=w1200','Neha Yadav','Bhopal, MP')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee" alt="Testimonial 14" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">NY</span>
+          <div><strong>Neha Yadav</strong><small>Bhopal, MP</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z&sz=w1200','Arjun Patel','Surat, Gujarat')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z" alt="Testimonial 15" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">AP</span>
+          <div><strong>Arjun Patel</strong><small>Surat, Gujarat</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK&sz=w1200','Pooja Malhotra','Delhi, India')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK" alt="Testimonial 16" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">PM</span>
+          <div><strong>Pooja Malhotra</strong><small>Delhi, India</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V&sz=w1200','Sahanawaz','Kota, Rajasthan')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V" alt="Testimonial 17" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">S</span>
+          <div><strong>Sahanawaz</strong><small>Kota, Rajasthan</small></div>
+        </div>
+      </article>
+      <article class="photo-card reveal-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa&sz=w1200','Umesh Nagar','Kota, Rajasthan')">
+        <div class="photo-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa" alt="Testimonial 18" loading="lazy">
+          <span class="zoom-chip"><i class="fas fa-magnifying-glass-plus"></i></span>
+        </div>
+        <div class="photo-info">
+          <span class="photo-avatar">UN</span>
+          <div><strong>Umesh Nagar</strong><small>Kota, Rajasthan</small></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section white">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-kicker"><i class="fas fa-comment-dots"></i> Documented Feedback</span>
+      <h2 class="section-title">Written Reviews</h2>
+      <p class="section-sub">Genuine user reviews shared by WorkDen members about their digital task experience.</p>
+    </div>
+    <div class="written-grid">
+      <article class="w-card reveal-card"><div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="w-text">“The portal interface is simple and structured. Task tracking and submission workflow is very easy to understand even as a first-timer.”</p><div class="w-author"><div class="w-avatar">RS</div><div><div class="w-name">Rohit Sharma</div><div class="w-city">Delhi, India</div></div></div></article>
+      <article class="w-card reveal-card"><div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="w-text">“Projects are clearly defined with detailed submission instructions. Very easy to manage remote digital work from home on this platform.”</p><div class="w-author"><div class="w-avatar">NV</div><div><div class="w-name">Neha Verma</div><div class="w-city">Mumbai, India</div></div></div></article>
+      <article class="w-card reveal-card"><div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="w-text">“Dashboard gives a clear overview of all tasks. Managing assignments is very convenient. The GSTIN verification gave me confidence.”</p><div class="w-author"><div class="w-avatar">AS</div><div><div class="w-name">Ankit Singh</div><div class="w-city">Bangalore, India</div></div></div></article>
+      <article class="w-card reveal-card"><div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="w-text">“I was sceptical at first but the free demo convinced me completely. Everything is transparent and support team responds quickly.”</p><div class="w-author"><div class="w-avatar">PK</div><div><div class="w-name">Priya Kumari</div><div class="w-city">Patna, Bihar</div></div></div></article>
+      <article class="w-card reveal-card"><div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="w-text">“As a housewife, WorkDen is perfect. I work from home, manage my family, and still complete simple structured tasks.”</p><div class="w-author"><div class="w-avatar">SM</div><div><div class="w-name">Sunita Mishra</div><div class="w-city">Lucknow, UP</div></div></div></article>
+      <article class="w-card reveal-card"><div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="w-text">“Being a college student I needed something flexible. WorkDen fits around my class schedule perfectly. Payment structure is very clear.”</p><div class="w-author"><div class="w-avatar">AY</div><div><div class="w-name">Ayush Yadav</div><div class="w-city">Jaipur, Rajasthan</div></div></div></article>
+    </div>
+
+    <div class="trust-summary reveal">
+      <div class="ts-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <div class="ts-heading">Trusted by 1,34,000+ Citizens</div>
+      <div class="ts-sub">Operating across India since 2024 · Verified GSTIN & MSME Record</div>
+      <a href="demo-task.html" class="btn btn-orange"><i class="fas fa-play"></i> Initiate Free Demo Task</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close image"><i class="fas fa-times"></i></button>
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt="Testimonial">
+    <div class="lightbox-name" id="lightboxName"></div>
+    <div class="lightbox-city" id="lightboxCity"></div>
+  </div>
+</div>
+
+<script src="content-sync.js?v=3.5"></script>
+<script>
+function runFragmentScripts(container){
+  const scripts = container.querySelectorAll('script');
+  scripts.forEach(oldScript => {
+    const s = document.createElement('script');
+    if(oldScript.src) s.src = oldScript.src;
+    s.textContent = oldScript.textContent;
+    document.body.appendChild(s);
+    oldScript.remove();
+  });
+}
+function loadFragment(id, file){
+  const el = document.getElementById(id);
+  if(!el) return Promise.resolve();
+  return fetch(file).then(r => {
+    if(!r.ok) throw new Error(file + ' not found');
+    return r.text();
+  }).then(html => {
+    el.innerHTML = html;
+    runFragmentScripts(el);
+  }).catch(err => console.error('Error loading ' + file + ':', err));
+}
+function openLightbox(src, name, city){
+  const box = document.getElementById('lightboxOverlay');
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightboxName').textContent = name;
+  document.getElementById('lightboxCity').textContent = city;
+  box.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e){
+  const box = document.getElementById('lightboxOverlay');
+  if(!e || e.target === box || e.target.closest('.lightbox-close')){
+    box.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.photo-wrap img').forEach(img => {
+    img.addEventListener('error', () => {
+      const fallback = img.getAttribute('data-fallback');
+      if(fallback && img.src !== fallback) img.src = fallback;
+      else img.src = 'https://via.placeholder.com/900x700/f3f5fb/113f7a?text=WorkDen+Review';
+    });
+  });
+  Promise.all([
+    loadFragment('header-placeholder','header.html'),
+    loadFragment('footer-placeholder','footer.html')
+  ]).finally(() => {
+    document.body.classList.add('loaded');
+    const items = document.querySelectorAll('.reveal, .reveal-card');
+    items.forEach((el, i) => {
+      const isCard = el.classList.contains('reveal-card');
+      el.style.transitionDelay = isCard ? Math.min(i * 70, 520) + 'ms' : Math.min(i * 80, 260) + 'ms';
+    });
+    if(!('IntersectionObserver' in window)){ items.forEach(el => el.classList.add('show')); return; }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ entry.target.classList.add('show'); obs.unobserve(entry.target); }
+      });
+    }, {threshold:.13, rootMargin:'0px 0px -60px 0px'});
+    items.forEach(el => obs.observe(el));
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<style>
+/* ================= WorkDen Clean Footer - No Demo CTA ================= */
+.wd-footer{
+  --ft-navy:#050b3f;
+  --ft-blue:#123f7a;
+  --ft-text:#4d6680;
+  --ft-muted:#7b8fa6;
+  --ft-orange:#ff5733;
+  --ft-orange-dark:#e74725;
+  --ft-bg:#ffffff;
+  --ft-soft:#f5f7fc;
+  --ft-border:#e7edf5;
+  --ft-shadow:0 -10px 35px rgba(13,34,63,.04);
+  background:var(--ft-bg);
+  border-top:1px solid var(--ft-border);
+  box-shadow:var(--ft-shadow);
+  font-family:'Poppins',Arial,sans-serif;
+  color:var(--ft-text);
+  overflow:hidden;
+}
+.wd-footer *{box-sizing:border-box}
+.wd-footer a{text-decoration:none;color:inherit}
+.wd-footer-container{
+  width:100%;
+  max-width:1240px;
+  margin:0 auto;
+  padding:0 22px;
+  position:relative;
+  z-index:1;
+}
+.wd-footer-main{
+  padding:58px 0 30px;
+  background:#fff;
+  position:relative;
+}
+.wd-footer-main::before{
+  content:'';
+  position:absolute;
+  right:-120px;
+  top:-120px;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(18,63,122,.06),transparent 68%);
+  pointer-events:none;
+}
+.wd-footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1.4fr;
+  gap:36px;
+  position:relative;
+  z-index:1;
+}
+.wd-footer-brand{max-width:360px}
+.wd-footer-logo{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  margin-bottom:16px;
+}
+.wd-footer-logo img{
+  width:50px;
+  height:50px;
+  object-fit:contain;
+  border-radius:12px;
+  border:1px solid var(--ft-border);
+  background:#fff;
+  box-shadow:0 8px 24px rgba(13,34,63,.06);
+}
+.wd-footer-logo strong{
+  display:block;
+  color:var(--ft-navy);
+  font-size:26px;
+  line-height:1.1;
+  font-weight:700;
+  letter-spacing:-.35px;
+}
+.wd-footer-logo span{
+  display:block;
+  color:var(--ft-muted);
+  font-size:13px;
+  margin-top:3px;
+}
+.wd-footer-desc{
+  color:var(--ft-text);
+  font-size:14.5px;
+  line-height:1.85;
+  margin:0 0 18px;
+}
+.wd-footer-verify{
+  display:grid;
+  gap:9px;
+  background:var(--ft-soft);
+  border:1px solid var(--ft-border);
+  border-radius:12px;
+  padding:15px;
+}
+.wd-footer-verify-title{
+  color:var(--ft-navy);
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:2px;
+}
+.wd-verify-line{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  font-size:13px;
+  line-height:1.55;
+  color:var(--ft-text);
+}
+.wd-verify-line i{
+  color:var(--ft-orange);
+  margin-top:4px;
+  width:14px;
+  text-align:center;
+}
+.wd-footer-col h4{
+  color:var(--ft-navy);
+  font-size:17px;
+  font-weight:600;
+  margin:0 0 18px;
+  position:relative;
+  padding-bottom:10px;
+}
+.wd-footer-col h4::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:34px;
+  height:3px;
+  border-radius:20px;
+  background:var(--ft-orange);
+  transform-origin:left;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.wd-footer-col:hover h4::after{transform:scaleX(1.45)}
+.wd-footer-links{display:grid;gap:10px}
+.wd-footer-links a,
+.wd-footer-contact p{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--ft-text);
+  font-size:14px;
+  line-height:1.65;
+  margin:0;
+  transition:color .22s ease,transform .22s ease;
+}
+.wd-footer-links a i,
+.wd-footer-contact p i{
+  color:var(--ft-orange);
+  font-size:12px;
+  width:16px;
+  flex:0 0 auto;
+}
+.wd-footer-links a:hover{color:var(--ft-orange);transform:translateX(4px)}
+.wd-footer-contact{display:grid;gap:11px}
+.wd-footer-contact p{align-items:flex-start}
+.wd-footer-mini-note{
+  margin-top:18px;
+  background:#fff7f4;
+  border:1px solid #ffe2d9;
+  color:#7a4b3f;
+  border-radius:10px;
+  padding:12px 14px;
+  font-size:12.5px;
+  line-height:1.65;
+}
+.wd-footer-bottom{
+  border-top:1px solid var(--ft-border);
+  padding:18px 0 22px;
+  background:#fff;
+}
+.wd-footer-bottom-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  color:var(--ft-muted);
+  font-size:13px;
+  line-height:1.7;
+}
+.wd-footer-bottom-links{display:flex;gap:14px;flex-wrap:wrap}
+.wd-footer-bottom-links a{transition:color .22s ease}
+.wd-footer-bottom-links a:hover{color:var(--ft-orange)}
+.wd-footer-reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .75s cubic-bezier(.22,.61,.36,1), transform .75s cubic-bezier(.22,.61,.36,1);
+}
+.wd-footer-reveal.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:1050px){
+  .wd-footer-grid{grid-template-columns:1fr 1fr;gap:34px 28px}
+}
+@media(max-width:720px){
+  .wd-footer-container{padding:0 18px}
+  .wd-footer-main{padding:44px 0 24px}
+  .wd-footer-grid{grid-template-columns:1fr;gap:30px}
+  .wd-footer-brand{max-width:100%}
+  .wd-footer-bottom-inner{flex-direction:column;text-align:center}
+  .wd-footer-bottom-links{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .wd-footer-reveal{opacity:1!important;transform:none!important;transition:none!important}
+}
+</style>
+
+<footer class="wd-footer">
+  <div class="wd-footer-main">
+    <div class="wd-footer-container">
+      <div class="wd-footer-grid">
+
+        <div class="wd-footer-brand wd-footer-reveal">
+          <div class="wd-footer-logo">
+            <img src="workden-logo.png" alt="WorkDen Logo" onerror="this.src='https://via.placeholder.com/50x50?text=WD'">
+            <div>
+              <strong>WorkDen</strong>
+              <span>Digital Task Management Portal</span>
+            </div>
+          </div>
+
+          <p class="wd-footer-desc">
+            A clean digital task platform for user onboarding, task submissions, dashboard tracking and helpdesk support.
+          </p>
+
+          <div class="wd-footer-verify">
+            <div class="wd-footer-verify-title">Business Details</div>
+            <div class="wd-verify-line"><i class="fas fa-file-invoice"></i><span>GSTIN: 10KEJPM6504N1Z7</span></div>
+            <div class="wd-verify-line"><i class="fas fa-building"></i><span>MSME: UDYAM-KR-03-0640514</span></div>
+            <div class="wd-verify-line"><i class="fas fa-award"></i><span>ISO Certificate No: ECACB/G7/42/120626</span></div>
+          </div>
+        </div>
+
+        <div class="wd-footer-col wd-footer-reveal">
+          <h4>Portal Links</h4>
+          <div class="wd-footer-links">
+            <a href="index.html"><i class="fas fa-angle-right"></i> Home</a>
+            <a href="about.html"><i class="fas fa-angle-right"></i> About WorkDen</a>
+            <a href="projects.html"><i class="fas fa-angle-right"></i> Task Categories</a>
+            <a href="plans.html"><i class="fas fa-angle-right"></i> Registration Plans</a>
+            <a href="earners.html"><i class="fas fa-angle-right"></i> Top Earners</a>
+            <a href="testimonials.html"><i class="fas fa-angle-right"></i> Testimonials</a>
+            <a href="blogs.html"><i class="fas fa-angle-right"></i> Blogs</a>
+          </div>
+        </div>
+
+        <div class="wd-footer-col wd-footer-reveal">
+          <h4>Legal</h4>
+          <div class="wd-footer-links">
+            <a href="privacy.html"><i class="fas fa-angle-right"></i> Privacy Policy</a>
+            <a href="terms.html"><i class="fas fa-angle-right"></i> Terms & Conditions</a>
+            <a href="disclaimer.html"><i class="fas fa-angle-right"></i> Disclaimer</a>
+            <a href="refund.html"><i class="fas fa-angle-right"></i> Refund Policy</a>
+          </div>
+        </div>
+
+        <div class="wd-footer-col wd-footer-reveal">
+          <h4>Helpdesk & Contact</h4>
+          <div class="wd-footer-contact">
+            <p><i class="fas fa-envelope"></i> <span>info<!-- -->@workden.online</span></p>
+            <p><i class="fas fa-headset"></i> <span>support<!-- -->@workden.online</span></p>
+            <p><i class="fas fa-location-dot"></i> <span>Ashok Nagar, Bangalore – 560001</span></p>
+            <p><i class="fas fa-location-dot"></i> <span>Parsuram Pur, Motihari – 845416</span></p>
+          </div>
+
+          <div class="wd-footer-mini-note">
+            For portal access, task and dashboard support, use the official helpdesk email only.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="wd-footer-bottom">
+    <div class="wd-footer-container wd-footer-bottom-inner">
+      <div>&copy; 2026 WorkDen. All rights reserved.</div>
+      <div class="wd-footer-bottom-links">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="refund.html">Refund</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var footerItems = document.querySelectorAll('.wd-footer-reveal');
+  if(!footerItems.length) return;
+
+  if(!('IntersectionObserver' in window)){
+    footerItems.forEach(function(el){
+      el.classList.add('show');
+    });
+    return;
+  }
+
+  footerItems.forEach(function(el, index){
+    el.style.transitionDelay = Math.min(index * 80, 300) + 'ms';
+  });
+
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold:0.12,
+    rootMargin:'0px 0px -40px 0px'
+  });
+
+  footerItems.forEach(function(el){
+    obs.observe(el);
+  });
+})();
+</script>

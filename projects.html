@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects – Available Work Types | WorkDen</title>
+<meta name="description" content="Explore available digital task categories at WorkDen – form filling, data entry, chat support, grammar correction, typing and more.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --navy:#02083f;
+  --blue:#113f7a;
+  --blue-soft:#eef6ff;
+  --text:#365a73;
+  --muted:#6b8297;
+  --bg:#f4f7fb;
+  --white:#ffffff;
+  --orange:#ff5733;
+  --orange-dark:#e74725;
+  --green:#1f8d4d;
+  --border:#e5edf6;
+  --line:#dbe6f2;
+  --shadow:0 18px 42px rgba(13,34,63,.075);
+  --shadow-hover:0 28px 72px rgba(13,34,63,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;opacity:0;transition:opacity .38s ease}
+body.loaded{opacity:1}
+a{text-decoration:none;color:inherit}
+#header-placeholder{min-height:110px;background:#fff}
+#footer-placeholder{min-height:360px;background:#fff}
+.container{max-width:1240px;margin:0 auto;padding:0 22px}
+.btn{min-height:50px;padding:0 24px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:600;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:transform .28s ease,box-shadow .28s ease,background .28s ease,border-color .28s ease,color .28s ease}
+.btn-orange{background:var(--orange);color:#fff;box-shadow:0 12px 25px rgba(255,87,51,.20)}
+.btn-orange:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 16px 34px rgba(255,87,51,.27)}
+.btn-outline{background:#fff;color:var(--blue);border-color:#cdd9e6}
+.btn-outline:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 12px 28px rgba(13,34,63,.08)}
+.btn-white{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.52)}
+.btn-white:hover{background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-2px)}
+
+.page-hero{position:relative;overflow:hidden;background:#fff;padding:92px 0 76px;border-bottom:1px solid var(--border)}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 8% 16%,rgba(17,63,122,.08),transparent 31%),radial-gradient(circle at 92% 18%,rgba(255,87,51,.10),transparent 28%);pointer-events:none}
+.page-hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,87,51,.42),transparent)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;background:#f1f7ff;border:1px solid #d9e8fb;color:var(--blue);border-radius:50px;padding:9px 18px;font-size:13px;font-weight:600;margin-bottom:18px}
+.page-hero h1{font-size:50px;line-height:1.16;color:var(--navy);font-weight:650;letter-spacing:-.9px;margin-bottom:18px}
+.page-hero p{font-size:17px;color:var(--text);max-width:680px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.hero-visual{position:relative;min-height:370px;border-radius:22px;background:linear-gradient(135deg,#ffffff,#f7fbff);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:28px;isolation:isolate}
+.hero-visual::before{content:'';position:absolute;width:250px;height:250px;border-radius:50%;background:rgba(255,87,51,.10);right:-80px;top:-78px;animation:softPulse 5.8s ease-in-out infinite}
+.hero-visual::after{content:'';position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(17,63,122,.08);left:-82px;bottom:-82px;animation:softPulse 6.6s ease-in-out infinite reverse}
+.hero-visual .main-hero-img{position:relative;z-index:1;width:min(430px,100%);height:auto;filter:drop-shadow(0 22px 30px rgba(13,34,63,.14));animation:floatY 5s ease-in-out infinite}
+.float-card{position:absolute;z-index:2;background:#fff;border:1px solid var(--border);box-shadow:0 14px 34px rgba(13,34,63,.10);border-radius:13px;padding:12px 14px;display:flex;align-items:center;gap:10px;color:var(--navy);font-size:13px;font-weight:600;animation:miniFloat 4.8s ease-in-out infinite}
+.float-card i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#fff2ed;color:var(--orange)}
+.fc-1{left:22px;top:28px}.fc-2{right:22px;bottom:32px;animation-delay:.35s}.fc-3{left:38px;bottom:42px;animation-delay:.7s}
+
+.projects-section{padding:78px 0;background:linear-gradient(180deg,var(--bg),#eef4fb)}
+.section-head{max-width:790px;margin:0 auto 46px;text-align:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-size:13px;text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:10px}
+.title{font-size:36px;line-height:1.22;color:var(--navy);font-weight:600;letter-spacing:-.5px;margin-bottom:12px}
+.sub{font-size:16px;color:var(--text);max-width:760px;margin:0 auto}
+.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.project-card{position:relative;min-height:448px;background:rgba(255,255,255,.96);border:1px solid rgba(225,235,246,.96);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 28px rgba(13,34,63,.045);transition:transform .42s cubic-bezier(.22,.61,.36,1),box-shadow .42s cubic-bezier(.22,.61,.36,1),border-color .42s ease;background-clip:padding-box;will-change:transform}
+.project-card::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--orange),#ff9c50);transform:scaleX(0);transform-origin:left;transition:transform .46s cubic-bezier(.22,.61,.36,1);z-index:4}
+.project-card::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.42) 44%,transparent 68%);transform:translateX(-120%);transition:transform .8s cubic-bezier(.22,.61,.36,1);pointer-events:none;z-index:3}
+.project-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-hover);border-color:#d7e5f3}
+.project-card:hover::before{transform:scaleX(1)}
+.project-card:hover::after{transform:translateX(120%)}
+.card-art{position:relative;height:184px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 22% 18%,rgba(255,87,51,.13),transparent 31%),linear-gradient(135deg,#fcfeff,#f3f8ff);border-bottom:1px solid var(--border);overflow:hidden;isolation:isolate}
+.card-art::before{content:'';position:absolute;left:24px;top:26px;width:62px;height:62px;border:1px dashed rgba(17,63,122,.19);border-radius:18px;transform:rotate(10deg);animation:rotateSlow 13s linear infinite}
+.card-art::after{content:'';position:absolute;right:18px;top:20px;width:92px;height:92px;border-radius:50%;background:rgba(255,87,51,.08)}
+.art-glow{position:absolute;width:134px;height:134px;border-radius:50%;background:rgba(17,63,122,.075);right:25px;bottom:-48px;z-index:0}
+.card-art img{position:relative;z-index:1;width:142px;height:142px;object-fit:contain;display:block;filter:drop-shadow(0 18px 18px rgba(13,34,63,.12));transform:translateY(0) scale(1);transition:transform .45s cubic-bezier(.22,.61,.36,1),filter .45s ease}
+.project-card:hover .card-art img{transform:translateY(-8px) scale(1.045);filter:drop-shadow(0 24px 22px rgba(13,34,63,.16))}
+.project-body{padding:24px 26px 18px;flex:1}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}
+.badge{font-size:12px;font-weight:700;padding:5px 10px;border-radius:50px;border:1px solid;line-height:1.2}
+.badge-blue{background:#eef6ff;color:var(--blue);border-color:#d4e7fb}
+.badge-green{background:#effaf3;color:var(--green);border-color:#d6efdd}
+.badge-amber{background:#fff7ed;color:#bd6b16;border-color:#ffe4c5}
+.project-title{color:var(--navy);font-size:23px;line-height:1.35;font-weight:600;margin-bottom:12px}
+.project-desc{font-size:15px;line-height:1.82;color:var(--text)}
+.project-footer{padding:15px 26px;background:#fbfdff;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.project-level{color:var(--muted);font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px}
+.project-level i{color:var(--orange)}
+.project-action{color:var(--blue);background:transparent;border:0;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:color .25s ease,transform .25s ease}
+.project-action:hover{color:var(--orange);transform:translateX(4px)}
+
+.bottom-cta{position:relative;overflow:hidden;margin-top:54px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:48px 34px;text-align:center;border-radius:18px;box-shadow:0 18px 44px rgba(2,8,63,.16)}
+.bottom-cta::before{content:'';position:absolute;right:-70px;top:-90px;width:230px;height:230px;border-radius:50%;background:rgba(255,87,51,.18);animation:softPulse 5.8s ease-in-out infinite}
+.bottom-cta::after{content:'';position:absolute;left:-90px;bottom:-110px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.08)}
+.bottom-cta h3{position:relative;font-size:28px;line-height:1.3;margin-bottom:12px;font-weight:600}
+.bottom-cta p{position:relative;font-size:16px;max-width:780px;margin:0 auto 26px;color:#dce8ff}
+.bottom-cta-btns{position:relative;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+.reveal,.reveal-card{opacity:0;transform:translate3d(0,34px,0);transition:opacity .82s cubic-bezier(.22,.61,.36,1),transform .82s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.reveal.left{transform:translate3d(-46px,0,0)}
+.reveal.right{transform:translate3d(46px,0,0)}
+.show{opacity:1!important;transform:translate3d(0,0,0)!important}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+@keyframes miniFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes softPulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
+@keyframes rotateSlow{to{transform:rotate(370deg)}}
+@media(max-width:1050px){.hero-grid{grid-template-columns:1fr}.project-grid{grid-template-columns:repeat(2,1fr)}.page-hero h1{font-size:40px}}
+@media(max-width:720px){#header-placeholder{min-height:76px}#footer-placeholder{min-height:520px}.page-hero{padding:58px 0}.page-hero h1{font-size:34px}.title{font-size:28px}.hero-visual{min-height:300px}.float-card{display:none}.projects-section{padding:58px 0}.project-grid{grid-template-columns:1fr;gap:22px}.project-card{min-height:auto}.card-art{height:170px}.project-footer{align-items:flex-start;flex-direction:column}.project-action{width:100%;justify-content:flex-end}.bottom-cta{padding:40px 20px}.bottom-cta h3{font-size:24px}.btn{width:100%;max-width:340px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.reveal,.reveal-card{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<section class="page-hero">
+  <div class="container hero-grid">
+    <div class="reveal left">
+      <span class="hero-badge"><i class="fas fa-briefcase"></i> Work Categories</span>
+      <h1 data-content-id="pageHeroTitle">Available Projects</h1>
+      <p data-content-id="pageHeroDesc">All tasks have clear standard operating procedures (SOPs) inside the portal. No prior experience required for most categories.</p>
+      <div class="hero-actions">
+        <a href="demo-task.html" class="btn btn-orange"><i class="fas fa-play"></i> Initiate Demo Module</a>
+        <button onclick="showLoginModal(event)" class="btn btn-outline"><i class="fas fa-lock"></i> Authorized Portal Login</button>
+      </div>
+    </div>
+    <div class="hero-visual reveal right">
+      <img class="main-hero-img" src="https://img.icons8.com/fluency/480/work-from-home.png" alt="Work from home task dashboard illustration" onerror="this.onerror=null;this.src='https://img.icons8.com/clouds/500/working-with-a-laptop.png';">
+      <div class="float-card fc-1"><i class="fas fa-keyboard"></i> Typing tasks</div>
+      <div class="float-card fc-2"><i class="fas fa-list-check"></i> Clear SOP</div>
+      <div class="float-card fc-3"><i class="fas fa-chart-line"></i> Task tracking</div>
+    </div>
+  </div>
+</section>
+
+<section class="projects-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker"><i class="fas fa-layer-group"></i> WorkDen Modules</span>
+      <h2 class="title">Explore Task Categories</h2>
+      <p class="sub">Explore WorkDen’s digital task categories with simple instructions, clear steps, and organized workflow.
+Select a category, review the demo, and begin your online task journey with confidence.</p>
+    </div>
+
+    <div class="project-grid">
+
+      <article class="project-card reveal-card">
+        <div class="card-art">
+          <span class="art-glow"></span>
+          <img src="https://img.icons8.com/fluency/240/survey.png" alt="Form Filling task PNG illustration" loading="lazy" onerror="this.onerror=null;this.src='https://img.icons8.com/clouds/260/survey.png';">
+        </div>
+        <div class="project-body">
+          <div class="badge-row"><span class="badge badge-blue">Most Popular</span><span class="badge badge-green">Beginner</span></div>
+          <h3 class="project-title" data-content-id="proj1Title">Form Filling</h3>
+          <p class="project-desc" data-content-id="proj1Desc">Fill structured online forms with given instructions. Data is pre-provided — you simply enter it accurately into the designated fields in the official portal.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-level"><i class="fas fa-signal"></i> Easy · No Experience</span>
+          <button onclick="showLoginModal(event)" class="project-action">Proceed <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal-card">
+        <div class="card-art">
+          <span class="art-glow"></span>
+          <img src="https://img.icons8.com/fluency/240/ms-excel.png" alt="Data Entry spreadsheet PNG illustration" loading="lazy" onerror="this.onerror=null;this.src='https://img.icons8.com/clouds/260/data-sheet.png';">
+        </div>
+        <div class="project-body">
+          <div class="badge-row"><span class="badge badge-blue">High Volume</span><span class="badge badge-green">Beginner</span></div>
+          <h3 class="project-title" data-content-id="proj2Title">Data Entry</h3>
+          <p class="project-desc" data-content-id="proj2Desc">Enter structured spreadsheet data into a secure database. Complete tasks with clear reference materials provided in the dashboard.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-level"><i class="fas fa-signal"></i> Easy · Basic Typing</span>
+          <button onclick="showLoginModal(event)" class="project-action">Proceed <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal-card">
+        <div class="card-art">
+          <span class="art-glow"></span>
+          <img src="https://img.icons8.com/fluency/240/email-open.png" alt="Email Support PNG illustration" loading="lazy" onerror="this.onerror=null;this.src='https://img.icons8.com/clouds/260/new-message.png';">
+        </div>
+        <div class="project-body">
+          <div class="badge-row"><span class="badge badge-amber">Intermediate</span></div>
+          <h3 class="project-title" data-content-id="proj3Title">Email Support</h3>
+          <p class="project-desc" data-content-id="proj3Desc">Handle basic customer email queries using predefined templates. Templates are provided — you select and send the appropriate response to each query.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-level"><i class="fas fa-signal"></i> Medium · Template Based</span>
+          <button onclick="showLoginModal(event)" class="project-action">Proceed <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal-card">
+        <div class="card-art">
+          <span class="art-glow"></span>
+          <img src="https://img.icons8.com/fluency/240/chat.png" alt="Chat Support PNG illustration" loading="lazy" onerror="this.onerror=null;this.src='https://img.icons8.com/clouds/260/chat.png';">
+        </div>
+        <div class="project-body">
+          <div class="badge-row"><span class="badge badge-amber">Intermediate</span></div>
+          <h3 class="project-title" data-content-id="proj4Title">Chat Support</h3>
+          <p class="project-desc" data-content-id="proj4Desc">Respond to live chat queries from the dashboard using guided templates. Quick responses with clear guidelines provided for each type of customer query.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-level"><i class="fas fa-signal"></i> Medium · Communication</span>
+          <button onclick="showLoginModal(event)" class="project-action">Proceed <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal-card">
+        <div class="card-art">
+          <span class="art-glow"></span>
+          <img src="https://img.icons8.com/fluency/240/spell-check.png" alt="Grammar Correction PNG illustration" loading="lazy" onerror="this.onerror=null;this.src='https://img.icons8.com/clouds/260/spellcheck.png';">
+        </div>
+        <div class="project-body">
+          <div class="badge-row"><span class="badge badge-amber">Intermediate</span></div>
+          <h3 class="project-title" data-content-id="proj5Title">Grammar Correction</h3>
+          <p class="project-desc" data-content-id="proj5Desc">Edit and correct short text documents for grammatical errors. Clear error indicators are shown in the portal — you identify and fix what's highlighted.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-level"><i class="fas fa-signal"></i> Medium · English Basics</span>
+          <button onclick="showLoginModal(event)" class="project-action">Proceed <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal-card">
+        <div class="card-art">
+          <span class="art-glow"></span>
+          <img src="https://img.icons8.com/fluency/240/keyboard.png" alt="Typing Tasks PNG illustration" loading="lazy" onerror="this.onerror=null;this.src='https://img.icons8.com/clouds/260/keyboard.png';">
+        </div>
+        <div class="project-body">
+          <div class="badge-row"><span class="badge badge-blue">Easy Start</span><span class="badge badge-green">Beginner</span></div>
+          <h3 class="project-title" data-content-id="proj6Title">Typing Tasks</h3>
+          <p class="project-desc" data-content-id="proj6Desc">Type the text shown in the dashboard into the designated input box. Simple and straightforward — ideal for citizens with basic typing skills and a standard device.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-level"><i class="fas fa-signal"></i> Easy · Basic Typing</span>
+          <button onclick="showLoginModal(event)" class="project-action">Proceed <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal-card">
+        <div class="card-art">
+          <span class="art-glow"></span>
+          <img src="https://img.icons8.com/fluency/240/password1.png" alt="Captcha Filling verification PNG illustration" loading="lazy" onerror="this.onerror=null;this.src='https://img.icons8.com/clouds/260/password.png';">
+        </div>
+        <div class="project-body">
+          <div class="badge-row"><span class="badge badge-blue">Entry Level</span><span class="badge badge-green">Beginner</span></div>
+          <h3 class="project-title" data-content-id="proj7Title">Captcha Filling</h3>
+          <p class="project-desc" data-content-id="proj7Desc">Enter verification codes displayed in the dashboard into the required input field. A simple, repeatable process designed for entry-level digital participation.</p>
+        </div>
+        <div class="project-footer">
+          <span class="project-level"><i class="fas fa-signal"></i> Easy · General Entry</span>
+          <button onclick="showLoginModal(event)" class="project-action">Proceed <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="bottom-cta reveal">
+      <h3 data-content-id="ctaTitle">Require Assistance to Begin?</h3>
+      <p data-content-id="ctaDesc">Access our complimentary demo task module to evaluate the platform interface prior to formal registration. No payment is required for this evaluation.</p>
+      <div class="bottom-cta-btns">
+        <a href="demo-task.html" class="btn btn-orange"><i class="fas fa-play"></i> Initiate Demo Module</a>
+        <button onclick="showLoginModal(event)" class="btn btn-white"><i class="fas fa-lock"></i> Authorized Portal Login</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="content-sync.js?v=3.5"></script>
+<script>
+  function runFragmentScripts(container){
+    const scripts = container.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      const s = document.createElement('script');
+      if(oldScript.src) s.src = oldScript.src;
+      s.textContent = oldScript.textContent;
+      document.body.appendChild(s);
+      oldScript.remove();
+    });
+  }
+  function loadFragment(id, file){
+    const el = document.getElementById(id);
+    if(!el) return Promise.resolve();
+    return fetch(file).then(r => {
+      if(!r.ok) throw new Error(file + ' not found');
+      return r.text();
+    }).then(html => {
+      el.innerHTML = html;
+      runFragmentScripts(el);
+    }).catch(err => console.error('Error loading ' + file + ':', err));
+  }
+
+  function initSmoothReveal(){
+    const items = document.querySelectorAll('.reveal, .reveal-card');
+    items.forEach((el, i) => {
+      const isCard = el.classList.contains('reveal-card');
+      el.style.transitionDelay = isCard ? Math.min(i * 85, 510) + 'ms' : Math.min(i * 70, 260) + 'ms';
+    });
+    if(!('IntersectionObserver' in window)){
+      items.forEach(el => el.classList.add('show'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -55px 0px'});
+    items.forEach(el => obs.observe(el));
+  }
+
+  function initCardTilt(){
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        if(window.innerWidth < 900) return;
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const rotateY = ((x / r.width) - .5) * 4;
+        const rotateX = ((.5 - y / r.height)) * 4;
+        card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  Promise.all([
+    loadFragment('header-placeholder','header.html'),
+    loadFragment('footer-placeholder','footer.html')
+  ]).finally(() => {
+    document.body.classList.add('loaded');
+    initSmoothReveal();
+    initCardTilt();
+  });
+</script>
+</body>
+</html>
